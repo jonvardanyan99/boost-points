@@ -1,5 +1,4 @@
 import './App.scss';
-import '@fontsource/open-sans';
 
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
