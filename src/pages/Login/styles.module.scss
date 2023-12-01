@@ -1,0 +1,19 @@
+.login {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  > div {
+    width: 375px;
+    height: 812px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    > .heading {
+      color: #151515;
+    }
+  }
+}
