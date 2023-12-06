@@ -53,31 +53,31 @@
 }
 
 .p1 {
-  font-size: 15px;
-  line-height: 26px;
+  font-size: var(--p1-font-size);
+  line-height: var(--p1-line-height);
 }
 
 .p2 {
-  font-size: 14px;
-  line-height: 24px;
+  font-size: var(--p2-font-size);
+  line-height: var(--p2-line-height);
 }
 
 .p3 {
-  font-size: 13px;
-  line-height: 22px;
+  font-size: var(--p3-font-size);
+  line-height: var(--p3-line-height);
 }
 
 .p4 {
-  font-size: 12px;
-  line-height: 20px;
+  font-size: var(--p4-font-size);
+  line-height: var(--p4-line-height);
 }
 
 .p5 {
-  font-size: 11px;
-  line-height: 18px;
+  font-size: var(--p5-font-size);
+  line-height: var(--p5-line-height);
 }
 
 .p6 {
-  font-size: 10px;
-  line-height: 16px;
+  font-size: var(--p6-font-size);
+  line-height: var(--p6-line-height);
 }
