@@ -1,36 +1,36 @@
 .h1 {
-  font-size: 34px;
-  line-height: 56px;
+  font-size: var(--h1-font-size);
+  line-height: var(--h1-line-height);
   font-weight: 700;
 }
 
 .h2 {
-  font-size: 30px;
-  line-height: 48px;
+  font-size: var(--h2-font-size);
+  line-height: var(--h2-line-height);
   font-weight: 700;
 }
 
 .h3 {
-  font-size: 26px;
-  line-height: 44px;
+  font-size: var(--h3-font-size);
+  line-height: var(--h3-line-height);
   font-weight: 700;
 }
 
 .h4 {
-  font-size: 20px;
-  line-height: 38px;
+  font-size: var(--h4-font-size);
+  line-height: var(--h4-line-height);
   font-weight: 700;
 }
 
 .h5 {
-  font-size: 18px;
-  line-height: 34px;
+  font-size: var(--h5-font-size);
+  line-height: var(--h5-line-height);
   font-weight: 700;
 }
 
 .h6 {
-  font-size: 16px;
-  line-height: 30px;
+  font-size: var(--h6-font-size);
+  line-height: var(--h6-line-height);
   font-weight: 700;
 }
 
