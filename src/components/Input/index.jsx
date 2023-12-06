@@ -10,7 +10,7 @@ export const Input = ({ disabled, error, placeholder, value, onChange }) => {
   console.log(value);
 
   return (
-    <div>
+    <div className={styles['input-container']}>
       <input
         className={classNames(styles.input, {
           [styles['input--disabled']]: disabled,
