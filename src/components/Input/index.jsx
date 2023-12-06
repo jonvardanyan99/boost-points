@@ -6,11 +6,8 @@ import { Text } from '../Text';
 import styles from './styles.module.scss';
 
 export const Input = ({ disabled, error, className, placeholder, value, onChange }) => {
-  // eslint-disable-next-line no-console
-  console.log(value);
-
   return (
-    <div className={classNames(styles['input-container'], className)}>
+    <div className={className}>
       <input
         className={classNames(styles.input, {
           [styles['input--disabled']]: disabled,
@@ -18,6 +15,7 @@ export const Input = ({ disabled, error, className, placeholder, value, onChange
         })}
         placeholder={placeholder}
         disabled={disabled}
+        value={value}
         onChange={onChange}
       />
       {error && (
@@ -34,6 +32,6 @@ Input.propTypes = {
   error: PropTypes.string,
   className: PropTypes.string,
   placeholder: PropTypes.string.isRequired,
-  value: PropTypes.string,
+  value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
 };
