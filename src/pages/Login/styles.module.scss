@@ -1,6 +1,6 @@
 .login {
   width: 100%;
-  height: 100vh;
+  height: 1000px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,7 +13,15 @@
     align-items: center;
 
     > .heading {
-      color: #151515;
+      margin-top: 25px;
+      margin-bottom: 6px;
+    }
+
+    > .login-instruction {
+      text-align: center;
+      width: 345px;
+      color: var(--black-4-color);
+      margin-bottom: 29px;
     }
   }
 }
