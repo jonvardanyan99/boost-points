@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
 import React from 'react';
 
 import { Text } from '../Text';
@@ -22,4 +23,9 @@ export const Input = ({ error, disabled }) => {
       )}
     </div>
   );
+};
+
+Input.propTypes = {
+  error: PropTypes.string,
+  disabled: PropTypes.bool,
 };
