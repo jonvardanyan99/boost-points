@@ -22,7 +22,12 @@ export const Login = () => {
         <Text type="p4" className={styles['login-instruction']}>
           Whenever you log in or creating a new account let’s start with your phone number
         </Text>
-        <Input value={inputValue} onChange={handleInputChange} error="this is an error" />
+        <Input
+          placeholder="0432 892 002"
+          value={inputValue}
+          onChange={handleInputChange}
+          error="this is an error"
+        />
       </div>
     </div>
   );

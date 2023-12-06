@@ -5,7 +5,7 @@ import React from 'react';
 import { Text } from '../Text';
 import styles from './styles.module.scss';
 
-export const Input = ({ error, disabled, value, onChange }) => {
+export const Input = ({ disabled, error, placeholder, value, onChange }) => {
   // eslint-disable-next-line no-console
   console.log(value);
 
@@ -16,7 +16,7 @@ export const Input = ({ error, disabled, value, onChange }) => {
           [styles['input--disabled']]: disabled,
           [styles['input--error']]: error,
         })}
-        placeholder="text"
+        placeholder={placeholder}
         disabled={disabled}
         onChange={onChange}
       />
@@ -30,8 +30,9 @@ export const Input = ({ error, disabled, value, onChange }) => {
 };
 
 Input.propTypes = {
-  error: PropTypes.string,
   disabled: PropTypes.bool,
+  error: PropTypes.string,
+  placeholder: PropTypes.string.isRequired,
   value: PropTypes.string,
   onChange: PropTypes.func.isRequired,
 };
