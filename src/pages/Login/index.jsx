@@ -1,6 +1,6 @@
 import { React, useState } from 'react';
 
-import logo from '../../assets/images/svgviewer-output.png';
+import logo from '../../assets/images/logo.svg';
 import { Input } from '../../components/Input';
 import { Text } from '../../components/Text';
 import styles from './styles.module.scss';
@@ -27,7 +27,6 @@ export const Login = () => {
           placeholder="0432 892 002"
           value={inputValue}
           onChange={handleInputChange}
-          error="this is an error"
         />
       </div>
     </div>
