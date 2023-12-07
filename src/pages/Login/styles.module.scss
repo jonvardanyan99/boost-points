@@ -1,13 +1,12 @@
 .login {
   width: 100%;
-  height: 1000px;
   display: flex;
   justify-content: center;
   align-items: center;
 
   > div {
-    width: 375px;
-    height: 812px;
+    width: 500px;
+    padding: 44px 15px 0 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -19,9 +18,12 @@
 
     > .login-instruction {
       text-align: center;
-      padding: 0 15px;
       color: var(--black-4-color);
       margin-bottom: 29px;
+    }
+
+    > .login-input {
+      width: 100%;
     }
   }
 }
