@@ -5,7 +5,7 @@ import React from 'react';
 import { Text } from '../Text';
 import styles from './styles.module.scss';
 
-export const Input = ({ disabled, error, className, placeholder, value, onChange }) => {
+export const Input = ({ className, placeholder, value, onChange, disabled, error }) => {
   return (
     <div className={className}>
       <input
@@ -14,9 +14,9 @@ export const Input = ({ disabled, error, className, placeholder, value, onChange
           [styles['input--error']]: error,
         })}
         placeholder={placeholder}
-        disabled={disabled}
         value={value}
         onChange={onChange}
+        disabled={disabled}
       />
       {error && (
         <Text type="p4" className={styles['error-text']}>
@@ -28,10 +28,10 @@ export const Input = ({ disabled, error, className, placeholder, value, onChange
 };
 
 Input.propTypes = {
-  disabled: PropTypes.bool,
-  error: PropTypes.string,
   className: PropTypes.string,
   placeholder: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
+  disabled: PropTypes.bool,
+  error: PropTypes.string,
 };
