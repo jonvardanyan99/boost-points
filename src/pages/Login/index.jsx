@@ -1,6 +1,7 @@
 import { React, useState } from 'react';
 
 import logo from '../../assets/images/logo.svg';
+import { Button } from '../../components/Button';
 import { Input } from '../../components/Input';
 import { Text } from '../../components/Text';
 import styles from './styles.module.scss';
@@ -28,6 +29,7 @@ export const Login = () => {
           value={inputValue}
           onChange={handleInputChange}
         />
+        <Button className={styles['login-button']}>Proceed</Button>
       </div>
     </div>
   );
