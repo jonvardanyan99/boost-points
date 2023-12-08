@@ -1,0 +1,26 @@
+.button {
+  height: 50px;
+  background-color: var(--accent-color);
+  font-size: var(--p4-font-size);
+  line-height: var(--p4-line-height);
+  font-weight: 600;
+  color: white;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+
+  &:active {
+    opacity: 0.1;
+    background-color: var(--black-1-color);
+  }
+
+  &:hover {
+    background-color: var(--gray-5-color);
+    color: var(--black-1-color);
+  }
+
+  &--disabled {
+    color: var(--gray-3-color);
+    background-color: var(--gray-5-color);
+  }
+}
