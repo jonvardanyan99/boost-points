@@ -3,8 +3,8 @@ import { React } from 'react';
 import BeatLoader from 'react-spinners/BeatLoader';
 
 export const Loader = ({
-  color = 'var(--accent-color)',
-  size = 30,
+  color = 'var(--white-color)',
+  size = 10,
   cssOverride = {},
   speedMultiplier,
 }) => {
