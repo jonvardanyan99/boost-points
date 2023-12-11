@@ -29,7 +29,7 @@ export const Login = () => {
           value={inputValue}
           onChange={handleInputChange}
         />
-        <Button className={styles['login-button']}>Proceed</Button>
+        <Button className={styles['login-button']} title="Proceed" />
       </div>
     </div>
   );
