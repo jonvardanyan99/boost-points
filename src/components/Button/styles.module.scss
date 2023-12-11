@@ -9,12 +9,12 @@
   border: none;
   cursor: pointer;
 
-  &:active {
+  &:active:not(&--disabled) {
     opacity: 0.1;
     background-color: var(--black-1-color);
   }
 
-  &:hover {
+  &:hover:not(&--disabled) {
     background-color: var(--gray-5-color);
     color: var(--black-1-color);
   }
@@ -22,5 +22,6 @@
   &--disabled {
     color: var(--gray-3-color);
     background-color: var(--gray-5-color);
+    cursor: default;
   }
 }
