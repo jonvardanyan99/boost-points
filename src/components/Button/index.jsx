@@ -9,9 +9,12 @@ export const Button = ({ className, title, onClick, loading, disabled }) => {
   return (
     <button
       type="button"
-      className={classNames(className, styles.button, { [styles['button--disabled']]: disabled })}
+      className={classNames(className, styles.button, {
+        [styles['button--disabled']]: disabled,
+        [styles['button--loading']]: loading,
+      })}
       onClick={onClick}
-      disabled={disabled}
+      disabled={disabled || loading}
     >
       {loading ? <Loader /> : title}
     </button>
