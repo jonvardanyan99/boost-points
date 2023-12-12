@@ -4,6 +4,14 @@ module.exports = {
       'airbnb/hooks',
       'prettier',
     ],
+    "settings": {
+      "import/resolver": {
+        "node": {          
+          "paths": ["src"],
+          "extensions": [".js", ".jsx", ".ts", ".tsx"]
+        }
+      }
+    },
     "parserOptions": {
       "ecmaVersion": 2020,
     },

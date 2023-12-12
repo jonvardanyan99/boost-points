@@ -1,9 +1,8 @@
 import classNames from 'classnames';
+import styles from 'components/Input/styles.module.scss';
+import { Text } from 'components/Text';
 import PropTypes from 'prop-types';
 import React from 'react';
-
-import { Text } from '../Text';
-import styles from './styles.module.scss';
 
 export const Input = ({ className, placeholder, value, onChange, disabled, error }) => {
   return (

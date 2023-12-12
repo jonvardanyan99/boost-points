@@ -1,8 +1,7 @@
 import classNames from 'classnames';
+import styles from 'components/Text/styles.module.scss';
 import PropTypes from 'prop-types';
 import React from 'react';
-
-import styles from './styles.module.scss';
 
 export const Text = ({ type, children, className, fontWeight }) => {
   if (type === 'h1') {

@@ -1,10 +1,9 @@
-import { React, useState } from 'react';
-
-import logo from '../../assets/images/logo.svg';
-import { Button } from '../../components/Button';
-import { Input } from '../../components/Input';
-import { Text } from '../../components/Text';
-import styles from './styles.module.scss';
+import logo from 'assets/images/logo.svg';
+import { Button } from 'components/Button';
+import { Input } from 'components/Input';
+import { Text } from 'components/Text';
+import styles from 'pages/Login/styles.module.scss';
+import React, { useState } from 'react';
 
 export const Login = () => {
   const [inputValue, setInputValue] = useState('');
