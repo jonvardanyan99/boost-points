@@ -1,8 +1,9 @@
 import classNames from 'classnames';
-import styles from 'components/Button/styles.module.scss';
 import { Loader } from 'components/Loader';
 import PropTypes from 'prop-types';
 import React from 'react';
+
+import styles from './styles.module.scss';
 
 export const Button = ({ className, title, onClick, loading, disabled }) => {
   return (
