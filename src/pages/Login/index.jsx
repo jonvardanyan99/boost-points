@@ -2,15 +2,33 @@ import logo from 'assets/images/logo.svg';
 import { Button } from 'components/Button';
 import { Input } from 'components/Input';
 import { Text } from 'components/Text';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import styles from './styles.module.scss';
 
 export const Login = () => {
   const [inputValue, setInputValue] = useState('');
+  const [errMessage, setErrMessage] = useState('');
+
+  useEffect(() => {
+    setErrMessage('');
+  }, [inputValue]);
+
+  const phoneNumberRegex = /^\d{10}$/;
 
   const handleInputChange = event => {
     setInputValue(event.target.value);
+  };
+
+  const handleValidation = () => {
+    if (phoneNumberRegex.test(inputValue)) {
+      // eslint-disable-next-line no-console
+      console.log(inputValue);
+    } else if (!inputValue) {
+      setErrMessage('This field is required');
+    } else {
+      setErrMessage('Invalid phone number. It should have exactly 10 numeric digits.');
+    }
   };
 
   return (
@@ -28,8 +46,9 @@ export const Login = () => {
           placeholder="0432 892 002"
           value={inputValue}
           onChange={handleInputChange}
+          error={errMessage}
         />
-        <Button className={styles['login-button']} title="Proceed" onClick={() => {}} />
+        <Button className={styles['login-button']} title="Proceed" onClick={handleValidation} />
       </div>
     </div>
   );
