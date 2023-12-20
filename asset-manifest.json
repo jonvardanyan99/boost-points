@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/boost-points/static/css/main.ee924ac2.css",
-    "main.js": "/boost-points/static/js/main.f9a44098.js",
+    "main.js": "/boost-points/static/js/main.d42fcebc.js",
     "static/js/787.13d0f21f.chunk.js": "/boost-points/static/js/787.13d0f21f.chunk.js",
     "static/media/OpenSans-Medium.ttf": "/boost-points/static/media/OpenSans-Medium.5b0a682fe3717764627e.ttf",
     "static/media/OpenSans-Bold.ttf": "/boost-points/static/media/OpenSans-Bold.45847e90261782dc01a6.ttf",
@@ -10,11 +10,11 @@
     "index.html": "/boost-points/index.html",
     "static/media/logo.svg": "/boost-points/static/media/logo.733acfcda52381b7c39f7c93bbfa4fe5.svg",
     "main.ee924ac2.css.map": "/boost-points/static/css/main.ee924ac2.css.map",
-    "main.f9a44098.js.map": "/boost-points/static/js/main.f9a44098.js.map",
+    "main.d42fcebc.js.map": "/boost-points/static/js/main.d42fcebc.js.map",
     "787.13d0f21f.chunk.js.map": "/boost-points/static/js/787.13d0f21f.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.ee924ac2.css",
-    "static/js/main.f9a44098.js"
+    "static/js/main.d42fcebc.js"
   ]
 }
