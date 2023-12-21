@@ -3,6 +3,7 @@ import { Button } from 'components/Button';
 import { Input } from 'components/Input';
 import { Text } from 'components/Text';
 import React, { useEffect, useState } from 'react';
+import { z } from 'zod';
 
 import styles from './styles.module.scss';
 
@@ -14,20 +15,21 @@ export const Login = () => {
     setErrMessage('');
   }, [inputValue]);
 
-  const phoneNumberRegex = /^\d{10}$/;
-
   const handleInputChange = event => {
     setInputValue(event.target.value);
   };
 
   const handleValidation = () => {
-    if (phoneNumberRegex.test(inputValue)) {
-      // eslint-disable-next-line no-console
-      console.log(inputValue);
-    } else if (!inputValue) {
-      setErrMessage('This field is required');
-    } else {
-      setErrMessage('Invalid phone number. It should have exactly 10 numeric digits.');
+    const schema = z
+      .string()
+      .min(1, 'This field is required')
+      .length(10, 'Invalid phone number')
+      .regex(/^[0-9]+$/, 'Invalid phone number');
+
+    const result = schema.safeParse(inputValue);
+
+    if (!result.success) {
+      setErrMessage(result.error.issues[0].message);
     }
   };
 
@@ -42,6 +44,7 @@ export const Login = () => {
           Whenever you log in or creating a new account let’s start with your phone number
         </Text>
         <Input
+          type="tel"
           className={styles['login-input']}
           placeholder="0432 892 002"
           value={inputValue}
