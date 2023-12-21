@@ -5,10 +5,11 @@ import React from 'react';
 
 import styles from './styles.module.scss';
 
-export const Input = ({ className, placeholder, value, onChange, disabled, error }) => {
+export const Input = ({ type, className, placeholder, value, onChange, disabled, error }) => {
   return (
     <div className={className}>
       <input
+        type={type}
         className={classNames(styles.input, {
           [styles['input--disabled']]: disabled,
           [styles['input--error']]: error,
@@ -28,6 +29,7 @@ export const Input = ({ className, placeholder, value, onChange, disabled, error
 };
 
 Input.propTypes = {
+  type: PropTypes.oneOf(['tel']).isRequired,
   className: PropTypes.string,
   placeholder: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
