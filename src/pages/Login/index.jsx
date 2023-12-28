@@ -1,15 +1,19 @@
 import logo from 'assets/images/logo.svg';
+import axios from 'axios';
 import { Button } from 'components/Button';
 import { Input } from 'components/Input';
 import { Text } from 'components/Text';
+import { API_URL } from 'constants/env';
 import React, { useEffect, useState } from 'react';
-import { z } from 'zod';
+import { handleApiError } from 'utils/errorHandler';
+import { phoneNumberSchema } from 'utils/validators';
 
 import styles from './styles.module.scss';
 
 export const Login = () => {
   const [inputValue, setInputValue] = useState('');
   const [errMessage, setErrMessage] = useState('');
+  const [dataLoading, setDataLoading] = useState(false);
 
   useEffect(() => {
     setErrMessage('');
@@ -19,16 +23,25 @@ export const Login = () => {
     setInputValue(event.target.value);
   };
 
-  const handleValidation = () => {
-    const schema = z
-      .string()
-      .min(1, 'This field is required')
-      .length(10, 'Invalid phone number')
-      .regex(/^[0-9]+$/, 'Invalid phone number');
+  const handleProceed = async () => {
+    const result = phoneNumberSchema.safeParse(inputValue);
 
-    const result = schema.safeParse(inputValue);
+    if (result.success) {
+      setDataLoading(true);
 
-    if (!result.success) {
+      try {
+        const response = await axios.post(`${API_URL}/api/v1/consumers/otp/send`, {
+          phoneNumber: `+61${inputValue.slice(1)}`,
+        });
+
+        // eslint-disable-next-line no-console
+        console.log(response);
+      } catch (error) {
+        handleApiError(error, setErrMessage, 'phoneNumber');
+      } finally {
+        setDataLoading(false);
+      }
+    } else {
       setErrMessage(result.error.issues[0].message);
     }
   };
@@ -51,7 +64,12 @@ export const Login = () => {
           onChange={handleInputChange}
           error={errMessage}
         />
-        <Button className={styles['login-button']} title="Proceed" onClick={handleValidation} />
+        <Button
+          className={styles['login-button']}
+          title="Proceed"
+          onClick={handleProceed}
+          loading={dataLoading}
+        />
       </div>
     </div>
   );
