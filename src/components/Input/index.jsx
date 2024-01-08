@@ -29,7 +29,7 @@ export const Input = ({ type, className, placeholder, value, onChange, disabled,
 };
 
 Input.propTypes = {
-  type: PropTypes.oneOf(['tel']).isRequired,
+  type: PropTypes.oneOf(['tel']),
   className: PropTypes.string,
   placeholder: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
