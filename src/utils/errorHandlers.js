@@ -1,3 +1,7 @@
 export const handleApiError = (error, setMessage, key) => {
-  setMessage(error.response.data.detail[0][key][0]);
+  if (error.response.status === 429) {
+    setMessage(error.response.data.detail);
+  } else {
+    setMessage(error.response.data.detail[0][key][0]);
+  }
 };
