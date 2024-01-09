@@ -39,7 +39,6 @@ export const Login = () => {
         // eslint-disable-next-line no-console
         console.log(response);
 
-        // eslint-disable-next-line no-console
         navigate('/verification', { state: { phoneNumber: inputValue } });
       } catch (error) {
         handleApiError(error, setErrMessage, 'phoneNumber');
