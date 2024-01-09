@@ -7,6 +7,7 @@ import { API_URL } from 'constants/env';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { handleApiError } from 'utils/errorHandlers';
+import { formatPhoneNumber } from 'utils/format';
 import { phoneNumberSchema } from 'utils/validators';
 
 import styles from './styles.module.scss';
@@ -33,7 +34,7 @@ export const Login = () => {
 
       try {
         const response = await axios.post(`${API_URL}/api/v1/consumers/otp/send`, {
-          phoneNumber: `+61${inputValue.slice(1)}`,
+          phoneNumber: formatPhoneNumber(inputValue),
         });
         // eslint-disable-next-line no-console
         console.log(response);
