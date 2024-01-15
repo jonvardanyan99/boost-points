@@ -1,14 +1,8 @@
 @import './assets/fonts/fonts.scss';
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+@import './reset.scss';
 
 body {
   font-family: 'OpenSans', sans-serif;
-  font-weight: 400;
   color: var(--black-1-color);
 }
 

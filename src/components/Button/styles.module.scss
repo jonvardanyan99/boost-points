@@ -6,8 +6,7 @@
   font-weight: 600;
   color: var(--white-color);
   border-radius: 8px;
-  border: none;
-  cursor: pointer;
+  text-align: center;
 
   &:hover:not(&--disabled, &--loading) {
     opacity: 0.8;
