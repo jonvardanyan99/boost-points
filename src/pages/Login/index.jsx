@@ -33,11 +33,9 @@ export const Login = () => {
       setDataLoading(true);
 
       try {
-        const response = await axios.post(`${API_URL}/api/v1/consumers/otp/send`, {
+        await axios.post(`${API_URL}/api/v1/consumers/otp/send`, {
           phoneNumber: formatPhoneNumber(inputValue),
         });
-        // eslint-disable-next-line no-console
-        console.log(response);
 
         navigate('/verification', { state: { phoneNumber: inputValue } });
       } catch (error) {
