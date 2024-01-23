@@ -26,7 +26,7 @@ export const Login = () => {
     setInputValue(event.target.value);
   };
 
-  const handleProceed = async () => {
+  const handleProceedClick = async () => {
     const result = phoneNumberSchema.safeParse(inputValue);
 
     if (result.success) {
@@ -69,7 +69,7 @@ export const Login = () => {
         <Button
           className={styles['login-button']}
           title="Proceed"
-          onClick={handleProceed}
+          onClick={handleProceedClick}
           loading={dataLoading}
         />
       </div>
