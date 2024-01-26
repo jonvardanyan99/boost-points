@@ -1,0 +1,33 @@
+.button {
+  width: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  > button {
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+
+    > .button__checkbox {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    
+      &:hover {
+        filter: brightness(0.85);
+      }
+    }
+  }
+
+  > label {
+    > .button__text {
+      color: var(--black-3-color);
+      margin-left: 8px;
+      cursor: pointer;
+    }
+  }
+}
