@@ -9,7 +9,7 @@ export const Button = ({ className, title, onClick, loading, disabled }) => {
   return (
     <button
       type="button"
-      className={classNames(className, styles.button, {
+      className={classNames(styles.button, className, {
         [styles['button--disabled']]: disabled,
         [styles['button--loading']]: loading,
       })}
