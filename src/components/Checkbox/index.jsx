@@ -13,17 +13,17 @@ export const Checkbox = ({ className, checked, onChange, label }) => {
   };
 
   return (
-    <div className={classNames(styles.button, className)}>
+    <div className={classNames(styles.checkbox, className)}>
       <button type="button" id={label} onClick={toggleChecked}>
         <img
-          className={styles.button__checkbox}
+          className={styles.checkbox__icon}
           src={checked ? checkboxActive : checkbox}
           alt="checkbox"
         />
       </button>
       {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
       <label htmlFor={label}>
-        <Text type="p3" className={styles.button__text}>
+        <Text type="p3" className={styles.checkbox__text}>
           {label}
         </Text>
       </label>

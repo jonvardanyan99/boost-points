@@ -85,21 +85,21 @@ export const Verification = () => {
     <div className={styles.verification}>
       <div>
         <img src={logo} alt="logo" />
-        <Text type="h4" className={styles.heading}>
+        <Text type="h4" className={styles.verification__heading}>
           Phone Verification
         </Text>
-        <Text type="p4" className={styles['verification-instruction']}>
+        <Text type="p4" className={styles.verification__instruction}>
           {contentText}
         </Text>
         <Input
-          className={styles['verification-input']}
+          className={styles.verification__input}
           placeholder="2423"
           value={inputValue}
           onChange={handleInputChange}
           error={errMessage}
         />
         <Button
-          className={styles['verification-button']}
+          className={styles.verification__button}
           title="Proceed"
           onClick={handleProceedClick}
           loading={dataLoading}

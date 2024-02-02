@@ -1,4 +1,4 @@
-.button {
+.checkbox {
   width: fit-content;
   display: flex;
   justify-content: center;
@@ -12,7 +12,7 @@
     width: 24px;
     height: 24px;
 
-    > .button__checkbox {
+    > .checkbox__icon {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -24,7 +24,7 @@
   }
 
   > label {
-    > .button__text {
+    > .checkbox__text {
       color: var(--black-3-color);
       margin-left: 8px;
       cursor: pointer;

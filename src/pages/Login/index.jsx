@@ -52,22 +52,22 @@ export const Login = () => {
     <div className={styles.login}>
       <div>
         <img src={logo} alt="logo" />
-        <Text type="h4" className={styles.heading}>
+        <Text type="h4" className={styles.login__heading}>
           Log in
         </Text>
-        <Text type="p4" className={styles['login-instruction']}>
+        <Text type="p4" className={styles.login__instruction}>
           Whenever you log in or creating a new account let’s start with your phone number
         </Text>
         <Input
           type="tel"
-          className={styles['login-input']}
+          className={styles.login__input}
           placeholder="0432 892 002"
           value={inputValue}
           onChange={handleInputChange}
           error={errMessage}
         />
         <Button
-          className={styles['login-button']}
+          className={styles.login__button}
           title="Proceed"
           onClick={handleProceedClick}
           loading={dataLoading}

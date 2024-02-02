@@ -44,8 +44,8 @@ export const Dropdown = ({
         <label htmlFor={label}>
           <Text
             type="p4"
-            className={classNames(styles['label-text'], {
-              [styles['label-text--disabled']]: disabled,
+            className={classNames(styles['dropdown__label-text'], {
+              [styles['dropdown__label-text--disabled']]: disabled,
             })}
           >
             {label}
