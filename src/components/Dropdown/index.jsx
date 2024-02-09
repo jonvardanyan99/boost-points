@@ -56,9 +56,9 @@ export const Dropdown = ({
         type="button"
         ref={mainButtonRef}
         id={label}
-        className={classNames(styles['main-button'], {
-          [styles['main-button--active']]: optionsVisible,
-          [styles['main-button--disabled']]: disabled,
+        className={classNames(styles['dropdown__main-button'], {
+          [styles['dropdown__main-button--active']]: optionsVisible,
+          [styles['dropdown__main-button--disabled']]: disabled,
         })}
         onClick={disabled ? undefined : toggleOptionsVisible}
       >

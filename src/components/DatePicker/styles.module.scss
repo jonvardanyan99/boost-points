@@ -1,16 +1,14 @@
-.date-picker-container {
+.date-picker {
   width: 150px;
   position: relative;
 
-  > label {
-    > .date-picker-container__label-text {
-      display: inline-block;
-      color: var(--gray-1-color);
-      margin-bottom: 6px;
-    }
+  &__label-text {
+    display: inline-block;
+    color: var(--gray-1-color);
+    margin-bottom: 6px;
   }
 
-  > .main-button {
+  &__main-button {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -43,7 +41,7 @@
     }
   }
 
-  .date-picker {
+  &__react-date-picker {
     position: absolute;
     top: 110%;
     z-index: 1;

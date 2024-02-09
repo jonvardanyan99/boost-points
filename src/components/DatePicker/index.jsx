@@ -48,17 +48,17 @@ export const DatePicker = ({ className, placeholder, value, onChange, label }) =
   };
 
   return (
-    <div ref={datePickerRef} className={classNames(styles['date-picker-container'], className)}>
+    <div ref={datePickerRef} className={classNames(styles['date-picker'], className)}>
       <label htmlFor={label}>
-        <Text type="p4" className={styles['date-picker-container__label-text']}>
+        <Text type="p4" className={styles['date-picker__label-text']}>
           {label}
         </Text>
       </label>
       <button
         type="button"
         id={label}
-        className={classNames(styles['main-button'], {
-          [styles['main-button--active']]: datePickerVisible,
+        className={classNames(styles['date-picker__main-button'], {
+          [styles['date-picker__main-button--active']]: datePickerVisible,
         })}
         onClick={toggleDatePickerVisible}
       >
@@ -70,7 +70,7 @@ export const DatePicker = ({ className, placeholder, value, onChange, label }) =
       </button>
       {datePickerVisible && (
         <ReactDatePicker
-          calendarClassName={styles['date-picker']}
+          calendarClassName={styles['date-picker__react-date-picker']}
           dayClassName={getDayClassName}
           selected={value}
           onChange={date => onChange(date)}

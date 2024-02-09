@@ -105,10 +105,10 @@ export const Verification = () => {
           loading={dataLoading}
         />
         {resendVisible && (
-          <div className={styles.resend}>
+          <div className={styles.verification__resend}>
             <Text type="p4">Didn’t get the code?</Text>
             <button type="button" onClick={handleResendClick}>
-              <Text type="p4" className={styles.resend__text}>
+              <Text type="p4" className={styles['verification__resend-text']}>
                 Resend
               </Text>
             </button>
