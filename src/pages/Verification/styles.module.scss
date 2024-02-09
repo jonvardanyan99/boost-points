@@ -5,7 +5,7 @@
   align-items: center;
 
   > div {
-    width: 500px;
+    width: var(--fixed-width);
     padding: 44px 15px 0 15px;
     display: flex;
     flex-direction: column;
