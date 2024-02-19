@@ -19,7 +19,7 @@
 
   &__instruction {
     text-align: center;
-    color: var(--black-4-color);
+    color: rgb(var(--black-4-color));
     margin-bottom: 29px;
   }
 
@@ -42,6 +42,6 @@
   }
 
   &__resend-text {
-    color: var(--accent-color);
+    color: rgb(var(--accent-color));
   }
 }
