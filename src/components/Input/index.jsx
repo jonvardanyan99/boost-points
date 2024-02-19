@@ -46,7 +46,7 @@ export const Input = ({
 };
 
 Input.propTypes = {
-  type: PropTypes.oneOf(['tel', 'email']),
+  type: PropTypes.oneOf(['tel', 'email', 'number']),
   className: PropTypes.string,
   placeholder: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
