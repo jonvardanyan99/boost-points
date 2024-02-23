@@ -62,14 +62,14 @@ export const Dropdown = ({
         })}
         onClick={disabled ? undefined : toggleOptionsVisible}
       >
-        {selectedOption || placeholder}
+        {selectedOption?.label || placeholder}
         <img src={disabled ? downArrowGray : downArrow} alt="down-arrow" />
       </button>
       {optionsVisible && (
         <div>
           {options.map(option => (
-            <button key={option} type="button" onClick={() => onChange(option)}>
-              {option}
+            <button key={option.value} type="button" onClick={() => onChange(option)}>
+              {option.label}
             </button>
           ))}
         </div>
@@ -81,9 +81,9 @@ export const Dropdown = ({
 Dropdown.propTypes = {
   className: PropTypes.string,
   placeholder: PropTypes.string.isRequired,
-  selectedOption: PropTypes.string.isRequired,
+  selectedOption: PropTypes.shape({}),
   onChange: PropTypes.func.isRequired,
-  options: PropTypes.arrayOf(PropTypes.string).isRequired,
+  options: PropTypes.arrayOf(PropTypes.shape).isRequired,
   label: PropTypes.string,
   disabled: PropTypes.bool,
 };
