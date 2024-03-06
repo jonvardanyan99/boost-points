@@ -5,7 +5,7 @@
   &__label-text {
     display: inline-block;
     color: rgb(var(--gray-1-color));
-    margin-bottom: 6px;
+    margin-bottom: 3px;
   }
 
   &__main-button {
@@ -20,6 +20,10 @@
 
     &--active {
       border-color: rgb(var(--accent-color));
+    }
+
+    &--error {
+      border-color: rgb(var(--red-color));
     }
 
     > div {
@@ -41,9 +45,14 @@
     }
   }
 
+  &__error-text {
+    color: rgb(var(--red-color));
+    margin-top: 3px;
+  }
+
   &__react-date-picker {
     position: absolute;
-    top: 110%;
+    margin-top: 7px;
     z-index: 1;
   
     .day--selected {

@@ -11,7 +11,16 @@ import ReactDatePicker from 'react-datepicker';
 
 import styles from './styles.module.scss';
 
-export const DatePicker = ({ className, placeholder, value, onChange, label }) => {
+export const DatePicker = ({
+  className,
+  placeholder,
+  name,
+  value,
+  onChange,
+  onBlur,
+  label,
+  error,
+}) => {
   const [datePickerVisible, setDatePickerVisible] = useState(false);
   const datePickerRef = useRef(null);
 
@@ -50,7 +59,7 @@ export const DatePicker = ({ className, placeholder, value, onChange, label }) =
   return (
     <div ref={datePickerRef} className={classNames(styles['date-picker'], className)}>
       <label htmlFor={label}>
-        <Text type="p4" className={styles['date-picker__label-text']}>
+        <Text type="p3" className={styles['date-picker__label-text']}>
           {label}
         </Text>
       </label>
@@ -59,21 +68,29 @@ export const DatePicker = ({ className, placeholder, value, onChange, label }) =
         id={label}
         className={classNames(styles['date-picker__main-button'], {
           [styles['date-picker__main-button--active']]: datePickerVisible,
+          [styles['date-picker__main-button--error']]: error,
         })}
         onClick={toggleDatePickerVisible}
       >
         <div>
           <img src={calendar} alt="calendar" />
-          <Text type="p4">{value ? format(value, 'dd/MM/y') : placeholder}</Text>
+          <Text type="p3">{value ? format(value, 'dd/MM/y') : placeholder}</Text>
         </div>
         <img src={downArrow} alt="down-arrow" />
       </button>
+      {error && (
+        <Text type="p4" className={styles['date-picker__error-text']}>
+          {error}
+        </Text>
+      )}
       {datePickerVisible && (
         <ReactDatePicker
           calendarClassName={styles['date-picker__react-date-picker']}
           dayClassName={getDayClassName}
+          name={name}
           selected={value}
           onChange={date => onChange(date)}
+          onBlur={onBlur}
           onSelect={() => setDatePickerVisible(false)}
           inline
         />
@@ -85,7 +102,10 @@ export const DatePicker = ({ className, placeholder, value, onChange, label }) =
 DatePicker.propTypes = {
   className: PropTypes.string,
   placeholder: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
   value: PropTypes.shape({}),
   onChange: PropTypes.func.isRequired,
+  onBlur: PropTypes.func.isRequired,
   label: PropTypes.string.isRequired,
+  error: PropTypes.string,
 };
