@@ -4,27 +4,55 @@ import { Button } from 'components/Button';
 import { Input } from 'components/Input';
 import { Text } from 'components/Text';
 import { API_URL } from 'constants/env';
+import { useFormik } from 'formik';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { setTokens } from 'store/reducers/auth/actions';
 import { handleApiError } from 'utils/errorHandlers';
 import { formatPhoneNumber } from 'utils/format';
-import { otpSchema } from 'utils/validators';
+import { verificationFormSchema } from 'utils/validators';
+import { toFormikValidationSchema } from 'zod-formik-adapter';
 
 import styles from './styles.module.scss';
 
 export const Verification = () => {
   const dispatch = useDispatch();
   const location = useLocation();
-  const [inputValue, setInputValue] = useState('');
-  const [errMessage, setErrMessage] = useState('');
   const [dataLoading, setDataLoading] = useState(false);
   const [resendVisible, setResendVisible] = useState(false);
 
-  useEffect(() => {
-    setErrMessage('');
-  }, [inputValue]);
+  const phoneNumber = location.state.phoneNumber;
+  const contentText = `Enter the verification code we’ve sent to ${phoneNumber}`;
+
+  const formik = useFormik({
+    initialValues: {
+      otp: '',
+    },
+    validationSchema: toFormikValidationSchema(verificationFormSchema),
+    onSubmit: async values => {
+      setDataLoading(true);
+
+      try {
+        const response = await axios.post(`${API_URL}/api/v1/consumers/otp/check`, {
+          phoneNumber: formatPhoneNumber(phoneNumber),
+          otp: values.otp,
+        });
+
+        dispatch(
+          setTokens({
+            accessToken: response.data.accessToken,
+            refreshToken: response.data.refreshToken,
+          }),
+        );
+        // todo dnel useNavigate depi create-account
+      } catch (error) {
+        handleApiError(error, formik.setFieldError, 'otp');
+      } finally {
+        setDataLoading(false);
+      }
+    },
+  });
 
   useEffect(() => {
     if (!resendVisible) {
@@ -34,48 +62,13 @@ export const Verification = () => {
     }
   }, [resendVisible]);
 
-  const phoneNumber = location.state.phoneNumber;
-  const contentText = `Enter the verification code we’ve sent to ${phoneNumber}`;
-
-  const handleInputChange = event => {
-    setInputValue(event.target.value);
-  };
-
-  const handleProceedClick = async () => {
-    const result = otpSchema.safeParse(inputValue);
-
-    if (result.success) {
-      setDataLoading(true);
-
-      try {
-        const response = await axios.post(`${API_URL}/api/v1/consumers/otp/check`, {
-          phoneNumber: formatPhoneNumber(phoneNumber),
-          otp: inputValue,
-        });
-
-        dispatch(
-          setTokens({
-            accessToken: response.data.accessToken,
-            refreshToken: response.data.refreshToken,
-          }),
-        );
-      } catch (error) {
-        handleApiError(error, setErrMessage, 'otp');
-      } finally {
-        setDataLoading(false);
-      }
-    } else {
-      setErrMessage(result.error.issues[0].message);
-    }
-  };
-
   const handleResendClick = async () => {
     try {
       await axios.post(`${API_URL}/api/v1/consumers/otp/send`, {
         phoneNumber: formatPhoneNumber(phoneNumber),
       });
     } catch (error) {
-      handleApiError(error, setErrMessage, 'phoneNumber');
+      handleApiError(error, formik.setFieldError, 'phoneNumber', 'otp');
     }
 
     setResendVisible(false);
@@ -94,14 +87,16 @@ export const Verification = () => {
         <Input
           className={styles.verification__input}
           placeholder="2423"
-          value={inputValue}
-          onChange={handleInputChange}
-          error={errMessage}
+          name="otp"
+          value={formik.values.otp}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          error={formik.errors.otp}
         />
         <Button
           className={styles.verification__button}
           title="Proceed"
-          onClick={handleProceedClick}
+          onClick={formik.handleSubmit}
           loading={dataLoading}
         />
         {resendVisible && (

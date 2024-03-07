@@ -4,49 +4,41 @@ import { Button } from 'components/Button';
 import { Input } from 'components/Input';
 import { Text } from 'components/Text';
 import { API_URL } from 'constants/env';
-import React, { useEffect, useState } from 'react';
+import { useFormik } from 'formik';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { handleApiError } from 'utils/errorHandlers';
 import { formatPhoneNumber } from 'utils/format';
-import { phoneNumberSchema } from 'utils/validators';
+import { loginFormSchema } from 'utils/validators';
+import { toFormikValidationSchema } from 'zod-formik-adapter';
 
 import styles from './styles.module.scss';
 
 export const Login = () => {
-  const [inputValue, setInputValue] = useState('');
-  const [errMessage, setErrMessage] = useState('');
   const [dataLoading, setDataLoading] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    setErrMessage('');
-  }, [inputValue]);
-
-  const handleInputChange = event => {
-    setInputValue(event.target.value);
-  };
-
-  const handleProceedClick = async () => {
-    const result = phoneNumberSchema.safeParse(inputValue);
-
-    if (result.success) {
+  const formik = useFormik({
+    initialValues: {
+      phoneNumber: '',
+    },
+    validationSchema: toFormikValidationSchema(loginFormSchema),
+    onSubmit: async values => {
       setDataLoading(true);
 
       try {
         await axios.post(`${API_URL}/api/v1/consumers/otp/send`, {
-          phoneNumber: formatPhoneNumber(inputValue),
+          phoneNumber: formatPhoneNumber(values.phoneNumber),
         });
 
-        navigate('/verification', { state: { phoneNumber: inputValue } });
+        navigate('/verification', { state: { phoneNumber: values.phoneNumber } });
       } catch (error) {
-        handleApiError(error, setErrMessage, 'phoneNumber');
+        handleApiError(error, formik.setFieldError, 'phoneNumber');
       } finally {
         setDataLoading(false);
       }
-    } else {
-      setErrMessage(result.error.issues[0].message);
-    }
-  };
+    },
+  });
 
   return (
     <div className={styles.login}>
@@ -62,14 +54,16 @@ export const Login = () => {
           type="tel"
           className={styles.login__input}
           placeholder="0432 892 002"
-          value={inputValue}
-          onChange={handleInputChange}
-          error={errMessage}
+          name="phoneNumber"
+          value={formik.values.phoneNumber}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          error={formik.errors.phoneNumber}
         />
         <Button
           className={styles.login__button}
           title="Proceed"
-          onClick={handleProceedClick}
+          onClick={formik.handleSubmit}
           loading={dataLoading}
         />
       </div>

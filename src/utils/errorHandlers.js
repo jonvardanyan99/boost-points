@@ -1,9 +1,11 @@
-export const handleApiError = (error, setMessage, key) => {
+export const handleApiError = (error, setError, apiKey, formikKey) => {
+  const key = formikKey || apiKey;
+
   if (typeof error.response.data.detail === 'string') {
-    setMessage(error.response.data.detail);
+    setError(key, error.response.data.detail);
   } else if (Array.isArray(error.response.data.detail)) {
-    setMessage(error.response.data.detail[0][key][0]);
+    setError(key, error.response.data.detail[0][apiKey][0]);
   } else {
-    setMessage(error.response.data.detail[key][0]);
+    setError(key, error.response.data.detail[apiKey][0]);
   }
 };
