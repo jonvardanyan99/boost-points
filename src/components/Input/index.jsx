@@ -9,11 +9,13 @@ export const Input = ({
   type,
   className,
   placeholder,
+  name,
   value,
   onChange,
+  onBlur,
+  label,
   disabled,
   error,
-  label,
 }) => {
   return (
     <div className={className}>
@@ -32,8 +34,10 @@ export const Input = ({
           [styles['input--error']]: error,
         })}
         placeholder={placeholder}
+        name={name}
         value={value}
         onChange={onChange}
+        onBlur={onBlur}
         disabled={disabled}
       />
       {error && (
@@ -49,9 +53,11 @@ Input.propTypes = {
   type: PropTypes.oneOf(['tel', 'email', 'number']),
   className: PropTypes.string,
   placeholder: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+  name: PropTypes.string,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   onChange: PropTypes.func.isRequired,
+  onBlur: PropTypes.func,
+  label: PropTypes.string,
   disabled: PropTypes.bool,
   error: PropTypes.string,
-  label: PropTypes.string,
 };

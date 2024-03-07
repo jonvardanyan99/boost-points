@@ -10,11 +10,14 @@ import styles from './styles.module.scss';
 export const Dropdown = ({
   className,
   placeholder,
+  name,
   selectedOption,
   onChange,
+  onBlur,
   options,
   label,
   disabled,
+  error,
 }) => {
   const [optionsVisible, setOptionsVisible] = useState(false);
   const mainButtonRef = useRef(null);
@@ -43,7 +46,7 @@ export const Dropdown = ({
       {label && (
         <label htmlFor={label}>
           <Text
-            type="p4"
+            type="p3"
             className={classNames(styles['dropdown__label-text'], {
               [styles['dropdown__label-text--disabled']]: disabled,
             })}
@@ -59,12 +62,20 @@ export const Dropdown = ({
         className={classNames(styles['dropdown__main-button'], {
           [styles['dropdown__main-button--active']]: optionsVisible,
           [styles['dropdown__main-button--disabled']]: disabled,
+          [styles['dropdown__main-button--error']]: error,
         })}
+        name={name}
+        onBlur={onBlur}
         onClick={disabled ? undefined : toggleOptionsVisible}
       >
         {selectedOption?.label || placeholder}
         <img src={disabled ? downArrowGray : downArrow} alt="down-arrow" />
       </button>
+      {error && (
+        <Text type="p4" className={styles['dropdown__error-text']}>
+          {error}
+        </Text>
+      )}
       {optionsVisible && (
         <div>
           {options.map(option => (
@@ -81,9 +92,12 @@ export const Dropdown = ({
 Dropdown.propTypes = {
   className: PropTypes.string,
   placeholder: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
   selectedOption: PropTypes.shape({}),
   onChange: PropTypes.func.isRequired,
+  onBlur: PropTypes.func.isRequired,
   options: PropTypes.arrayOf(PropTypes.shape).isRequired,
   label: PropTypes.string,
   disabled: PropTypes.bool,
+  error: PropTypes.string,
 };
