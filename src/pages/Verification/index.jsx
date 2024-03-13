@@ -10,6 +10,7 @@ import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { setTokens } from 'store/reducers/auth/actions';
 import { handleApiError } from 'utils/errorHandlers';
+import { getFormikError } from 'utils/errorHandlers';
 import { formatPhoneNumber } from 'utils/format';
 import { verificationFormSchema } from 'utils/validators';
 import { toFormikValidationSchema } from 'zod-formik-adapter';
@@ -91,7 +92,7 @@ export const Verification = () => {
           value={formik.values.otp}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          error={formik.errors.otp}
+          error={getFormikError(formik, 'otp')}
         />
         <Button
           className={styles.verification__button}

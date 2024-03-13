@@ -8,6 +8,7 @@ import { useFormik } from 'formik';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { handleApiError } from 'utils/errorHandlers';
+import { getFormikError } from 'utils/errorHandlers';
 import { formatPhoneNumber } from 'utils/format';
 import { loginFormSchema } from 'utils/validators';
 import { toFormikValidationSchema } from 'zod-formik-adapter';
@@ -58,7 +59,7 @@ export const Login = () => {
           value={formik.values.phoneNumber}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          error={formik.errors.phoneNumber}
+          error={getFormikError(formik, 'phoneNumber')}
         />
         <Button
           className={styles.login__button}

@@ -9,3 +9,11 @@ export const handleApiError = (error, setError, apiKey, formikKey) => {
     setError(key, error.response.data.detail[apiKey][0]);
   }
 };
+
+export const getFormikError = (formik, key) => {
+  if (formik.errors[key] && formik.touched[key]) {
+    return formik.errors[key];
+  }
+
+  return null;
+};
