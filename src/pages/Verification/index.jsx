@@ -11,7 +11,7 @@ import { useLocation } from 'react-router-dom';
 import { setTokens } from 'store/reducers/auth/actions';
 import { handleApiError } from 'utils/errorHandlers';
 import { getFormikError } from 'utils/errorHandlers';
-import { formatPhoneNumber } from 'utils/format';
+import { formatPhoneNumber } from 'utils/formats';
 import { verificationFormSchema } from 'utils/validators';
 import { toFormikValidationSchema } from 'zod-formik-adapter';
 

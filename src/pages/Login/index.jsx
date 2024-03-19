@@ -9,7 +9,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { handleApiError } from 'utils/errorHandlers';
 import { getFormikError } from 'utils/errorHandlers';
-import { formatPhoneNumber } from 'utils/format';
+import { formatPhoneNumber } from 'utils/formats';
 import { loginFormSchema } from 'utils/validators';
 import { toFormikValidationSchema } from 'zod-formik-adapter';
 
