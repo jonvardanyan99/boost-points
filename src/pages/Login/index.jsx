@@ -4,6 +4,7 @@ import { Button } from 'components/Button';
 import { Input } from 'components/Input';
 import { Text } from 'components/Text';
 import { API_URL } from 'constants/env';
+import { ROUTES } from 'constants/routes';
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -32,7 +33,7 @@ export const Login = () => {
           phoneNumber: formatPhoneNumber(values.phoneNumber),
         });
 
-        navigate('/verification', { state: { phoneNumber: values.phoneNumber } });
+        navigate(ROUTES.VERIFICATION, { state: { phoneNumber: values.phoneNumber } });
       } catch (error) {
         handleApiError(error, formik.setFieldError, 'phoneNumber');
       } finally {
