@@ -4,10 +4,11 @@ import { Button } from 'components/Button';
 import { Input } from 'components/Input';
 import { Text } from 'components/Text';
 import { API_URL } from 'constants/env';
+import { ROUTES } from 'constants/routes';
 import { useFormik } from 'formik';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { setTokens } from 'store/reducers/auth/actions';
 import { handleApiError } from 'utils/errorHandlers';
 import { getFormikError } from 'utils/errorHandlers';
@@ -20,6 +21,7 @@ import styles from './styles.module.scss';
 export const Verification = () => {
   const dispatch = useDispatch();
   const location = useLocation();
+  const navigate = useNavigate();
   const [dataLoading, setDataLoading] = useState(false);
   const [resendVisible, setResendVisible] = useState(false);
 
@@ -46,7 +48,13 @@ export const Verification = () => {
             refreshToken: response.data.refreshToken,
           }),
         );
-        // todo dnel useNavigate depi create-account
+
+        if (response.data.consumer.isNew) {
+          navigate(ROUTES.CREATE_ACCOUNT);
+        } else {
+          // eslint-disable-next-line no-console
+          console.log('The consumer is already signed');
+        }
       } catch (error) {
         handleApiError(error, formik.setFieldError, 'otp');
       } finally {
