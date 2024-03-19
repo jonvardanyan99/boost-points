@@ -1,15 +1,15 @@
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 
-export const useUpdateEffect = ({ dependency, effectFunction }) => {
-  const isMountedRef = useRef(false);
+import { useFirstMountState } from './useFirstMountState';
 
+export const useUpdateEffect = (effect, deps) => {
+  const isFirstMount = useFirstMountState();
+
+  // eslint-disable-next-line consistent-return
   useEffect(() => {
-    if (isMountedRef.current) {
-      if (!dependency) {
-        effectFunction();
-      }
-    } else {
-      isMountedRef.current = true;
+    if (!isFirstMount) {
+      return effect();
     }
-  }, [dependency, effectFunction]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, deps);
 };
