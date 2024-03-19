@@ -5,6 +5,7 @@ import downArrow from 'assets/images/down-arrow.svg';
 import classNames from 'classnames';
 import { Text } from 'components/Text';
 import format from 'date-fns/format';
+import { useUpdateEffect } from 'hooks/useUpdateEffect';
 import PropTypes from 'prop-types';
 import React, { useEffect, useRef, useState } from 'react';
 import ReactDatePicker from 'react-datepicker';
@@ -36,6 +37,12 @@ export const DatePicker = ({
       global.addEventListener('click', handleClickOutside);
 
       return () => global.removeEventListener('click', handleClickOutside);
+    }
+  }, [datePickerVisible]);
+
+  useUpdateEffect(() => {
+    if (!datePickerVisible) {
+      onBlur();
     }
   }, [datePickerVisible]);
 
@@ -90,7 +97,6 @@ export const DatePicker = ({
           name={name}
           selected={value}
           onChange={date => onChange(date)}
-          onBlur={onBlur}
           onSelect={() => setDatePickerVisible(false)}
           inline
         />
