@@ -1,12 +1,17 @@
-export const handleApiError = (error, setError, apiKey, formikKey) => {
-  const key = formikKey || apiKey;
+export const handleApiError = (error, setError, keys) => {
+  const { detail } = error.response.data;
 
-  if (typeof error.response.data.detail === 'string') {
-    setError(key, error.response.data.detail);
-  } else if (Array.isArray(error.response.data.detail)) {
-    setError(key, error.response.data.detail[0][apiKey][0]);
+  if (typeof detail === 'string') {
+    setError(keys[0], detail);
   } else {
-    setError(key, error.response.data.detail[apiKey][0]);
+    const errorDetails = Array.isArray(detail) ? detail[0] : detail;
+
+    // eslint-disable-next-line array-callback-return
+    Object.keys(errorDetails).map(apiKey => {
+      if (keys.includes(apiKey)) {
+        setError(apiKey, errorDetails[apiKey][0]);
+      }
+    });
   }
 };
 

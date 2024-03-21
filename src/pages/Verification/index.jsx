@@ -10,8 +10,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { setTokens } from 'store/reducers/auth/actions';
-import { handleApiError } from 'utils/errorHandlers';
-import { getFormikError } from 'utils/errorHandlers';
+import { getFormikError, handleApiError } from 'utils/errorHandlers';
 import { formatPhoneNumber } from 'utils/formats';
 import { verificationFormSchema } from 'utils/validators';
 import { toFormikValidationSchema } from 'zod-formik-adapter';
@@ -56,7 +55,7 @@ export const Verification = () => {
           console.log('The consumer is already signed');
         }
       } catch (error) {
-        handleApiError(error, formik.setFieldError, 'otp');
+        handleApiError(error, formik.setFieldError, ['otp']);
       } finally {
         setDataLoading(false);
       }
@@ -77,7 +76,7 @@ export const Verification = () => {
         phoneNumber: formatPhoneNumber(phoneNumber),
       });
     } catch (error) {
-      handleApiError(error, formik.setFieldError, 'phoneNumber', 'otp');
+      handleApiError(error, formik.setFieldError, ['phoneNumber']);
     }
 
     setResendVisible(false);

@@ -8,8 +8,7 @@ import { ROUTES } from 'constants/routes';
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { handleApiError } from 'utils/errorHandlers';
-import { getFormikError } from 'utils/errorHandlers';
+import { getFormikError, handleApiError } from 'utils/errorHandlers';
 import { formatPhoneNumber } from 'utils/formats';
 import { loginFormSchema } from 'utils/validators';
 import { toFormikValidationSchema } from 'zod-formik-adapter';
@@ -35,7 +34,7 @@ export const Login = () => {
 
         navigate(ROUTES.VERIFICATION, { state: { phoneNumber: values.phoneNumber } });
       } catch (error) {
-        handleApiError(error, formik.setFieldError, 'phoneNumber');
+        handleApiError(error, formik.setFieldError, ['phoneNumber']);
       } finally {
         setDataLoading(false);
       }
