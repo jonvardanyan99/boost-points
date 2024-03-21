@@ -23,7 +23,7 @@ export const verificationFormSchema = z.object({
 export const confirmAddressFormSchema = z.object({
   propertyName: z.string({ required_error: FIELD_REQUIRED }),
   unitNumber: z.string().optional(),
-  streetNumber: z.string().optional(),
+  streetNumber: z.string({ required_error: FIELD_REQUIRED }),
   streetName: z.string({ required_error: FIELD_REQUIRED }),
   streetSuffix: z.string({ required_error: FIELD_REQUIRED }),
   suburb: z.string({ required_error: FIELD_REQUIRED }),
