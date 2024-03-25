@@ -6,11 +6,12 @@ import { Text } from 'components/Text';
 import { API_URL } from 'constants/env';
 import { ROUTES } from 'constants/routes';
 import { useFormik } from 'formik';
+import { useErrorHandler } from 'hooks/useErrorHandler';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { setTokens } from 'store/reducers/auth/actions';
-import { getFormikError, handleApiError } from 'utils/errorHandlers';
+import { getFormikError } from 'utils/errorHandlers';
 import { formatPhoneNumber } from 'utils/formats';
 import { verificationFormSchema } from 'utils/validators';
 import { toFormikValidationSchema } from 'zod-formik-adapter';
@@ -23,6 +24,7 @@ export const Verification = () => {
   const navigate = useNavigate();
   const [dataLoading, setDataLoading] = useState(false);
   const [resendVisible, setResendVisible] = useState(false);
+  const { handleApiError, snackbar } = useErrorHandler();
 
   const phoneNumber = location.state.phoneNumber;
   const contentText = `Enter the verification code we’ve sent to ${phoneNumber}`;
@@ -118,6 +120,7 @@ export const Verification = () => {
           </div>
         )}
       </div>
+      {snackbar}
     </div>
   );
 };

@@ -6,9 +6,10 @@ import { Text } from 'components/Text';
 import { API_URL } from 'constants/env';
 import { ROUTES } from 'constants/routes';
 import { useFormik } from 'formik';
+import { useErrorHandler } from 'hooks/useErrorHandler';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getFormikError, handleApiError } from 'utils/errorHandlers';
+import { getFormikError } from 'utils/errorHandlers';
 import { formatPhoneNumber } from 'utils/formats';
 import { loginFormSchema } from 'utils/validators';
 import { toFormikValidationSchema } from 'zod-formik-adapter';
@@ -18,6 +19,7 @@ import styles from './styles.module.scss';
 export const Login = () => {
   const [dataLoading, setDataLoading] = useState(false);
   const navigate = useNavigate();
+  const { handleApiError, snackbar } = useErrorHandler();
 
   const formik = useFormik({
     initialValues: {
@@ -68,6 +70,7 @@ export const Login = () => {
           loading={dataLoading}
         />
       </div>
+      {snackbar}
     </div>
   );
 };
