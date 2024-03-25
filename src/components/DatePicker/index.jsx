@@ -12,16 +12,7 @@ import ReactDatePicker from 'react-datepicker';
 
 import styles from './styles.module.scss';
 
-export const DatePicker = ({
-  className,
-  placeholder,
-  name,
-  value,
-  onChange,
-  onBlur,
-  label,
-  error,
-}) => {
+export const DatePicker = ({ className, placeholder, value, onChange, onBlur, label, error }) => {
   const [datePickerVisible, setDatePickerVisible] = useState(false);
   const datePickerRef = useRef(null);
 
@@ -46,6 +37,10 @@ export const DatePicker = ({
     }
   }, [datePickerVisible]);
 
+  const toggleDatePickerVisible = () => {
+    setDatePickerVisible(prevValue => !prevValue);
+  };
+
   const getDayClassName = date => {
     const currentDay =
       value?.getFullYear() === date.getFullYear() &&
@@ -59,12 +54,8 @@ export const DatePicker = ({
     return styles['day--keyboard-selected'];
   };
 
-  const toggleDatePickerVisible = () => {
-    setDatePickerVisible(prevValue => !prevValue);
-  };
-
   return (
-    <div ref={datePickerRef} className={classNames(styles['date-picker'], className)}>
+    <div className={classNames(styles['date-picker'], className)} ref={datePickerRef}>
       <label htmlFor={label}>
         <Text type="p3" className={styles['date-picker__label-text']}>
           {label}
@@ -94,7 +85,6 @@ export const DatePicker = ({
         <ReactDatePicker
           calendarClassName={styles['date-picker__react-date-picker']}
           dayClassName={getDayClassName}
-          name={name}
           selected={value}
           onChange={date => onChange(date)}
           onSelect={() => setDatePickerVisible(false)}
@@ -108,7 +98,6 @@ export const DatePicker = ({
 DatePicker.propTypes = {
   className: PropTypes.string,
   placeholder: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
   value: PropTypes.shape({}),
   onChange: PropTypes.func.isRequired,
   onBlur: PropTypes.func.isRequired,
