@@ -45,7 +45,7 @@ export const Login = () => {
 
   return (
     <div className={styles.login}>
-      <div>
+      <div className={styles.login__container}>
         <img src={logo} alt="logo" />
         <Text type="h4" className={styles.login__heading}>
           Log in

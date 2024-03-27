@@ -91,7 +91,7 @@ export const Verification = () => {
 
   return (
     <div className={styles.verification}>
-      <div>
+      <div className={styles.verification__container}>
         <img src={logo} alt="logo" />
         <Text type="h4" className={styles.verification__heading}>
           Phone Verification

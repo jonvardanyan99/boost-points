@@ -4,7 +4,7 @@
   justify-content: center;
   align-items: center;
 
-  > div {
+  &__container {
     width: var(--fixed-width);
     padding: 44px 15px 0 15px;
     display: flex;
