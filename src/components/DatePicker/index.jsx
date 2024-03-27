@@ -88,6 +88,9 @@ export const DatePicker = ({ className, placeholder, value, onChange, onBlur, la
           selected={value}
           onChange={date => onChange(date)}
           onSelect={() => setDatePickerVisible(false)}
+          dropdownMode="select"
+          showMonthDropdown
+          showYearDropdown
           inline
         />
       )}
