@@ -64,11 +64,16 @@ export const Verification = () => {
     },
   });
 
+  // eslint-disable-next-line consistent-return
   useEffect(() => {
     if (!resendVisible) {
-      setTimeout(() => {
+      const timeoutId = setTimeout(() => {
         setResendVisible(true);
       }, 30000);
+
+      return () => {
+        clearTimeout(timeoutId);
+      };
     }
   }, [resendVisible]);
 
