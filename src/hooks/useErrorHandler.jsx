@@ -16,12 +16,16 @@ export const useErrorHandler = () => {
     } else {
       const errorDetails = Array.isArray(detail) ? detail[0] : detail;
 
-      // eslint-disable-next-line array-callback-return
-      Object.keys(errorDetails).map(apiKey => {
-        if (keys.includes(apiKey)) {
-          setError(apiKey, errorDetails[apiKey][0]);
-        }
-      });
+      if (keys.length) {
+        // eslint-disable-next-line array-callback-return
+        Object.keys(errorDetails).map(apiKey => {
+          if (keys.includes(apiKey)) {
+            setError(apiKey, errorDetails[apiKey][0]);
+          }
+        });
+      } else {
+        setSnackbarText(errorDetails[Object.keys(errorDetails)[0]][0]);
+      }
     }
   };
 

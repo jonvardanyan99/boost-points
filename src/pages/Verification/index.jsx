@@ -78,7 +78,7 @@ export const Verification = () => {
         phoneNumber: formatPhoneNumber(phoneNumber),
       });
     } catch (error) {
-      handleApiError(error, formik.setFieldError, ['phoneNumber']);
+      handleApiError(error, formik.setFieldError, []);
     }
 
     setResendVisible(false);
