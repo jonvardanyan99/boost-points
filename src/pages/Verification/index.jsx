@@ -1,15 +1,14 @@
 import logo from 'assets/images/logo.svg';
-import axios from 'axios';
 import { Button } from 'components/Button';
 import { Input } from 'components/Input';
 import { Text } from 'components/Text';
-import { API_URL } from 'constants/env';
-import { ROUTES } from 'constants/routes';
 import { useFormik } from 'formik';
 import { useErrorHandler } from 'hooks/useErrorHandler';
+import { useMutation } from 'hooks/useMutation';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { API } from 'services/api';
 import { setTokens } from 'store/reducers/auth/actions';
 import { getFormikError } from 'utils/errorHandlers';
 import { formatPhoneNumber } from 'utils/formats';
@@ -21,9 +20,8 @@ import styles from './styles.module.scss';
 export const Verification = () => {
   const dispatch = useDispatch();
   const location = useLocation();
-  const navigate = useNavigate();
-  const [dataLoading, setDataLoading] = useState(false);
   const [resendVisible, setResendVisible] = useState(false);
+  const [verify, { loading }] = useMutation(API.verifyPhoneNumber);
   const { handleApiError, snackbar } = useErrorHandler();
 
   const phoneNumber = location.state.phoneNumber;
@@ -35,10 +33,8 @@ export const Verification = () => {
     },
     validationSchema: toFormikValidationSchema(verificationFormSchema),
     onSubmit: async values => {
-      setDataLoading(true);
-
       try {
-        const response = await axios.post(`${API_URL}/api/v1/consumers/otp/check`, {
+        const response = await verify({
           phoneNumber: formatPhoneNumber(phoneNumber),
           otp: values.otp,
         });
@@ -51,15 +47,14 @@ export const Verification = () => {
         );
 
         if (response.data.consumer.isNew) {
-          navigate(ROUTES.CREATE_ACCOUNT);
+          // eslint-disable-next-line no-console
+          console.log('The consumer is new.');
         } else {
           // eslint-disable-next-line no-console
-          console.log('The consumer is already signed');
+          console.log('The consumer is already signed.');
         }
       } catch (error) {
         handleApiError(error, formik.setFieldError, ['otp']);
-      } finally {
-        setDataLoading(false);
       }
     },
   });
@@ -79,7 +74,7 @@ export const Verification = () => {
 
   const handleResendClick = async () => {
     try {
-      await axios.post(`${API_URL}/api/v1/consumers/otp/send`, {
+      await API.login({
         phoneNumber: formatPhoneNumber(phoneNumber),
       });
     } catch (error) {
@@ -112,7 +107,7 @@ export const Verification = () => {
           className={styles.verification__button}
           title="Proceed"
           onClick={formik.handleSubmit}
-          loading={dataLoading}
+          loading={loading}
         />
         {resendVisible && (
           <div className={styles.verification__resend}>

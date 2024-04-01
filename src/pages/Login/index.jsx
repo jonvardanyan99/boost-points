@@ -1,14 +1,14 @@
 import logo from 'assets/images/logo.svg';
-import axios from 'axios';
 import { Button } from 'components/Button';
 import { Input } from 'components/Input';
 import { Text } from 'components/Text';
-import { API_URL } from 'constants/env';
 import { ROUTES } from 'constants/routes';
 import { useFormik } from 'formik';
 import { useErrorHandler } from 'hooks/useErrorHandler';
-import React, { useState } from 'react';
+import { useMutation } from 'hooks/useMutation';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { API } from 'services/api';
 import { getFormikError } from 'utils/errorHandlers';
 import { formatPhoneNumber } from 'utils/formats';
 import { loginFormSchema } from 'utils/validators';
@@ -17,8 +17,8 @@ import { toFormikValidationSchema } from 'zod-formik-adapter';
 import styles from './styles.module.scss';
 
 export const Login = () => {
-  const [dataLoading, setDataLoading] = useState(false);
   const navigate = useNavigate();
+  const [login, { loading }] = useMutation(API.login);
   const { handleApiError, snackbar } = useErrorHandler();
 
   const formik = useFormik({
@@ -27,18 +27,14 @@ export const Login = () => {
     },
     validationSchema: toFormikValidationSchema(loginFormSchema),
     onSubmit: async values => {
-      setDataLoading(true);
-
       try {
-        await axios.post(`${API_URL}/api/v1/consumers/otp/send`, {
+        await login({
           phoneNumber: formatPhoneNumber(values.phoneNumber),
         });
 
         navigate(ROUTES.VERIFICATION, { state: { phoneNumber: values.phoneNumber } });
       } catch (error) {
         handleApiError(error, formik.setFieldError, ['phoneNumber']);
-      } finally {
-        setDataLoading(false);
       }
     },
   });
@@ -67,7 +63,7 @@ export const Login = () => {
           className={styles.login__button}
           title="Proceed"
           onClick={formik.handleSubmit}
-          loading={dataLoading}
+          loading={loading}
         />
       </div>
       {snackbar}
