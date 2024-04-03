@@ -1,0 +1,92 @@
+.page {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__container {
+    width: var(--fixed-width);
+    padding: 44px 15px 38px 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__heading {
+    margin-top: 25px;
+    margin-bottom: 6px;
+  }
+
+  &__content {
+    width: 100%;
+  }
+
+  &__middle-name-toggle {
+    margin-top: 2px;
+    margin-bottom: 6px;
+  }
+
+  &__middle-name-toggle-text {
+    color: rgb(var(--accent-color));
+  }
+
+  &__middle-name-input {
+    margin-bottom: 6px;
+  }
+
+  &__dropdown-wrapper {
+    margin-top: 6px;
+    display: flex;
+    gap: 13px;
+  }
+
+  &__dropdown {
+    width: 100%;
+  }
+
+  &__checkbox {
+    margin-top: 15px;
+    margin-bottom: 12px;
+
+    > button {
+      width: 22px;
+      height: 22px;
+    }
+  }
+
+  &__previous-address-dropdown {
+    margin-bottom: 6px;
+    width: 100%;
+  }
+
+  &__main-button {
+    width: 100%;
+    margin-top: 36px;
+    margin-bottom: 15px;
+  }
+
+  &__terms-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__terms-wrapper {
+    max-width: 345px;
+    text-align: center;
+  }
+
+  &__terms-text {
+    display: inline;
+    color: rgb(var(--gray-1-color));
+  }
+
+  &__terms-anchor {
+    margin-left: 5px;
+    text-decoration: none;
+  }
+
+  &__terms-anchor-text {
+    display: inline;
+    color: rgb(var(--accent-color));
+  }
+}
