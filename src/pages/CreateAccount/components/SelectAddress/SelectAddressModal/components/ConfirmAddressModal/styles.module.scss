@@ -1,0 +1,58 @@
+.confirm-address-modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 25px;
+
+  &__container {
+    padding: 30px 15px 45px 15px;
+    width: var(--fixed-width);
+    max-height: 100%;
+    background-color: rgb(var(--white-color));
+    overflow-y: auto;
+  }
+
+  &__left-arrow-button {
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 18px;
+    height: 18px;
+
+    > img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__text {
+    margin-top: 6px;
+    margin-bottom: 11px;
+    color: rgb(var(--black-4-color));
+  }
+
+  &__street-type-input {
+    margin: 6px 0;
+  }
+
+  &__wrapper {
+    margin: 6px 0;
+    display: flex;
+    gap: 13px;
+  }
+
+  &__state-dropdown, &__post-code-input {
+    width: 100%;
+  }
+
+  &__country-code-dropdown {
+    margin-bottom: 36px;
+    width: 100%;
+  }
+
+  &__button {
+    width: 100%;
+  }
+}
