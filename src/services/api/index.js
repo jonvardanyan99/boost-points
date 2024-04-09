@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { API_URL } from 'constants/env';
 import { store } from 'store';
+import { resetStore } from 'store/reducers/app/actions';
 import { setTokens } from 'store/reducers/auth/actions';
 
 const REFRESH_TOKEN_URL = '/api/v1/consumers/token/refresh';
@@ -17,7 +18,15 @@ export const API = {
   createAccount: data => axiosInstance.post('/api/v1/consumers/me', data),
 };
 
-axiosInstance.interceptors.request.use(config => {
+let refreshingToken = false;
+let refreshTokenPromise = new Promise(() => {});
+let refreshTokenPromiseResolver = () => {};
+
+axiosInstance.interceptors.request.use(async config => {
+  if (refreshingToken && config.url !== REFRESH_TOKEN_URL) {
+    await refreshTokenPromise;
+  }
+
   const state = store.getState();
   const accessToken = state.auth.accessToken;
 
@@ -32,10 +41,15 @@ axiosInstance.interceptors.response.use(
   response => response,
   async error => {
     if (error.response.status === 401 && error.response.config.url !== REFRESH_TOKEN_URL) {
-      try {
-        const state = store.getState();
-        const refreshToken = state.auth.refreshToken;
+      refreshingToken = true;
+      refreshTokenPromise = new Promise(resolve => {
+        refreshTokenPromiseResolver = resolve;
+      });
 
+      const state = store.getState();
+      const refreshToken = state.auth.refreshToken;
+
+      try {
         const response = await API.refreshToken({
           credentials: refreshToken,
         });
@@ -47,7 +61,12 @@ axiosInstance.interceptors.response.use(
           }),
         );
       } catch (e) {
+        store.dispatch(resetStore());
+
         return Promise.reject(e);
+      } finally {
+        refreshingToken = false;
+        refreshTokenPromiseResolver('success');
       }
 
       return axiosInstance(error.config);
