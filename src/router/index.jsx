@@ -1,5 +1,6 @@
 import { ROUTES } from 'constants/routes';
 import { CreateAccount } from 'pages/CreateAccount';
+import { Identification } from 'pages/Identification';
 import { Login } from 'pages/Login';
 import { Verification } from 'pages/Verification';
 import React from 'react';
@@ -19,6 +20,7 @@ export const Router = () => {
         </Route>
         <Route element={isAuthenticated ? undefined : <Navigate to={ROUTES.LOGIN} />}>
           <Route path={ROUTES.CREATE_ACCOUNT} element={<CreateAccount />} />
+          <Route path={ROUTES.IDENTIFICATION} element={<Identification />} />
         </Route>
       </Routes>
     </BrowserRouter>

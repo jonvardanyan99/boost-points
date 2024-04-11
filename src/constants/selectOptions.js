@@ -22,3 +22,5 @@ export const COUNTRY_CODE_OPTIONS = [
   { label: 'AU', value: 'AU' },
   { label: 'NZ', value: 'NZ' },
 ];
+
+export const DOCUMENT_TYPE_OPTIONS = [{ label: "Driver's licence", value: 'Driver License' }];
