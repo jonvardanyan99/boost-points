@@ -73,3 +73,11 @@
     }
   }
 }
+
+@media only screen and (max-width: 350px) {
+  .date-picker {
+    &__main-button {
+      padding: 0 8px;
+    }
+  }
+}
