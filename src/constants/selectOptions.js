@@ -4,7 +4,7 @@ export const GENDER_OPTIONS = [
   { label: 'Female', value: 'Female' },
 ];
 
-export const STATES_OPTIONS = [
+export const STATE_OPTIONS = [
   { label: 'Australian Capital Territory', value: 'ACT' },
   { label: 'New South Wales', value: 'NSW' },
   { label: 'Northern Territory', value: 'NT' },

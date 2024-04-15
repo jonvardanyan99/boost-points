@@ -4,7 +4,7 @@ import { Dropdown } from 'components/Dropdown';
 import { Input } from 'components/Input';
 import { Modal } from 'components/Modal';
 import { Text } from 'components/Text';
-import { COUNTRY_CODE_OPTIONS, STATES_OPTIONS } from 'constants/selectOptions';
+import { COUNTRY_CODE_OPTIONS, STATE_OPTIONS } from 'constants/selectOptions';
 import { useFormik } from 'formik';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -23,7 +23,7 @@ export const ConfirmAddressModal = ({
   onSelect,
 }) => {
   const getState = () => {
-    const foundState = STATES_OPTIONS.find(option => option.value === draftAddress.state);
+    const foundState = STATE_OPTIONS.find(option => option.value === draftAddress.state);
 
     if (foundState) {
       return foundState;
@@ -148,7 +148,7 @@ export const ConfirmAddressModal = ({
             selectedOption={formik.values.state}
             onChange={option => formik.setFieldValue('state', option, true)}
             onBlur={() => formik.setFieldTouched('state', true, true)}
-            options={STATES_OPTIONS}
+            options={STATE_OPTIONS}
             label="State *"
             error={getFormikError(formik, 'state')}
           />
