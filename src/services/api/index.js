@@ -1,10 +1,8 @@
 import axios from 'axios';
-import { API_URL } from 'constants/env';
+import { API_URL, REFRESH_TOKEN_URL } from 'constants/env';
 import { store } from 'store';
 import { resetStore } from 'store/reducers/app/actions';
 import { setTokens } from 'store/reducers/auth/actions';
-
-const REFRESH_TOKEN_URL = '/api/v1/consumers/token/refresh';
 
 const axiosInstance = axios.create({
   baseURL: API_URL,
