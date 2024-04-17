@@ -3,10 +3,10 @@ import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
 import { RESET_STORE } from './reducers/app/actions';
-import { authReducer } from './reducers/auth';
+import { userReducer } from './reducers/user';
 
 const appReducer = combineReducers({
-  auth: authReducer,
+  user: userReducer,
 });
 
 const rootReducer = (state, action) => {
@@ -20,7 +20,7 @@ const rootReducer = (state, action) => {
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['auth'],
+  whitelist: ['user'],
 };
 
 const persistedRootReducer = persistReducer(persistConfig, rootReducer);
