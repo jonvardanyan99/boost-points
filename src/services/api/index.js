@@ -2,7 +2,7 @@ import axios from 'axios';
 import { API_URL, REFRESH_TOKEN_URL } from 'constants/env';
 import { store } from 'store';
 import { resetStore } from 'store/reducers/app/actions';
-import { setTokens } from 'store/reducers/auth/actions';
+import { setTokens } from 'store/reducers/user/actions';
 
 const axiosInstance = axios.create({
   baseURL: API_URL,
@@ -14,6 +14,7 @@ export const API = {
   refreshToken: data => axiosInstance.post(REFRESH_TOKEN_URL, data),
   getAccount: () => axiosInstance.get('/api/v1/consumers/me'),
   createAccount: data => axiosInstance.post('/api/v1/consumers/me', data),
+  addId: data => axiosInstance.post('/api/v1/consumers/me/id', data),
 };
 
 let refreshingToken = false;
@@ -26,10 +27,10 @@ axiosInstance.interceptors.request.use(async config => {
   }
 
   const state = store.getState();
-  const accessToken = state.auth.accessToken;
+  const tokens = state.user.tokens;
 
-  if (accessToken) {
-    config.headers.Authorization = `Bearer ${accessToken}`;
+  if (tokens) {
+    config.headers.Authorization = `Bearer ${tokens.access}`;
   }
 
   return config;
@@ -45,11 +46,11 @@ axiosInstance.interceptors.response.use(
       });
 
       const state = store.getState();
-      const refreshToken = state.auth.refreshToken;
+      const tokens = state.user.tokens;
 
       try {
         const response = await API.refreshToken({
-          credentials: refreshToken,
+          credentials: tokens?.refresh,
         });
 
         store.dispatch(
