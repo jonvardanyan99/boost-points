@@ -5,6 +5,7 @@ const INVALID_PHONE_NUMBER = 'Invalid phone number';
 const INVALID_OTP = 'Invalid OTP';
 const INVALID_EMAIL = 'Invalid email';
 const INVALID_DATE = 'Invalid date';
+const INVALID_LICENCE_NO = 'Invalid licence no';
 
 export const loginFormSchema = z.object({
   phoneNumber: z
@@ -77,4 +78,24 @@ export const createAccountFormSchema = z.object({
     message: FIELD_REQUIRED,
   }),
   previousAddress: confirmAddressFormSchema.nullable(),
+});
+
+export const identificationFormSchema = z.object({
+  documentType: z
+    .object({ label: z.string(), value: z.string() })
+    .nullable()
+    .refine(item => item !== null, {
+      message: FIELD_REQUIRED,
+    }),
+  state: z
+    .object({ label: z.string(), value: z.string() })
+    .nullable()
+    .refine(item => item !== null, {
+      message: FIELD_REQUIRED,
+    }),
+  number: z
+    .string({ required_error: FIELD_REQUIRED })
+    .min(4, INVALID_LICENCE_NO)
+    .max(9, INVALID_LICENCE_NO)
+    .regex(/^\d+$/, INVALID_LICENCE_NO),
 });
