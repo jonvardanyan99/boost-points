@@ -11,7 +11,9 @@ import { useFormik } from 'formik';
 import { useErrorHandler } from 'hooks/useErrorHandler';
 import { useMutation } from 'hooks/useMutation';
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { API } from 'services/api';
+import { setAccount } from 'store/reducers/user/actions';
 import { getFormikError } from 'utils/errorHandlers';
 import { formatAddressTitle } from 'utils/formats';
 import { createAccountFormSchema } from 'utils/validators';
@@ -21,6 +23,7 @@ import { SelectAddress } from './components/SelectAddress';
 import styles from './styles.module.scss';
 
 export const CreateAccount = () => {
+  const dispatch = useDispatch();
   const [previousAddressVisible, setPreviousAddressVisible] = useState(false);
   const [middleNameVisible, setMiddleNameVisible] = useState(false);
   const [createAccount, { loading }] = useMutation(API.createAccount);
@@ -40,7 +43,7 @@ export const CreateAccount = () => {
     validationSchema: toFormikValidationSchema(createAccountFormSchema),
     onSubmit: async values => {
       try {
-        await createAccount({
+        const response = await createAccount({
           firstName: values.firstName,
           middleName: values.middleName || null,
           surname: values.surname,
@@ -72,6 +75,8 @@ export const CreateAccount = () => {
               }
             : null,
         });
+
+        dispatch(setAccount(response.data));
       } catch (error) {
         handleApiError(error, formik.setFieldError, [
           'firstName',
@@ -159,7 +164,7 @@ export const CreateAccount = () => {
           </div>
           <SelectAddress
             placeholder={
-              formatAddressTitle(formik, 'residentialAddress') || 'Select Residential Address'
+              formatAddressTitle(formik.values.residentialAddress) || 'Select Residential Address'
             }
             label="Residential address *"
             onBlur={() => formik.setFieldTouched('residentialAddress', true, true)}
@@ -175,7 +180,7 @@ export const CreateAccount = () => {
           {previousAddressVisible && (
             <SelectAddress
               placeholder={
-                formatAddressTitle(formik, 'previousAddress') || 'Select Previous Address'
+                formatAddressTitle(formik.values.previousAddress) || 'Select Previous Address'
               }
               label="Previous address"
               onBlur={() => formik.setFieldTouched('previousAddress', true, true)}
