@@ -2,20 +2,22 @@ export const formatPhoneNumber = phoneNumber => {
   return `+61${phoneNumber.slice(1)}`;
 };
 
-export const formatAddressTitle = (formik, key) => {
+export const backFormatPhoneNumber = phoneNumber => {
+  return `0${phoneNumber.slice(3)}`;
+};
+
+export const formatAddressTitle = address => {
   let formattedTitle = '';
 
-  if (formik.values[key]) {
-    const propertyName = formik.values[key].propertyName;
-    const streetNumber = formik.values[key].streetNumber || null;
-    const streetName = formik.values[key].streetName;
-    const streetSuffix = !streetName.includes(formik.values[key].streetSuffix)
-      ? formik.values[key].streetSuffix
-      : null;
-    const suburb = formik.values[key].suburb;
-    const state = formik.values[key].state.label;
-    const postcode = formik.values[key].postcode;
-    const countryCode = formik.values[key].countryCode.label;
+  if (address) {
+    const propertyName = address.propertyName;
+    const streetNumber = address.streetNumber || null;
+    const streetName = address.streetName;
+    const streetSuffix = !streetName.includes(address.streetSuffix) ? address.streetSuffix : null;
+    const suburb = address.suburb;
+    const state = address.state.label || address.state;
+    const postcode = address.postcode;
+    const countryCode = address.countryCode.label || address.countryCode;
 
     formattedTitle = `${propertyName},`;
 
