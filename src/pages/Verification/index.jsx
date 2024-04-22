@@ -9,7 +9,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { API } from 'services/api';
-import { setTokens } from 'store/reducers/auth/actions';
+import { setAccount, setTokens } from 'store/reducers/user/actions';
 import { getFormikError } from 'utils/errorHandlers';
 import { formatPhoneNumber } from 'utils/formats';
 import { verificationFormSchema } from 'utils/validators';
@@ -45,14 +45,7 @@ export const Verification = () => {
             refreshToken: response.data.refreshToken,
           }),
         );
-
-        if (response.data.consumer.isNew) {
-          // eslint-disable-next-line no-console
-          console.log('The consumer is new.');
-        } else {
-          // eslint-disable-next-line no-console
-          console.log('The consumer is already signed.');
-        }
+        dispatch(setAccount(response.data.consumer));
       } catch (error) {
         handleApiError(error, formik.setFieldError, ['otp']);
       }
