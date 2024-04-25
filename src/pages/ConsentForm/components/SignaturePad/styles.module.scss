@@ -1,0 +1,20 @@
+.signature-pad {
+  position: relative;
+  background-color: rgb(var(--gray-8-color));
+
+  &__text {
+    position: absolute;
+    z-index: 1;
+    top: 12px;
+    left: 14px;
+    color: rgb(var(--gray-2-color));
+  }
+
+  &__clear-text {
+    position: absolute;
+    z-index: 1;
+    top: 12px;
+    right: 14px;
+    color: rgb(var(--accent-color));
+  }
+}

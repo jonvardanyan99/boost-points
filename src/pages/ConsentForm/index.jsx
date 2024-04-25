@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import { selectAccount } from 'store/reducers/user/selectors';
 import { backFormatPhoneNumber, formatAddressTitle } from 'utils/formats';
 
+import { SignaturePad } from './components/SignaturePad';
 import styles from './styles.module.scss';
 
 export const ConsentForm = () => {
@@ -97,6 +98,7 @@ export const ConsentForm = () => {
             label="I have read and agree with the access seeker consent form above"
           />
         </div>
+        {isConfirmed && <SignaturePad className={styles['consent-form__signature']} />}
         <Button
           className={styles['consent-form__main-button']}
           title="Get reports"
