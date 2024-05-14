@@ -16,6 +16,8 @@ export const API = {
   createAccount: data => axiosInstance.post('/api/v1/consumers/me', data),
   getId: () => axiosInstance.get('/api/v1/consumers/me/id'),
   addId: data => axiosInstance.post('/api/v1/consumers/me/id', data),
+  getLink: () => axiosInstance.get('/api/v1/file-link/consumer.signs'),
+  signConsentForm: data => axiosInstance.post('/api/v1/consumers/me/consent-form', data),
 };
 
 let refreshingToken = false;
