@@ -10,7 +10,7 @@ import { useMutation } from 'hooks/useMutation';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { API } from 'services/api';
-import { setIsNew } from 'store/reducers/user/actions';
+import { unsetNew } from 'store/reducers/user/actions';
 import { getFormikError } from 'utils/errorHandlers';
 import { identificationFormSchema } from 'utils/validators';
 import { toFormikValidationSchema } from 'zod-formik-adapter';
@@ -39,7 +39,7 @@ export const Identification = () => {
           },
         });
 
-        dispatch(setIsNew());
+        dispatch(unsetNew());
       } catch (error) {
         handleApiError(error, formik.setFieldError, ['documentType', 'state', 'number']);
       }
