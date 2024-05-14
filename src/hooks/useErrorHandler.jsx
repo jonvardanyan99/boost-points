@@ -8,7 +8,7 @@ export const useErrorHandler = () => {
     setSnackbarText('');
   };
 
-  const handleApiError = (error, setError, keys) => {
+  const handleApiError = (error, setError = () => {}, keys = []) => {
     const { detail } = error.response.data;
 
     if (typeof detail === 'string') {
