@@ -2,26 +2,59 @@ import { Button } from 'components/Button';
 import { Checkbox } from 'components/Checkbox';
 import { Text } from 'components/Text';
 import format from 'date-fns/format';
+import { useErrorHandler } from 'hooks/useErrorHandler';
+import { useMutation } from 'hooks/useMutation';
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { API } from 'services/api';
+import { setConsentFormSigned } from 'store/reducers/user/actions';
 import { selectAccount } from 'store/reducers/user/selectors';
 import { backFormatPhoneNumber, formatAddressTitle } from 'utils/formats';
+import { dataUrlToFile } from 'utils/helpers';
+import { uploadFileToAWS } from 'utils/uploadFileToAWS';
+import { extractKeyFromPresignedUrl } from 'utils/uploadFileToAWS';
 
 import { SignaturePad } from './components/SignaturePad';
 import styles from './styles.module.scss';
 
 export const ConsentForm = () => {
-  const [isConfirmed, setIsConfirmed] = useState(false);
   const account = useSelector(selectAccount);
+  const dispatch = useDispatch();
+  const [isConfirmed, setIsConfirmed] = useState(false);
+  const [signature, setSignature] = useState('');
+  const { handleApiError, snackbar } = useErrorHandler();
 
-  const fullName = `${account.firstName} ${account.middleName || ''} ${account.surname}`;
+  const fullName = `${account.data.firstName} ${account.data.middleName || ''} ${
+    account.data.surname
+  }`;
 
   const fullNameText = `Full Name: ${fullName}`;
-  const birthDateText = `Date of Birth: ${format(new Date(account.birthDate), 'dd MMM y')}`;
-  const currentAddressText = `Current Address: ${formatAddressTitle(account.residentialAddress)}`;
-  const contactNumberText = `Contact Number: ${backFormatPhoneNumber(account.phoneNumber)}`;
+  const birthDateText = `Date of Birth: ${format(new Date(account.data.birthDate), 'dd MMM y')}`;
+  const currentAddressText = `Current Address: ${formatAddressTitle(
+    account.data.residentialAddress,
+  )}`;
+  const contactNumberText = `Contact Number: ${backFormatPhoneNumber(account.data.phoneNumber)}`;
 
   const consentDeclarationText = `I, ${fullName}, hereby provide my explicit consent to Wardle Consultancy Services to act on my behalf in requesting and obtaining my credit reports from the following credit reporting agencies:`;
+
+  const signConsentFormRequest = async () => {
+    try {
+      const response = await API.getLink();
+
+      await uploadFileToAWS(response.data.link, await dataUrlToFile(signature, 'signature.png'));
+
+      await API.signConsentForm({
+        text: 'text',
+        signKey: extractKeyFromPresignedUrl(response.data.link),
+      });
+
+      dispatch(setConsentFormSigned());
+    } catch (error) {
+      handleApiError(error);
+    }
+  };
+
+  const [signConsentForm, { loading }] = useMutation(signConsentFormRequest);
 
   return (
     <div className={styles['consent-form']}>
@@ -98,13 +131,22 @@ export const ConsentForm = () => {
             label="I have read and agree with the access seeker consent form above"
           />
         </div>
-        {isConfirmed && <SignaturePad className={styles['consent-form__signature']} />}
+        {isConfirmed && (
+          <SignaturePad
+            className={styles['consent-form__signature']}
+            value={signature}
+            onChange={setSignature}
+          />
+        )}
         <Button
           className={styles['consent-form__main-button']}
           title="Get reports"
-          onClick={() => {}}
+          onClick={signConsentForm}
+          loading={loading}
+          disabled={!isConfirmed || !signature}
         />
       </div>
+      {snackbar}
     </div>
   );
 };
