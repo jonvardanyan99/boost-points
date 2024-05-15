@@ -1,4 +1,4 @@
-import { SET_ACCOUNT, SET_TOKENS, UNSET_NEW } from './actions';
+import { SET_ACCOUNT, SET_CONSENT_FORM_SIGNED, SET_DATA, SET_TOKENS, UNSET_NEW } from './actions';
 
 const initialState = {
   tokens: null,
@@ -16,12 +16,28 @@ export const userReducer = (state = initialState, action) => {
     case SET_ACCOUNT:
       return {
         ...state,
-        account: action.payload,
+        account: {
+          data: action.payload.data,
+          isConsentFormSigned: action.payload.isConsentFormSigned,
+        },
+      };
+    case SET_DATA:
+      return {
+        ...state,
+        account: {
+          ...state.account,
+          data: action.payload,
+        },
       };
     case UNSET_NEW:
       return {
         ...state,
-        account: { ...state.account, isNew: false },
+        account: { ...state.account, data: { ...state.account.data, isNew: false } },
+      };
+    case SET_CONSENT_FORM_SIGNED:
+      return {
+        ...state,
+        account: { ...state.account, isConsentFormSigned: true },
       };
     default:
       return state;
