@@ -45,7 +45,12 @@ export const Verification = () => {
             refreshToken: response.data.refreshToken,
           }),
         );
-        dispatch(setAccount(response.data.consumer));
+        dispatch(
+          setAccount({
+            data: response.data.consumer,
+            isConsentFormSigned: response.data.isConsentFormSigned,
+          }),
+        );
       } catch (error) {
         handleApiError(error, formik.setFieldError, ['otp']);
       }
