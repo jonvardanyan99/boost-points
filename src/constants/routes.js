@@ -4,4 +4,5 @@ export const ROUTES = {
   CREATE_ACCOUNT: '/create-account',
   IDENTIFICATION: '/identification',
   CONSENT_FORM: '/consent-form',
+  DASHBOARD: '/dashboard',
 };
