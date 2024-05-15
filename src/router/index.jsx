@@ -1,6 +1,7 @@
 import { ROUTES } from 'constants/routes';
 import { ConsentForm } from 'pages/ConsentForm';
 import { CreateAccount } from 'pages/CreateAccount';
+import { Dashboard } from 'pages/Dashboard';
 import { Identification } from 'pages/Identification';
 import { Login } from 'pages/Login';
 import { Verification } from 'pages/Verification';
@@ -13,8 +14,9 @@ export const Router = () => {
   const isAuthenticated = useSelector(selectIsAuthenticated);
   const account = useSelector(selectAccount);
 
-  const isNew = account?.isNew;
-  const hasAccountCreated = isNew && !!account.firstName;
+  const isNew = account?.data?.isNew;
+  const hasAccountCreated = isNew && !!account.data.firstName;
+  const hasConsentFormSigned = !!account?.isConsentFormSigned;
 
   return (
     <BrowserRouter basename="/boost-points">
@@ -38,10 +40,16 @@ export const Router = () => {
               }
             />
           </Route>
-          <Route
-            path={ROUTES.CONSENT_FORM}
-            element={isNew ? <Navigate to={ROUTES.CREATE_ACCOUNT} /> : <ConsentForm />}
-          />
+          <Route element={isNew ? <Navigate to={ROUTES.CREATE_ACCOUNT} /> : undefined}>
+            <Route
+              path={ROUTES.CONSENT_FORM}
+              element={hasConsentFormSigned ? <Navigate to={ROUTES.DASHBOARD} /> : <ConsentForm />}
+            />
+            <Route
+              path={ROUTES.DASHBOARD}
+              element={hasConsentFormSigned ? <Dashboard /> : <Navigate to={ROUTES.CONSENT_FORM} />}
+            />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>
