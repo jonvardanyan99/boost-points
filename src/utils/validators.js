@@ -74,9 +74,10 @@ export const createAccountFormSchema = z.object({
       message: FIELD_REQUIRED,
     }),
   email: z.string({ required_error: FIELD_REQUIRED }).email(INVALID_EMAIL),
-  residentialAddress: confirmAddressFormSchema.nullable().refine(item => item !== null, {
-    message: FIELD_REQUIRED,
-  }),
+  residentialAddress: confirmAddressFormSchema.nullable(),
+  // residentialAddress: confirmAddressFormSchema.nullable().refine(item => item !== null, {
+  //   message: FIELD_REQUIRED,
+  // }),
   previousAddress: confirmAddressFormSchema.nullable(),
 });
 

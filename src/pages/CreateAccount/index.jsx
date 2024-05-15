@@ -13,7 +13,7 @@ import { useMutation } from 'hooks/useMutation';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { API } from 'services/api';
-import { setAccount } from 'store/reducers/user/actions';
+import { setData } from 'store/reducers/user/actions';
 import { getFormikError } from 'utils/errorHandlers';
 import { formatAddressTitle } from 'utils/formats';
 import { createAccountFormSchema } from 'utils/validators';
@@ -51,15 +51,15 @@ export const CreateAccount = () => {
           birthDate: new Date(values.birthDate).setUTCHours(0, 0, 0, 0),
           email: values.email,
           residentialAddress: {
-            propertyName: values.residentialAddress.propertyName,
-            unitNumber: values.residentialAddress.unitNumber || null,
-            streetNumber: values.residentialAddress.streetNumber,
-            streetName: values.residentialAddress.streetName,
-            streetSuffix: values.residentialAddress.streetSuffix,
-            suburb: values.residentialAddress.suburb,
-            state: values.residentialAddress.state.value,
-            postcode: values.residentialAddress.postcode.toString(),
-            countryCode: values.residentialAddress.countryCode.value,
+            propertyName: 'qqq', // values.residentialAddress.propertyName
+            unitNumber: null, // values.residentialAddress.unitNumber || null
+            streetNumber: '111', // values.residentialAddress.streetNumber
+            streetName: 'wwww', // values.residentialAddress.streetName
+            streetSuffix: 'eee', // values.residentialAddress.streetSuffix
+            suburb: 'rrr', // values.residentialAddress.suburb
+            state: 'NSW', // values.residentialAddress.state.value
+            postcode: '222', // values.residentialAddress.postcode.toString()
+            countryCode: 'AU', // values.residentialAddress.countryCode.value
           },
           previousAddress: values.previousAddress
             ? {
@@ -76,7 +76,7 @@ export const CreateAccount = () => {
             : null,
         });
 
-        dispatch(setAccount(response.data));
+        dispatch(setData(response.data));
       } catch (error) {
         handleApiError(error, formik.setFieldError, [
           'firstName',
