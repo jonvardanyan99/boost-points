@@ -51,14 +51,14 @@ export const CreateAccount = () => {
           birthDate: new Date(values.birthDate).setUTCHours(0, 0, 0, 0),
           email: values.email,
           residentialAddress: {
-            propertyName: 'qqq', // values.residentialAddress.propertyName
+            propertyName: 'Main', // values.residentialAddress.propertyName
             unitNumber: null, // values.residentialAddress.unitNumber || null
-            streetNumber: '111', // values.residentialAddress.streetNumber
-            streetName: 'wwww', // values.residentialAddress.streetName
-            streetSuffix: 'eee', // values.residentialAddress.streetSuffix
-            suburb: 'rrr', // values.residentialAddress.suburb
+            streetNumber: '112', // values.residentialAddress.streetNumber
+            streetName: 'MCEVOY', // values.residentialAddress.streetName
+            streetSuffix: 'ST', // values.residentialAddress.streetSuffix
+            suburb: 'ALEXANDRIA', // values.residentialAddress.suburb
             state: 'NSW', // values.residentialAddress.state.value
-            postcode: '222', // values.residentialAddress.postcode.toString()
+            postcode: '2015', // values.residentialAddress.postcode.toString()
             countryCode: 'AU', // values.residentialAddress.countryCode.value
           },
           previousAddress: values.previousAddress
