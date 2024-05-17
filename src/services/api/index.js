@@ -18,6 +18,8 @@ export const API = {
   addId: data => axiosInstance.post('/api/v1/consumers/me/id', data),
   getLink: () => axiosInstance.get('/api/v1/file-link/consumer.signs'),
   signConsentForm: data => axiosInstance.post('/api/v1/consumers/me/consent-form', data),
+  getReport: () => axiosInstance.get('/api/v1/consumers/report/equifax'),
+  getCreditScores: () => axiosInstance.get('/api/v1/consumers/me/credit-scores'),
 };
 
 let refreshingToken = false;
