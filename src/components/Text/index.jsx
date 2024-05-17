@@ -39,7 +39,7 @@ export const Text = ({ type, children, fontWeight, className }) => {
 Text.propTypes = {
   type: PropTypes.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p1', 'p2', 'p3', 'p4', 'p5', 'p6'])
     .isRequired,
-  children: PropTypes.string.isRequired,
+  children: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   fontWeight: PropTypes.oneOf([400, 500, 600, 700]),
   className: PropTypes.string,
 };
