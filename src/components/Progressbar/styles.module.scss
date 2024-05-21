@@ -1,0 +1,17 @@
+.progressbar {
+  position: relative;
+  display: flex;
+  justify-content: center;
+
+  &__text-wrapper {
+    position: absolute;
+    top: 47%;
+    transform: translateY(-50%);
+    text-align: center;
+    z-index: 1;
+  }
+  
+  &__max-value-text {
+    color: rgb(var(--gray-2-color));
+  }
+}
