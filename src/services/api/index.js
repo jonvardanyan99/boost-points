@@ -18,7 +18,7 @@ export const API = {
   addId: data => axiosInstance.post('/api/v1/consumers/me/id', data),
   getLink: () => axiosInstance.get('/api/v1/file-link/consumer.signs'),
   signConsentForm: data => axiosInstance.post('/api/v1/consumers/me/consent-form', data),
-  getReport: () => axiosInstance.get('/api/v1/consumers/report/equifax'),
+  getReport: param => axiosInstance.get(`/api/v1/consumers/report/${param}`),
   getCreditScores: () => axiosInstance.get('/api/v1/consumers/me/credit-scores'),
 };
 
