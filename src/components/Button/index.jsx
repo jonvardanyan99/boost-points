@@ -5,13 +5,14 @@ import React from 'react';
 
 import styles from './styles.module.scss';
 
-export const Button = ({ className, title, onClick, loading, disabled }) => {
+export const Button = ({ className, title, onClick, secondary, loading, disabled }) => {
   return (
     <button
       type="button"
       className={classNames(
         styles.button,
         {
+          [styles['button--secondary']]: secondary,
           [styles['button--disabled']]: disabled,
           [styles['button--loading']]: loading,
         },
@@ -20,7 +21,7 @@ export const Button = ({ className, title, onClick, loading, disabled }) => {
       onClick={onClick}
       disabled={disabled || loading}
     >
-      {loading ? <Loader /> : title}
+      {loading ? <Loader color={secondary && 'rgb(var(--accent-color))'} /> : title}
     </button>
   );
 };
@@ -29,6 +30,7 @@ Button.propTypes = {
   className: PropTypes.string,
   title: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
+  secondary: PropTypes.bool,
   loading: PropTypes.bool,
   disabled: PropTypes.bool,
 };

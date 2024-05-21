@@ -12,6 +12,11 @@
     opacity: 0.8;
   }
 
+  &--secondary {
+    color: rgb(var(--black-2-color));
+    background-color: rgb(var(--gray-8-color));
+  }
+
   &--disabled {
     color: rgb(var(--gray-3-color));
     background-color: rgb(var(--gray-5-color));
