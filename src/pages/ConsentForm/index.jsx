@@ -10,7 +10,7 @@ import { API } from 'services/api';
 import { setConsentFormSigned } from 'store/reducers/user/actions';
 import { selectAccount } from 'store/reducers/user/selectors';
 import { backFormatPhoneNumber, formatAddressTitle } from 'utils/formats';
-import { dataUrlToFile } from 'utils/helpers';
+import { dataUrlToFile, getFullName } from 'utils/helpers';
 import { uploadFileToAWS } from 'utils/uploadFileToAWS';
 import { extractKeyFromPresignedUrl } from 'utils/uploadFileToAWS';
 
@@ -24,9 +24,11 @@ export const ConsentForm = () => {
   const [signature, setSignature] = useState('');
   const { handleApiError, snackbar } = useErrorHandler();
 
-  const fullName = `${account.data.firstName} ${account.data.middleName || ''} ${
-    account.data.surname
-  }`;
+  const fullName = getFullName(
+    account.data.firstName,
+    account.data.middleName,
+    account.data.surname,
+  );
 
   const fullNameText = `Full Name: ${fullName}`;
   const birthDateText = `Date of Birth: ${format(new Date(account.data.birthDate), 'dd MMM y')}`;
