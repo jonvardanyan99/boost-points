@@ -1,4 +1,4 @@
-import rightArrow from 'assets/images/right-arrow.svg';
+import rightArrow from 'assets/icons/right-arrow.svg';
 import classNames from 'classnames';
 import { Text } from 'components/Text';
 import PropTypes from 'prop-types';

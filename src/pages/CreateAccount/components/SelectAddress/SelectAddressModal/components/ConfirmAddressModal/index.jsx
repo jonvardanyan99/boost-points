@@ -1,4 +1,4 @@
-import leftArrow from 'assets/images/left-arrow.svg';
+import leftArrow from 'assets/icons/left-arrow.svg';
 import { Button } from 'components/Button';
 import { Dropdown } from 'components/Dropdown';
 import { Input } from 'components/Input';

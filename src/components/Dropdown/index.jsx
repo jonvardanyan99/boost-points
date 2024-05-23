@@ -1,5 +1,5 @@
-import downArrow from 'assets/images/down-arrow.svg';
-import downArrowGray from 'assets/images/down-arrow-gray.svg';
+import downArrow from 'assets/icons/down-arrow.svg';
+import downArrowGray from 'assets/icons/down-arrow-gray.svg';
 import classNames from 'classnames';
 import { Text } from 'components/Text';
 import { useUpdateEffect } from 'hooks/useUpdateEffect';

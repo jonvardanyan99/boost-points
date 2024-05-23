@@ -1,4 +1,4 @@
-import leftArrow from 'assets/images/left-arrow.svg';
+import leftArrow from 'assets/icons/left-arrow.svg';
 import { Input } from 'components/Input';
 import { Modal } from 'components/Modal';
 import { Text } from 'components/Text';

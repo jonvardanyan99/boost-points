@@ -1,7 +1,7 @@
 import 'react-datepicker/dist/react-datepicker.css';
 
-import calendar from 'assets/images/calendar.svg';
-import downArrow from 'assets/images/down-arrow.svg';
+import calendar from 'assets/icons/calendar.svg';
+import downArrow from 'assets/icons/down-arrow.svg';
 import classNames from 'classnames';
 import { Text } from 'components/Text';
 import format from 'date-fns/format';
