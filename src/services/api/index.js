@@ -20,6 +20,7 @@ export const API = {
   signConsentForm: data => axiosInstance.post('/api/v1/consumers/me/consent-form', data),
   getReport: param => axiosInstance.get(`/api/v1/consumers/report/${param}`),
   getCreditScores: () => axiosInstance.get('/api/v1/consumers/me/credit-scores'),
+  getIssues: () => axiosInstance.get('/api/v1/consumers/issues'),
 };
 
 let refreshingToken = false;
