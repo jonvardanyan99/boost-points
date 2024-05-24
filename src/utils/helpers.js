@@ -4,9 +4,3 @@ export const dataUrlToFile = async (dataUrl, fileName) => {
 
   return new File([blob], fileName, { type: 'image/png' });
 };
-
-export const getFullName = (firstName, middleName, surname) => {
-  const fullName = `${firstName} ${middleName || ''} ${surname}`;
-
-  return fullName;
-};
