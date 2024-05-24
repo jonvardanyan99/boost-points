@@ -10,7 +10,7 @@ import { API } from 'services/api';
 import { setConsentFormSigned } from 'store/reducers/user/actions';
 import { selectAccount } from 'store/reducers/user/selectors';
 import { backFormatPhoneNumber, formatAddressTitle } from 'utils/formats';
-import { dataUrlToFile, getFullName } from 'utils/helpers';
+import { dataUrlToFile } from 'utils/helpers';
 import { uploadFileToAWS } from 'utils/uploadFileToAWS';
 import { extractKeyFromPresignedUrl } from 'utils/uploadFileToAWS';
 
@@ -24,20 +24,14 @@ export const ConsentForm = () => {
   const [signature, setSignature] = useState('');
   const { handleApiError, snackbar } = useErrorHandler();
 
-  const fullName = getFullName(
-    account.data.firstName,
-    account.data.middleName,
-    account.data.surname,
-  );
-
-  const fullNameText = `Full Name: ${fullName}`;
+  const fullNameText = `Full Name: ${account.data.fullName}`;
   const birthDateText = `Date of Birth: ${format(new Date(account.data.birthDate), 'dd MMM y')}`;
   const currentAddressText = `Current Address: ${formatAddressTitle(
     account.data.residentialAddress,
   )}`;
   const contactNumberText = `Contact Number: ${backFormatPhoneNumber(account.data.phoneNumber)}`;
 
-  const consentDeclarationText = `I, ${fullName}, hereby provide my explicit consent to Wardle Consultancy Services to act on my behalf in requesting and obtaining my credit reports from the following credit reporting agencies:`;
+  const consentDeclarationText = `I, ${account.data.fullName}, hereby provide my explicit consent to Wardle Consultancy Services to act on my behalf in requesting and obtaining my credit reports from the following credit reporting agencies:`;
 
   const signConsentFormRequest = async () => {
     try {
