@@ -8,7 +8,7 @@ import { CircularProgressbar } from 'react-circular-progressbar';
 
 import styles from './styles.module.scss';
 
-export const Progressbar = ({ className, value, maxValue }) => {
+export const Progressbar = ({ className, width = '178px', height = '178px', value, maxValue }) => {
   const maxValueText = `out of ${maxValue.toLocaleString('en-US')}`;
 
   return (
@@ -18,7 +18,7 @@ export const Progressbar = ({ className, value, maxValue }) => {
         maxValue={maxValue}
         strokeWidth={9}
         styles={{
-          root: { width: '178px', height: '178px' },
+          root: { width, height },
           path: { stroke: 'rgb(var(--green-color))' },
           trail: { stroke: 'rgb(var(--gray-7-color))' },
         }}
@@ -35,6 +35,8 @@ export const Progressbar = ({ className, value, maxValue }) => {
 
 Progressbar.propTypes = {
   className: PropTypes.string,
+  width: PropTypes.string,
+  height: PropTypes.string,
   value: PropTypes.number.isRequired,
   maxValue: PropTypes.number.isRequired,
 };
