@@ -21,7 +21,7 @@ export const Button = ({ className, title, onClick, secondary, loading, disabled
       onClick={onClick}
       disabled={disabled || loading}
     >
-      {loading ? <Loader color={secondary && 'rgb(var(--accent-color))'} /> : title}
+      {loading ? <Loader secondary={secondary} /> : title}
     </button>
   );
 };
