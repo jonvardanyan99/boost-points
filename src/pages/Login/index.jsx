@@ -41,31 +41,29 @@ export const Login = () => {
 
   return (
     <div className={styles.login}>
-      <div className={styles.login__container}>
-        <img src={logo} alt="logo" />
-        <Text type="h4" className={styles.login__heading}>
-          Log in
-        </Text>
-        <Text type="p4" className={styles.login__instruction}>
-          Whenever you log in or creating a new account let’s start with your phone number
-        </Text>
-        <Input
-          type="tel"
-          className={styles.login__input}
-          placeholder="0432 892 002"
-          name="phoneNumber"
-          value={formik.values.phoneNumber}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          error={getFormikError(formik, 'phoneNumber')}
-        />
-        <Button
-          className={styles.login__button}
-          title="Proceed"
-          onClick={formik.handleSubmit}
-          loading={loading}
-        />
-      </div>
+      <img src={logo} alt="logo" />
+      <Text type="h4" className={styles.login__heading}>
+        Log in
+      </Text>
+      <Text type="p4" className={styles.login__instruction}>
+        Whenever you log in or creating a new account let’s start with your phone number
+      </Text>
+      <Input
+        type="tel"
+        className={styles.login__input}
+        placeholder="0432 892 002"
+        name="phoneNumber"
+        value={formik.values.phoneNumber}
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
+        error={getFormikError(formik, 'phoneNumber')}
+      />
+      <Button
+        className={styles.login__button}
+        title="Proceed"
+        onClick={formik.handleSubmit}
+        loading={loading}
+      />
       {snackbar}
     </div>
   );

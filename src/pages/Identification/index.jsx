@@ -48,52 +48,50 @@ export const Identification = () => {
 
   return (
     <div className={styles.identification}>
-      <div className={styles.identification__container}>
-        <img src={logo} alt="logo" />
-        <Text type="h4" className={styles.identification__heading}>
-          Identification
-        </Text>
-        <Text type="p4" className={styles.identification__instruction}>
-          This info is required by credit organizations to obtain your credit reports
-        </Text>
-        <div className={styles.identification__content}>
-          <Dropdown
-            className={styles.identification__field}
-            placeholder="Select Document Type"
-            selectedOption={formik.values.documentType}
-            onChange={option => formik.setFieldValue('documentType', option, true)}
-            onBlur={() => formik.setFieldTouched('documentType', true, true)}
-            options={DOCUMENT_TYPE_OPTIONS}
-            label="Document type"
-            error={getFormikError(formik, 'documentType')}
-          />
-          <Dropdown
-            className={styles.identification__field}
-            placeholder="Select State"
-            selectedOption={formik.values.state}
-            onChange={option => formik.setFieldValue('state', option, true)}
-            onBlur={() => formik.setFieldTouched('state', true, true)}
-            options={STATE_OPTIONS}
-            label="State of issue"
-            error={getFormikError(formik, 'state')}
-          />
-          <Input
-            className={styles.identification__field}
-            placeholder="249004225"
-            name="number"
-            value={formik.values.number}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            label="Licence no"
-            error={getFormikError(formik, 'number')}
-          />
-          <Button
-            className={styles['identification__main-button']}
-            title="Continue"
-            onClick={formik.handleSubmit}
-            loading={loading}
-          />
-        </div>
+      <img src={logo} alt="logo" />
+      <Text type="h4" className={styles.identification__heading}>
+        Identification
+      </Text>
+      <Text type="p4" className={styles.identification__instruction}>
+        This info is required by credit organizations to obtain your credit reports
+      </Text>
+      <div className={styles.identification__content}>
+        <Dropdown
+          className={styles.identification__field}
+          placeholder="Select Document Type"
+          selectedOption={formik.values.documentType}
+          onChange={option => formik.setFieldValue('documentType', option, true)}
+          onBlur={() => formik.setFieldTouched('documentType', true, true)}
+          options={DOCUMENT_TYPE_OPTIONS}
+          label="Document type"
+          error={getFormikError(formik, 'documentType')}
+        />
+        <Dropdown
+          className={styles.identification__field}
+          placeholder="Select State"
+          selectedOption={formik.values.state}
+          onChange={option => formik.setFieldValue('state', option, true)}
+          onBlur={() => formik.setFieldTouched('state', true, true)}
+          options={STATE_OPTIONS}
+          label="State of issue"
+          error={getFormikError(formik, 'state')}
+        />
+        <Input
+          className={styles.identification__field}
+          placeholder="249004225"
+          name="number"
+          value={formik.values.number}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          label="Licence no"
+          error={getFormikError(formik, 'number')}
+        />
+        <Button
+          className={styles['identification__main-button']}
+          title="Continue"
+          onClick={formik.handleSubmit}
+          loading={loading}
+        />
       </div>
       {snackbar}
     </div>

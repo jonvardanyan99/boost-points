@@ -84,40 +84,38 @@ export const Verification = () => {
 
   return (
     <div className={styles.verification}>
-      <div className={styles.verification__container}>
-        <img src={logo} alt="logo" />
-        <Text type="h4" className={styles.verification__heading}>
-          Phone Verification
-        </Text>
-        <Text type="p4" className={styles.verification__instruction}>
-          {contentText}
-        </Text>
-        <Input
-          className={styles.verification__input}
-          placeholder="2423"
-          name="otp"
-          value={formik.values.otp}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          error={getFormikError(formik, 'otp')}
-        />
-        <Button
-          className={styles.verification__button}
-          title="Proceed"
-          onClick={formik.handleSubmit}
-          loading={loading}
-        />
-        {resendVisible && (
-          <div className={styles.verification__resend}>
-            <Text type="p4">Didn’t get the code?</Text>
-            <button type="button" onClick={handleResendClick}>
-              <Text type="p4" className={styles['verification__resend-text']}>
-                Resend
-              </Text>
-            </button>
-          </div>
-        )}
-      </div>
+      <img src={logo} alt="logo" />
+      <Text type="h4" className={styles.verification__heading}>
+        Phone Verification
+      </Text>
+      <Text type="p4" className={styles.verification__instruction}>
+        {contentText}
+      </Text>
+      <Input
+        className={styles.verification__input}
+        placeholder="2423"
+        name="otp"
+        value={formik.values.otp}
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
+        error={getFormikError(formik, 'otp')}
+      />
+      <Button
+        className={styles.verification__button}
+        title="Proceed"
+        onClick={formik.handleSubmit}
+        loading={loading}
+      />
+      {resendVisible && (
+        <div className={styles.verification__resend}>
+          <Text type="p4">Didn’t get the code?</Text>
+          <button type="button" onClick={handleResendClick}>
+            <Text type="p4" className={styles['verification__resend-text']}>
+              Resend
+            </Text>
+          </button>
+        </div>
+      )}
       {snackbar}
     </div>
   );

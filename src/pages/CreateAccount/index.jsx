@@ -96,130 +96,128 @@ export const CreateAccount = () => {
 
   return (
     <div className={styles.page}>
-      <div className={styles.page__container}>
-        <img src={logo} alt="logo" />
-        <Text type="h4" className={styles.page__heading}>
-          Create Account
-        </Text>
-        <div className={styles.page__content}>
+      <img src={logo} alt="logo" />
+      <Text type="h4" className={styles.page__heading}>
+        Create Account
+      </Text>
+      <div className={styles.page__content}>
+        <Input
+          placeholder="David"
+          name="firstName"
+          value={formik.values.firstName}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          label="First name *"
+          error={getFormikError(formik, 'firstName')}
+        />
+        <button
+          type="button"
+          className={styles['page__middle-name-toggle']}
+          onClick={toggleMiddleNameVisible}
+        >
+          <Text type="p4" className={styles['page__middle-name-toggle-text']} fontWeight={600}>
+            {middleNameVisible ? 'Subtract middle name' : 'Add middle name'}
+          </Text>
+        </button>
+        {middleNameVisible && (
           <Input
-            placeholder="David"
-            name="firstName"
-            value={formik.values.firstName}
+            className={styles['page__middle-name-input']}
+            placeholder="John"
+            name="middleName"
+            value={formik.values.middleName}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            label="First name *"
-            error={getFormikError(formik, 'firstName')}
+            label="Middle name"
+            error={getFormikError(formik, 'middleName')}
           />
-          <button
-            type="button"
-            className={styles['page__middle-name-toggle']}
-            onClick={toggleMiddleNameVisible}
-          >
-            <Text type="p4" className={styles['page__middle-name-toggle-text']} fontWeight={600}>
-              {middleNameVisible ? 'Subtract middle name' : 'Add middle name'}
-            </Text>
-          </button>
-          {middleNameVisible && (
-            <Input
-              className={styles['page__middle-name-input']}
-              placeholder="John"
-              name="middleName"
-              value={formik.values.middleName}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              label="Middle name"
-              error={getFormikError(formik, 'middleName')}
-            />
-          )}
-          <Input
-            placeholder="Bryant"
-            name="surname"
-            value={formik.values.surname}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            label="Surname *"
-            error={getFormikError(formik, 'surname')}
+        )}
+        <Input
+          placeholder="Bryant"
+          name="surname"
+          value={formik.values.surname}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          label="Surname *"
+          error={getFormikError(formik, 'surname')}
+        />
+        <div className={styles['page__dropdown-wrapper']}>
+          <DatePicker
+            className={styles.page__dropdown}
+            placeholder="Select"
+            value={formik.values.birthDate}
+            onChange={option => formik.setFieldValue('birthDate', option, true)}
+            onBlur={() => formik.setFieldTouched('birthDate', true, true)}
+            label="Date of birth *"
+            error={getFormikError(formik, 'birthDate')}
           />
-          <div className={styles['page__dropdown-wrapper']}>
-            <DatePicker
-              className={styles.page__dropdown}
-              placeholder="Select"
-              value={formik.values.birthDate}
-              onChange={option => formik.setFieldValue('birthDate', option, true)}
-              onBlur={() => formik.setFieldTouched('birthDate', true, true)}
-              label="Date of birth *"
-              error={getFormikError(formik, 'birthDate')}
-            />
-            <Dropdown
-              className={styles.page__dropdown}
-              placeholder="Select Gender"
-              selectedOption={formik.values.gender}
-              onChange={option => formik.setFieldValue('gender', option, true)}
-              onBlur={() => formik.setFieldTouched('gender', true, true)}
-              options={GENDER_OPTIONS}
-              label="Gender *"
-              error={getFormikError(formik, 'gender')}
-            />
-          </div>
+          <Dropdown
+            className={styles.page__dropdown}
+            placeholder="Select Gender"
+            selectedOption={formik.values.gender}
+            onChange={option => formik.setFieldValue('gender', option, true)}
+            onBlur={() => formik.setFieldTouched('gender', true, true)}
+            options={GENDER_OPTIONS}
+            label="Gender *"
+            error={getFormikError(formik, 'gender')}
+          />
+        </div>
+        <SelectAddress
+          placeholder={
+            formatAddressTitle(formik.values.residentialAddress) || 'Select Residential Address'
+          }
+          label="Residential address *"
+          onBlur={() => formik.setFieldTouched('residentialAddress', true, true)}
+          onSelect={data => formik.setFieldValue('residentialAddress', data, true)}
+          error={getFormikError(formik, 'residentialAddress')}
+        />
+        <Checkbox
+          className={styles.page__checkbox}
+          checked={previousAddressVisible}
+          onChange={setPreviousAddressVisible}
+          label="I have lived here for fewer than 2 years"
+        />
+        {previousAddressVisible && (
           <SelectAddress
             placeholder={
-              formatAddressTitle(formik.values.residentialAddress) || 'Select Residential Address'
+              formatAddressTitle(formik.values.previousAddress) || 'Select Previous Address'
             }
-            label="Residential address *"
-            onBlur={() => formik.setFieldTouched('residentialAddress', true, true)}
-            onSelect={data => formik.setFieldValue('residentialAddress', data, true)}
-            error={getFormikError(formik, 'residentialAddress')}
+            label="Previous address"
+            onBlur={() => formik.setFieldTouched('previousAddress', true, true)}
+            onSelect={data => formik.setFieldValue('previousAddress', data, true)}
+            error={getFormikError(formik, 'previousAddress')}
           />
-          <Checkbox
-            className={styles.page__checkbox}
-            checked={previousAddressVisible}
-            onChange={setPreviousAddressVisible}
-            label="I have lived here for fewer than 2 years"
-          />
-          {previousAddressVisible && (
-            <SelectAddress
-              placeholder={
-                formatAddressTitle(formik.values.previousAddress) || 'Select Previous Address'
-              }
-              label="Previous address"
-              onBlur={() => formik.setFieldTouched('previousAddress', true, true)}
-              onSelect={data => formik.setFieldValue('previousAddress', data, true)}
-              error={getFormikError(formik, 'previousAddress')}
-            />
-          )}
-          <Input
-            type="email"
-            placeholder="david_bryant@mail.com"
-            name="email"
-            value={formik.values.email}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            label="Email *"
-            error={getFormikError(formik, 'email')}
-          />
-          <Button
-            className={styles['page__main-button']}
-            title="Continue"
-            onClick={formik.handleSubmit}
-            loading={loading}
-          />
-          <div className={styles['page__terms-container']}>
-            <div className={styles['page__terms-wrapper']}>
-              <Text type="p3" className={styles['page__terms-text']}>
-                By creating account I confirm that I have read and agree with
+        )}
+        <Input
+          type="email"
+          placeholder="david_bryant@mail.com"
+          name="email"
+          value={formik.values.email}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          label="Email *"
+          error={getFormikError(formik, 'email')}
+        />
+        <Button
+          className={styles['page__main-button']}
+          title="Continue"
+          onClick={formik.handleSubmit}
+          loading={loading}
+        />
+        <div className={styles['page__terms-container']}>
+          <div className={styles['page__terms-wrapper']}>
+            <Text type="p3" className={styles['page__terms-text']}>
+              By creating account I confirm that I have read and agree with
+            </Text>
+            <a
+              href={TERMS_OF_USE_URL}
+              target="_blank"
+              className={styles['page__terms-anchor']}
+              rel="noreferrer"
+            >
+              <Text type="p3" className={styles['page__terms-anchor-text']}>
+                ScoreUp Terms & Conditions
               </Text>
-              <a
-                href={TERMS_OF_USE_URL}
-                target="_blank"
-                className={styles['page__terms-anchor']}
-                rel="noreferrer"
-              >
-                <Text type="p3" className={styles['page__terms-anchor-text']}>
-                  ScoreUp Terms & Conditions
-                </Text>
-              </a>
-            </div>
+            </a>
           </div>
         </div>
       </div>

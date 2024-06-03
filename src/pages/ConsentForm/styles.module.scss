@@ -1,11 +1,6 @@
 .consent-form {
-  display: flex;
-  justify-content: center;
-
-  &__container {
-    width: var(--fixed-width);
-    padding: 42px 15px 43px 15px;
-  }
+  width: var(--fixed-width);
+  padding: 42px 15px 43px 15px;
 
   &__heading {
     margin-bottom: 6px;

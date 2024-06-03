@@ -1,14 +1,9 @@
 .login {
+  width: var(--fixed-width);
+  padding: 44px 15px 0 15px;
   display: flex;
-  justify-content: center;
-
-  &__container {
-    width: var(--fixed-width);
-    padding: 44px 15px 0 15px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+  flex-direction: column;
+  align-items: center;
 
   &__heading {
     margin-top: 25px;
