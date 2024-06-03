@@ -1,0 +1,51 @@
+.credit-score {
+  border-radius: 5px;
+  border: 1px solid rgb(var(--gray-7-color));
+  padding: 22px 19px;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__rating-wrapper {
+    background-color: rgb(var(--gray-8-color));
+    border-radius: 100px;
+    padding: 2px 6px 3px 6px;
+  }
+
+  &__rating {
+    color: rgb(var(--gray-2-color));
+  }
+
+  &__progressbar {
+    margin-top: 12px;
+  }
+
+  &__issue-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 14px;
+  }
+
+  &__issue-text {
+    color: rgb(var(--gray-3-color));
+    margin-left: 5px;
+
+    &--warning {
+      color: rgb(var(--orange-color));
+    }
+  }
+
+  &__view-button {
+    width: 100%;
+    margin-top: 17px;
+  }
+
+  &__report-button {
+    width: 100%;
+    margin-top: 15px;
+  }
+}
