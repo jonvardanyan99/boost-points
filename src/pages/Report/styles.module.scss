@@ -1,0 +1,58 @@
+.report {
+  width: var(--fixed-width);
+
+  &__content-heading {
+    padding: 15px 15px 19px 15px;
+  }
+
+  &__date-wrapper {
+    display: flex;
+    gap: 7px;
+  }
+
+  &__date-text {
+    color: rgb(var(--gray-1-color));
+  }
+
+  &__content {
+    background-color: rgb(var(--gray-8-color));
+    padding: 20px 10px;
+  }
+
+  &__overview {
+    background-color: rgb(var(--white-color));
+    border-radius: 5px;
+    padding: 25px 18px 40px 18px;
+  }
+
+  &__progressbar-container {
+    border-radius: 5px;
+    border: 1px solid rgb(var(--gray-7-color));
+    padding: 36px 17px;
+    margin-top: 9px;
+  }
+
+  &__credit-info {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    border-radius: 5px;
+    border: 1px solid rgb(var(--gray-7-color));
+    padding: 31px 22px 34px 22px;
+    margin-top: 16px;
+  }
+
+  &__circle-wrapper {
+    display: flex;
+    gap: 4px;
+  }
+
+  &__credit-info-title {
+    margin-top: 9px;
+    margin-bottom: 5px;
+  }
+
+  &__credit-info-text {
+    color: rgb(var(--gray-1-color));
+  }
+}
