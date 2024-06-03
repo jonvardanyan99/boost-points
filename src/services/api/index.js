@@ -45,7 +45,7 @@ axiosInstance.interceptors.request.use(async config => {
 axiosInstance.interceptors.response.use(
   response => response,
   async error => {
-    if (error.response.status === 401 && error.response.config.url !== REFRESH_TOKEN_URL) {
+    if (error.response?.status === 401 && error.response?.config.url !== REFRESH_TOKEN_URL) {
       refreshingToken = true;
       refreshTokenPromise = new Promise(resolve => {
         refreshTokenPromiseResolver = resolve;
