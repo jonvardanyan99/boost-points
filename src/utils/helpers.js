@@ -4,3 +4,11 @@ export const dataUrlToFile = async (dataUrl, fileName) => {
 
   return new File([blob], fileName, { type: 'image/png' });
 };
+
+export const capitalize = word => {
+  const capitalized = word[0].toUpperCase();
+
+  const result = capitalized + word.slice(1);
+
+  return result;
+};
