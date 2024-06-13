@@ -1,20 +1,40 @@
 {
   "files": {
-    "main.css": "/boost-points/static/css/main.ee924ac2.css",
-    "main.js": "/boost-points/static/js/main.d42fcebc.js",
+    "main.css": "/boost-points/static/css/main.4b8c57ae.css",
+    "main.js": "/boost-points/static/js/main.b3a10924.js",
     "static/js/787.13d0f21f.chunk.js": "/boost-points/static/js/787.13d0f21f.chunk.js",
     "static/media/OpenSans-Medium.ttf": "/boost-points/static/media/OpenSans-Medium.5b0a682fe3717764627e.ttf",
     "static/media/OpenSans-Bold.ttf": "/boost-points/static/media/OpenSans-Bold.45847e90261782dc01a6.ttf",
     "static/media/OpenSans-Regular.ttf": "/boost-points/static/media/OpenSans-Regular.9a6cfa5890d7f3eef585.ttf",
     "static/media/OpenSans-SemiBold.ttf": "/boost-points/static/media/OpenSans-SemiBold.dcf2e322dbaa037ca821.ttf",
+    "static/media/illion.svg": "/boost-points/static/media/illion.2ab40260ef58adaa205c238481e88e14.svg",
+    "static/media/experian.svg": "/boost-points/static/media/experian.75aa4af7d5c0e81299ec426b4ff5853c.svg",
+    "static/media/equifax.svg": "/boost-points/static/media/equifax.d41003e9b4c13c2df9e75e5eb4605109.svg",
+    "static/media/avatar.svg": "/boost-points/static/media/avatar.d84a64556abfb64ab29e66034e8049bb.svg",
+    "static/media/exclamation-mark.svg": "/boost-points/static/media/exclamation-mark.0467938224afdfc5d73963071f7fa8ef.svg",
+    "static/media/calendar.svg": "/boost-points/static/media/calendar.a448e677d9fc357526b557796452bc3e.svg",
+    "static/media/logout.svg": "/boost-points/static/media/logout.489d83976f63e6170a063def4f40b48f.svg",
+    "static/media/disapprove-circle.svg": "/boost-points/static/media/disapprove-circle.cc907a919d1f66b83173089d5691e0db.svg",
+    "static/media/close.svg": "/boost-points/static/media/close.48ae62234a1d17ed50e212066e1bed34.svg",
+    "static/media/menu.svg": "/boost-points/static/media/menu.4cf078bd45b406c0dcc8926e7b4d70dd.svg",
+    "static/media/checkbox-active.svg": "/boost-points/static/media/checkbox-active.72d3d72655dd0b4338185257bf26b552.svg",
+    "static/media/approve-circle.svg": "/boost-points/static/media/approve-circle.ecfeffb0437a3f95de7c30ab4c36a06e.svg",
+    "static/media/check-mark.svg": "/boost-points/static/media/check-mark.6ff8510c95492e3749d9ee8b627ef3c1.svg",
+    "static/media/left-arrow.svg": "/boost-points/static/media/left-arrow.6f408f438bae863f3c9059fd93524233.svg",
     "index.html": "/boost-points/index.html",
+    "static/media/down-arrow.svg": "/boost-points/static/media/down-arrow.1d8a502baa434ff8f4d5f73c5ad36a01.svg",
+    "static/media/down-arrow-gray.svg": "/boost-points/static/media/down-arrow-gray.7436ed35eeab99d622641fcfc03e72ac.svg",
+    "static/media/right-arrow.svg": "/boost-points/static/media/right-arrow.4c455643450c79e501852df8dd11e078.svg",
+    "static/media/logo-white.svg": "/boost-points/static/media/logo-white.d6cc5c9079a6f7b59317a9434ed4076c.svg",
     "static/media/logo.svg": "/boost-points/static/media/logo.733acfcda52381b7c39f7c93bbfa4fe5.svg",
-    "main.ee924ac2.css.map": "/boost-points/static/css/main.ee924ac2.css.map",
-    "main.d42fcebc.js.map": "/boost-points/static/js/main.d42fcebc.js.map",
+    "static/media/checkbox.svg": "/boost-points/static/media/checkbox.d9a8bf52491d538af2082cf157265904.svg",
+    "static/media/empty-circle.svg": "/boost-points/static/media/empty-circle.a0dc55b64bdd67868a05a66dc3c9d355.svg",
+    "main.4b8c57ae.css.map": "/boost-points/static/css/main.4b8c57ae.css.map",
+    "main.b3a10924.js.map": "/boost-points/static/js/main.b3a10924.js.map",
     "787.13d0f21f.chunk.js.map": "/boost-points/static/js/787.13d0f21f.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.ee924ac2.css",
-    "static/js/main.d42fcebc.js"
+    "static/css/main.4b8c57ae.css",
+    "static/js/main.b3a10924.js"
   ]
 }

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="150" height="30" viewBox="0 0 135 25">
+  <style>
+    text {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 18px;
+      fill: white;
+      font-weight: bold;
+    }
+
+    #arrow-icon {
+      fill: url(#grad);
+    }
+  </style>
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:yellow;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:red;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <text x="0" y="20">Boost Points</text>
+  <polygon id="arrow-icon" points="116,20 125,5 134,20" />
+</svg>
