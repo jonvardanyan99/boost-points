@@ -5,26 +5,4 @@
   &--signed {
     margin-top: var(--header-height);
   }
-  
-  &__header {
-    width: 100%;
-    max-width: var(--fixed-width);
-    position: fixed;
-    top: 0;
-    z-index: 2;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: var(--secondary-gradient);
-    padding: 13px 15px;
-  }
-
-  &__menu-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(var(--black-4-color), 0.2);
-    border-radius: 4px;
-    padding: 14px;
-  }
 }
