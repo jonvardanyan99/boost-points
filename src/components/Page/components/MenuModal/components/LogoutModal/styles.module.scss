@@ -1,0 +1,39 @@
+.logout-modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__container {
+    width: var(--fixed-width);
+    padding: 0 10px;
+  }
+
+  &__wrapper {
+    background-color: rgb(var(--white-color));
+    border-radius: 10px;
+    text-align: center;
+    padding: 29px 20px;
+    box-shadow: 0px 8px 20px 0px rgba(var(--gray-9-color), 0.1);
+  }
+
+  &__instruction {
+    color: rgb(var(--gray-1-color));
+    margin-top: 3px;
+    margin-bottom: 24px;
+  }
+
+  &__button-wrapper {
+    display: flex;
+    gap: 13px;
+  }
+
+  &__button {
+    width: 100%;
+    font-size: var(--p5-font-size);
+    line-height: var(--p5-line-height);
+    
+    &:first-child {
+      border: 1px solid rgb(var(--gray-5-color));
+    }
+  }
+}
