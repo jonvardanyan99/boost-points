@@ -4,9 +4,11 @@ import { Checkbox } from 'components/Checkbox';
 import { DatePicker } from 'components/DatePicker';
 import { Dropdown } from 'components/Dropdown';
 import { Input } from 'components/Input';
+import { SelectAddress } from 'components/SelectAddress';
 import { Text } from 'components/Text';
 import { TERMS_OF_USE_URL } from 'constants/env';
 import { GENDER_OPTIONS } from 'constants/selectOptions';
+import format from 'date-fns/format';
 import { useFormik } from 'formik';
 import { useErrorHandler } from 'hooks/useErrorHandler';
 import { useMutation } from 'hooks/useMutation';
@@ -19,7 +21,6 @@ import { formatAddressTitle } from 'utils/formats';
 import { createAccountFormSchema } from 'utils/validators';
 import { toFormikValidationSchema } from 'zod-formik-adapter';
 
-import { SelectAddress } from './components/SelectAddress';
 import styles from './styles.module.scss';
 
 export const CreateAccount = () => {
@@ -48,7 +49,7 @@ export const CreateAccount = () => {
           middleName: values.middleName || null,
           surname: values.surname,
           gender: values.gender.value,
-          birthDate: new Date(values.birthDate).setUTCHours(0, 0, 0, 0),
+          birthDate: format(values.birthDate, 'y-MM-dd'),
           email: values.email,
           residentialAddress: {
             propertyName: 'Main', // values.residentialAddress.propertyName
@@ -162,6 +163,7 @@ export const CreateAccount = () => {
           />
         </div>
         <SelectAddress
+          className={styles['page__select-residential-address']}
           placeholder={
             formatAddressTitle(formik.values.residentialAddress) || 'Select Residential Address'
           }
@@ -178,6 +180,7 @@ export const CreateAccount = () => {
         />
         {previousAddressVisible && (
           <SelectAddress
+            className={styles['page__select-previous-address']}
             placeholder={
               formatAddressTitle(formik.values.previousAddress) || 'Select Previous Address'
             }

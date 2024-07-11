@@ -37,6 +37,10 @@
     width: 100%;
   }
 
+  &__select-residential-address {
+    margin-top: 6px;
+  }
+
   &__checkbox {
     margin-top: 15px;
     margin-bottom: 12px;
@@ -47,9 +51,8 @@
     }
   }
 
-  &__previous-address-dropdown {
+  &__select-previous-address {
     margin-bottom: 6px;
-    width: 100%;
   }
 
   &__main-button {
