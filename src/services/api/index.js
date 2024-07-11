@@ -14,6 +14,7 @@ export const API = {
   refreshToken: data => axiosInstance.post(REFRESH_TOKEN_URL, data),
   getAccount: () => axiosInstance.get('/api/v1/consumers/me'),
   createAccount: data => axiosInstance.post('/api/v1/consumers/me', data),
+  patchAccount: data => axiosInstance.patch('/api/v1/consumers/me', data),
   getId: () => axiosInstance.get('/api/v1/consumers/me/id'),
   addId: data => axiosInstance.post('/api/v1/consumers/me/id', data),
   getLink: () => axiosInstance.get('/api/v1/file-link/consumer.signs'),
