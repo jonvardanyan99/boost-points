@@ -4,10 +4,10 @@ import { Text } from 'components/Text';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
-import { SelectAddressModal } from './SelectAddressModal';
+import { SelectAddressModal } from './components/SelectAddressModal';
 import styles from './styles.module.scss';
 
-export const SelectAddress = ({ placeholder, label, onBlur, onSelect, error }) => {
+export const SelectAddress = ({ className, placeholder, label, onBlur, onSelect, error }) => {
   const [selectAddressModalVisible, setSelectAddressModalVisible] = useState(false);
 
   const openSelectAddressModal = () => {
@@ -20,7 +20,7 @@ export const SelectAddress = ({ placeholder, label, onBlur, onSelect, error }) =
   };
 
   return (
-    <div className={styles['select-address']}>
+    <div className={classNames(styles['select-address'], className)}>
       <label htmlFor={label}>
         <Text type="p4" className={styles['select-address__label-text']}>
           {label}
@@ -53,6 +53,7 @@ export const SelectAddress = ({ placeholder, label, onBlur, onSelect, error }) =
 };
 
 SelectAddress.propTypes = {
+  className: PropTypes.string,
   placeholder: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   onBlur: PropTypes.func.isRequired,
