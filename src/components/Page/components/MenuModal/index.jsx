@@ -18,7 +18,7 @@ const navLinks = [
   { route: ROUTES.HOME, text: 'Disputes' },
   { route: ROUTES.HOME, text: 'FAQ' },
   { route: ROUTES.HOME, text: 'Support' },
-  { route: ROUTES.HOME, text: 'Account' },
+  { route: ROUTES.ACCOUNT, text: 'Account' },
 ];
 
 export const MenuModal = ({ visible, onClose, account }) => {

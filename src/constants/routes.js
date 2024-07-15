@@ -7,4 +7,5 @@ export const ROUTES = {
   CONSENT_FORM: '/consent-form',
   DASHBOARD: '/dashboard',
   REPORT: '/report/:agency',
+  ACCOUNT: '/account',
 };
