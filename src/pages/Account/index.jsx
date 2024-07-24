@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import { Text } from 'components/Text';
 import React, { useState } from 'react';
 
+import { Identification } from './components/Identification';
 import { Settings } from './components/Settings';
 import styles from './styles.module.scss';
 
@@ -9,6 +10,14 @@ const tabs = ['Settings', 'Identification', 'Subscription'];
 
 export const Account = () => {
   const [activeTab, setActiveTab] = useState(tabs[0]);
+
+  let content;
+
+  if (activeTab === tabs[0]) {
+    content = <Settings />;
+  } else if (activeTab === tabs[1]) {
+    content = <Identification />;
+  }
 
   return (
     <div className={styles.account}>
@@ -37,7 +46,7 @@ export const Account = () => {
             </button>
           ))}
         </div>
-        <Settings />
+        {content}
       </div>
     </div>
   );
