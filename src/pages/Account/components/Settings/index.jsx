@@ -10,7 +10,6 @@ import { format } from 'date-fns';
 import { useFormik } from 'formik';
 import { useErrorHandler } from 'hooks/useErrorHandler';
 import { useMutation } from 'hooks/useMutation';
-import isEqual from 'lodash.isequal';
 import React, { useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { API } from 'services/api';
@@ -18,6 +17,7 @@ import { setData } from 'store/reducers/user/actions';
 import { selectAccount } from 'store/reducers/user/selectors';
 import { getFormikError } from 'utils/errorHandlers';
 import { formatAddressTitle } from 'utils/formats';
+import { diffObjects } from 'utils/helpers';
 import { createAccountFormSchema } from 'utils/validators';
 import { toFormikValidationSchema } from 'zod-formik-adapter';
 
@@ -103,57 +103,44 @@ export const Settings = () => {
     validationSchema: toFormikValidationSchema(createAccountFormSchema),
     onSubmit: async values => {
       const { initialValues } = formik;
+      const changedData = diffObjects(values, initialValues);
 
-      const changedData = Object.keys(values).reduce((acc, key) => {
-        if (!isEqual(values[key], initialValues[key])) {
-          acc[key] = values[key];
-        }
-
-        return acc;
-      }, {});
-
-      const patchData = { ...changedData };
-
-      if (patchData.middleName === '') {
-        patchData.middleName = null;
+      if (changedData.middleName === '') {
+        changedData.middleName = null;
       }
 
-      if (patchData.birthDate) {
-        patchData.birthDate = format(patchData.birthDate, 'y-MM-dd');
+      if (changedData.birthDate) {
+        changedData.birthDate = format(changedData.birthDate, 'y-MM-dd');
       }
 
-      if (patchData.gender) {
-        patchData.gender = patchData.gender.value;
+      if (changedData.gender) {
+        changedData.gender = changedData.gender.value;
       }
 
-      if (patchData.residentialAddress) {
-        patchData.residentialAddress = {
-          ...patchData.residentialAddress,
-          unitNumber: patchData.residentialAddress.unitNumber || null,
-          state: patchData.residentialAddress.state.value,
-          postcode: patchData.residentialAddress.postcode.toString(),
-          countryCode: patchData.residentialAddress.countryCode.value,
+      if (changedData.residentialAddress) {
+        changedData.residentialAddress = {
+          ...changedData.residentialAddress,
+          unitNumber: changedData.residentialAddress.unitNumber || null,
+          state: changedData.residentialAddress.state.value,
+          postcode: changedData.residentialAddress.postcode.toString(),
+          countryCode: changedData.residentialAddress.countryCode.value,
         };
       }
 
-      if (patchData.previousAddress) {
-        patchData.previousAddress = {
-          ...patchData.previousAddress,
-          unitNumber: patchData.previousAddress.unitNumber || null,
-          state: patchData.previousAddress.state.value,
-          postcode: patchData.previousAddress.postcode.toString(),
-          countryCode: patchData.previousAddress.countryCode.value,
+      if (changedData.previousAddress) {
+        changedData.previousAddress = {
+          ...changedData.previousAddress,
+          unitNumber: changedData.previousAddress.unitNumber || null,
+          state: changedData.previousAddress.state.value,
+          postcode: changedData.previousAddress.postcode.toString(),
+          countryCode: changedData.previousAddress.countryCode.value,
         };
       }
 
       try {
-        const response = await patchAccount(patchData);
+        const response = await patchAccount(changedData);
 
         dispatch(setData(response.data));
-        formik.resetForm({
-          ...formik.initialValues,
-          ...changedData,
-        });
       } catch (error) {
         handleApiError(error, formik.setFieldError, [
           'firstName',
