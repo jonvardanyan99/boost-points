@@ -1,5 +1,7 @@
 import { Page } from 'components/Page';
 import { ROUTES } from 'constants/routes';
+import { useQuery } from 'hooks/useQuery';
+import { Account } from 'pages/Account';
 import { ConsentForm } from 'pages/ConsentForm';
 import { CreateAccount } from 'pages/CreateAccount';
 import { Dashboard } from 'pages/Dashboard';
@@ -7,18 +9,29 @@ import { Identification } from 'pages/Identification';
 import { Login } from 'pages/Login';
 import { Report } from 'pages/Report';
 import { Verification } from 'pages/Verification';
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { API } from 'services/api';
+import { setData } from 'store/reducers/user/actions';
 import { selectAccount, selectIsAuthenticated } from 'store/reducers/user/selectors';
 
 export const Router = () => {
+  const dispatch = useDispatch();
   const isAuthenticated = useSelector(selectIsAuthenticated);
   const account = useSelector(selectAccount);
 
   const isNew = account?.data.isNew;
   const isAccountCreated = isNew && !!account.data.firstName;
   const isConsentFormSigned = !!account?.isConsentFormSigned;
+
+  const { data } = useQuery({ requestFn: API.getAccount, skip: !isAuthenticated });
+
+  useEffect(() => {
+    if (data) {
+      dispatch(setData(data));
+    }
+  }, [data, dispatch]);
 
   return (
     <BrowserRouter basename="/boost-points">
@@ -54,6 +67,7 @@ export const Router = () => {
               >
                 <Route path={ROUTES.DASHBOARD} element={<Dashboard />} />
                 <Route path={ROUTES.REPORT} element={<Report />} />
+                <Route path={ROUTES.ACCOUNT} element={<Account />} />
               </Route>
             </Route>
           </Route>
