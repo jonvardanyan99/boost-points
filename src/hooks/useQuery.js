@@ -1,23 +1,25 @@
 import { useEffect, useState } from 'react';
 
-export const useQuery = requestFn => {
+export const useQuery = ({ requestFn, skip }) => {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState();
 
   useEffect(() => {
-    const sendQuery = async () => {
-      try {
-        const response = await requestFn();
+    if (!skip) {
+      const sendQuery = async () => {
+        try {
+          const response = await requestFn();
 
-        setData(response.data);
-      } finally {
-        setLoading(false);
-      }
-    };
+          setData(response.data);
+        } finally {
+          setLoading(false);
+        }
+      };
 
-    sendQuery();
+      sendQuery();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [skip]);
 
-  return { loading, data };
+  return { data, loading };
 };
