@@ -1,16 +1,20 @@
 import { useEffect, useState } from 'react';
 
 export const useQuery = ({ requestFn, skip }) => {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [data, setData] = useState();
 
   useEffect(() => {
     if (!skip) {
+      setLoading(true);
+
       const sendQuery = async () => {
         try {
           const response = await requestFn();
 
           setData(response.data);
+          // eslint-disable-next-line no-empty
+        } catch (error) {
         } finally {
           setLoading(false);
         }
