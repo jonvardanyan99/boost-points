@@ -19,7 +19,7 @@ export const Report = () => {
   const account = useSelector(selectAccount);
   const params = useParams();
   const { agency } = params;
-  const { loading, data } = useQuery({ requestFn: () => API.getReport(agency) });
+  const { data, loading } = useQuery({ requestFn: () => API.getReport(agency) });
 
   return (
     <div className={styles.report}>
