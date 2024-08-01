@@ -19,6 +19,7 @@ export const userReducer = (state = initialState, action) => {
         account: {
           data: action.payload.data,
           isConsentFormSigned: action.payload.isConsentFormSigned,
+          isSubscriptionActivated: false,
         },
       };
     case SET_DATA:
