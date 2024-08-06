@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 
 import { Identification } from './components/Identification';
 import { Settings } from './components/Settings';
+import { Subscription } from './components/Subscription';
 import styles from './styles.module.scss';
 
 const tabs = ['Settings', 'Identification', 'Subscription'];
@@ -17,6 +18,8 @@ export const Account = () => {
     content = <Settings />;
   } else if (activeTab === tabs[1]) {
     content = <Identification />;
+  } else if (activeTab === tabs[2]) {
+    content = <Subscription />;
   }
 
   return (
