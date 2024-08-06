@@ -22,7 +22,8 @@ export const API = {
   getReport: param => axiosInstance.get(`/api/v1/consumers/report/${param}`),
   getCreditScores: () => axiosInstance.get('/api/v1/consumers/me/credit-scores'),
   getIssues: () => axiosInstance.get('/api/v1/consumers/issues'),
-  getSubscriptions: () => axiosInstance.get('/api/v1/consumers/subscriptions'),
+  getSubscription: () => axiosInstance.get('/api/v1/consumers/subscriptions'),
+  getSubscriptionPlans: () => axiosInstance.get('/api/v1/consumers/subscriptions/plans'),
 };
 
 let refreshingToken = false;
