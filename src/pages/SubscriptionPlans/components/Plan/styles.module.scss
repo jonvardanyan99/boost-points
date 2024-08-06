@@ -1,0 +1,66 @@
+.plan {
+  border-radius: 5px;
+  background-color: rgba(var(--white-color), 0.1);
+  padding: 16px 22px 27px 22px;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(var(--white-color), 0.1);
+    padding-bottom: 16px;
+  }
+
+  &__heading-wrapper {
+    text-align: left;
+    margin-right: 10px;
+  }
+
+  &__text {
+    color: rgb(var(--white-color));
+  }
+
+  &__duration-text {
+    color: rgba(var(--white-color), 0.8);
+  }
+
+  &__prices-wrapper {
+    display: flex;
+    gap: 6px;
+  }
+
+  &__price {
+    text-decoration: line-through;
+    color: rgba(var(--white-color), 0.4);
+  }
+
+  &__discount {
+    float: right;
+    color: rgb(var(--white-color));
+    background-color: rgb(var(--orange-color));
+    border-radius: 4px;
+    padding: 1px 6px 2px 6px;
+    margin-top: 4px;
+  }
+
+  &__features-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 21px;
+  }
+
+  &__feature-wrapper {
+    display: flex;
+    gap: 7px;
+  }
+
+  &__feature-text {
+    color: rgba(var(--white-color), 0.8);
+  }
+
+  &__button {
+    width: 100%;
+    margin-top: 23px;
+  }
+}

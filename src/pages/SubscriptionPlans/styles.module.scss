@@ -1,0 +1,41 @@
+.page {
+  width: var(--fixed-width);
+  background: var(--secondary-gradient);
+  padding: 28px 15px;
+
+  &__close-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 16px;
+  }
+
+  &__close-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__heading {
+    color: rgb(var(--white-color));
+    text-align: center;
+  }
+
+  &__text {
+    color: rgba(var(--white-color), 0.7);
+    text-align: center;
+    margin-top: 9px;
+    margin-bottom: 25px;
+  }
+
+  &__plans-container {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  &__disclaimer-text {
+    color: rgba(var(--white-color), 0.5);
+    text-align: center;
+    margin-top: 18px;
+  }
+}
