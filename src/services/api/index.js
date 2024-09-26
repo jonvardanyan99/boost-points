@@ -23,6 +23,7 @@ export const API = {
   getCreditScores: () => axiosInstance.get('/api/v1/consumers/me/credit-scores'),
   getIssues: () => axiosInstance.get('/api/v1/consumers/issues'),
   getSubscription: () => axiosInstance.get('/api/v1/consumers/subscriptions'),
+  activateSubscription: data => axiosInstance.post('/api/v1/consumers/subscriptions', data),
   getSubscriptionPlans: () => axiosInstance.get('/api/v1/consumers/subscriptions/plans'),
 };
 
