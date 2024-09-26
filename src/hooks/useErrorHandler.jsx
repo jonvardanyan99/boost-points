@@ -19,7 +19,6 @@ export const useErrorHandler = () => {
       } else {
         const errorDetails = Array.isArray(detail) ? detail[0] : detail;
 
-        // eslint-disable-next-line array-callback-return
         Object.keys(errorDetails).forEach(apiKey => {
           if (keys.includes(apiKey)) {
             setError(apiKey, errorDetails[apiKey][0]);
