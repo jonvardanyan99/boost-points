@@ -10,7 +10,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { API } from 'services/api';
-import { selectAccount } from 'store/reducers/user/selectors';
+import { selectAccount } from 'store/slices/user/selectors';
 import { capitalize } from 'utils/helpers';
 
 import styles from './styles.module.scss';
@@ -38,11 +38,11 @@ export const Report = () => {
               <Text type="p5" className={styles['report__date-text']}>
                 •
               </Text>
-              {data && (
-                <Text type="p5" className={styles['report__date-text']}>
-                  {`From ${format(new Date(data.creditEnquiries[0].enquiryDate), 'dd MMM y')}`}
-                </Text>
-              )}
+              <Text type="p5" className={styles['report__date-text']}>
+                {data?.creditEnquiries
+                  ? `From ${format(new Date(data.creditEnquiries[0].enquiryDate), 'dd MMM y')}`
+                  : 'No date'}
+              </Text>
             </div>
           </div>
           <div className={styles.report__content}>
@@ -52,7 +52,7 @@ export const Report = () => {
                 <Progressbar
                   width="148px"
                   height="148px"
-                  value={Number(data?.scores.oneScore) || 0}
+                  value={Number(data?.scores?.oneScore) || 0}
                   maxValue={1200}
                 />
               </div>

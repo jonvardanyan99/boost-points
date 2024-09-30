@@ -8,7 +8,7 @@ import { ROUTES } from 'constants/routes';
 import { useErrorHandler } from 'hooks/useErrorHandler';
 import { useMutation } from 'hooks/useMutation';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { generatePath, useNavigate } from 'react-router-dom';
 import { API } from 'services/api';
 
@@ -16,9 +16,9 @@ import styles from './styles.module.scss';
 
 export const CreditScore = ({ className, agency, logo, maxScore, disabled }) => {
   const navigate = useNavigate();
+  const [creditScore, setCreditScore] = useState(null);
+  const [issuesCount, setIssuesCount] = useState(null);
   const { handleApiError, snackbar } = useErrorHandler();
-  const [creditScore, setCreditScore] = useState(0);
-  const [issuesCount, setIssuesCount] = useState(0);
 
   const sendReportRequest = async () => {
     try {
@@ -26,14 +26,26 @@ export const CreditScore = ({ className, agency, logo, maxScore, disabled }) => 
       const scoresResponse = await API.getCreditScores();
       const issuesResponse = await API.getIssues();
 
-      setCreditScore(scoresResponse.data[agency]);
-      setIssuesCount(issuesResponse.data.data[0].issues.length);
+      setCreditScore(scoresResponse.data[agency] || 0);
+      setIssuesCount(issuesResponse.data.data[0].qt);
     } catch (error) {
       handleApiError(error);
     }
   };
 
   const [requestReport, { loading }] = useMutation(sendReportRequest);
+
+  const ratingText = useMemo(() => {
+    if (creditScore >= 1000) {
+      return 'Perfect';
+    }
+
+    if (creditScore < 1000 && creditScore >= 500) {
+      return 'Good';
+    }
+
+    return 'Bad';
+  }, [creditScore]);
 
   const viewReport = () => {
     navigate(generatePath(ROUTES.REPORT, { agency }));
@@ -43,15 +55,23 @@ export const CreditScore = ({ className, agency, logo, maxScore, disabled }) => 
     <div className={classNames(styles['credit-score'], className)}>
       <div className={styles['credit-score__header']}>
         <img src={logo} alt={agency} />
-        {!!creditScore && (
+        {creditScore !== null && (
           <div className={styles['credit-score__rating-wrapper']}>
             <Text type="p6" className={styles['credit-score__rating']}>
-              Good
+              {ratingText}
             </Text>
           </div>
         )}
       </div>
-      {creditScore ? (
+      {creditScore === null ? (
+        <Button
+          className={styles['credit-score__report-button']}
+          title="Request report"
+          onClick={requestReport}
+          loading={loading}
+          disabled={disabled}
+        />
+      ) : (
         <>
           <Progressbar
             className={styles['credit-score__progressbar']}
@@ -79,14 +99,6 @@ export const CreditScore = ({ className, agency, logo, maxScore, disabled }) => 
             secondary
           />
         </>
-      ) : (
-        <Button
-          className={styles['credit-score__report-button']}
-          title="Request report"
-          onClick={requestReport}
-          loading={loading}
-          disabled={disabled}
-        />
       )}
       {snackbar}
     </div>
