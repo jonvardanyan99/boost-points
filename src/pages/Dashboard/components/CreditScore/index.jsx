@@ -17,7 +17,7 @@ import styles from './styles.module.scss';
 export const CreditScore = ({ className, agency, logo, maxScore, disabled }) => {
   const navigate = useNavigate();
   const [creditScore, setCreditScore] = useState(null);
-  const [issuesCount, setIssuesCount] = useState(null);
+  const [issuesQuantity, setIssuesQuantity] = useState(null);
   const { handleApiError, snackbar } = useErrorHandler();
 
   const sendReportRequest = async () => {
@@ -27,7 +27,7 @@ export const CreditScore = ({ className, agency, logo, maxScore, disabled }) => 
       const issuesResponse = await API.getIssues();
 
       setCreditScore(scoresResponse.data[agency] || 0);
-      setIssuesCount(issuesResponse.data.data[0].qt);
+      setIssuesQuantity(issuesResponse.data.data[0].qt);
     } catch (error) {
       handleApiError(error);
     }
@@ -80,16 +80,16 @@ export const CreditScore = ({ className, agency, logo, maxScore, disabled }) => 
           />
           <div className={styles['credit-score__issue-wrapper']}>
             <img
-              src={issuesCount ? exclamationMark : checkMark}
-              alt={issuesCount ? 'exclamation-mark' : 'check-mark'}
+              src={issuesQuantity ? exclamationMark : checkMark}
+              alt={issuesQuantity ? 'exclamation-mark' : 'check-mark'}
             />
             <Text
               type="p5"
               className={classNames(styles['credit-score__issue-text'], {
-                [styles['credit-score__issue-text--warning']]: issuesCount,
+                [styles['credit-score__issue-text--warning']]: issuesQuantity,
               })}
             >
-              {issuesCount ? `${issuesCount} issues found` : 'No issues'}
+              {issuesQuantity ? `${issuesQuantity} issues found` : 'No issues'}
             </Text>
           </div>
           <Button
