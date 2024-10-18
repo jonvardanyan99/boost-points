@@ -19,6 +19,12 @@
     color: rgb(var(--gray-2-color));
   }
 
+  &__report-button {
+    width: 100%;
+    height: 44px;
+    margin-top: 15px;
+  }
+
   &__progressbar {
     margin-top: 12px;
   }
@@ -41,11 +47,7 @@
 
   &__view-button {
     width: 100%;
+    height: 44px;
     margin-top: 17px;
-  }
-
-  &__report-button {
-    width: 100%;
-    margin-top: 15px;
   }
 }
