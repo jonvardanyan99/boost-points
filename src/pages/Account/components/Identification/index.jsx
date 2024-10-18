@@ -77,7 +77,7 @@ export const Identification = () => {
             onChange={option => formik.setFieldValue('documentType', option, true)}
             onBlur={() => formik.setFieldTouched('documentType', true, true)}
             options={DOCUMENT_TYPE_OPTIONS}
-            label="Document type"
+            label="Document type *"
             error={getFormikError(formik, 'documentType')}
           />
           <Dropdown
@@ -87,7 +87,7 @@ export const Identification = () => {
             onChange={option => formik.setFieldValue('state', option, true)}
             onBlur={() => formik.setFieldTouched('state', true, true)}
             options={STATE_OPTIONS}
-            label="State of issue"
+            label="State of issue *"
             error={getFormikError(formik, 'state')}
           />
           <Input
@@ -96,7 +96,7 @@ export const Identification = () => {
             value={formik.values.number}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            label="Licence no"
+            label="Licence no *"
             error={getFormikError(formik, 'number')}
           />
           <Button
