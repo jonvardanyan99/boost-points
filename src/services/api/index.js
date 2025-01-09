@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { API_URL, REFRESH_TOKEN_URL } from 'constants/env';
 import { store } from 'store';
-import { resetStore } from 'store/reducers/app/actions';
-import { setTokens } from 'store/reducers/user/actions';
+import { resetStore } from 'store/slices/app/actions';
+import { setTokens } from 'store/slices/user';
 
 const axiosInstance = axios.create({
   baseURL: API_URL,
@@ -17,14 +17,24 @@ export const API = {
   patchAccount: data => axiosInstance.patch('/api/v1/consumers/me', data),
   getId: () => axiosInstance.get('/api/v1/consumers/me/id'),
   addId: data => axiosInstance.post('/api/v1/consumers/me/id', data),
-  getLink: () => axiosInstance.get('/api/v1/file-link/consumer.signs'),
+  getSignLink: () => axiosInstance.get('/api/v1/file-link/consumer.signs'),
+  getDisputeLink: () => axiosInstance.get('/api/v1/file-link/consumer.disputes'),
   signConsentForm: data => axiosInstance.post('/api/v1/consumers/me/consent-form', data),
   getReport: param => axiosInstance.get(`/api/v1/consumers/report/${param}`),
   getCreditScores: () => axiosInstance.get('/api/v1/consumers/me/credit-scores'),
+  getIssue: uuid => axiosInstance.get(`/api/v1/consumers/issues/${uuid}`),
   getIssues: () => axiosInstance.get('/api/v1/consumers/issues'),
+  getIssueFurtherOptions: uuid =>
+    axiosInstance.get(`/api/v1/consumers/issues/further-options?dispute_uuid=${uuid}`),
   getSubscription: () => axiosInstance.get('/api/v1/consumers/subscriptions'),
   activateSubscription: data => axiosInstance.post('/api/v1/consumers/subscriptions', data),
   getSubscriptionPlans: () => axiosInstance.get('/api/v1/consumers/subscriptions/plans'),
+  getDispute: uuid => axiosInstance.get(`/api/v1/consumers/disputes/${uuid}`),
+  createDispute: data => axiosInstance.post('/api/v1/consumers/disputes', data),
+  getDisputes: () => axiosInstance.get('/api/v1/consumers/disputes'),
+  sendDisputeAction: (uuid, action, data) =>
+    axiosInstance.post(`/api/v1/consumers/disputes/${uuid}/${action}`, data),
+  updatePaymentMethod: data => axiosInstance.post('/api/v1/consumers/me/payment-method', data),
 };
 
 let refreshingToken = false;
