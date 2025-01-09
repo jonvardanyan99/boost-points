@@ -15,7 +15,7 @@ import { useMutation } from 'hooks/useMutation';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { API } from 'services/api';
-import { setData } from 'store/reducers/user/actions';
+import { setData } from 'store/slices/user';
 import { getFormikError } from 'utils/errorHandlers';
 import { formatAddressTitle } from 'utils/formats';
 import { createAccountFormSchema } from 'utils/validators';
