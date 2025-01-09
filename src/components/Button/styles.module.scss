@@ -1,12 +1,16 @@
 .button {
   height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
   background-color: rgb(var(--accent-color));
   font-size: var(--p4-font-size);
   line-height: var(--p4-line-height);
   font-weight: 600;
   color: rgb(var(--white-color));
   border-radius: 8px;
-  text-align: center;
+  transition: all 0.2s;
 
   &:hover:not(&--disabled, &--loading) {
     opacity: 0.8;
