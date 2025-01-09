@@ -7,8 +7,8 @@ import { useMutation } from 'hooks/useMutation';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { API } from 'services/api';
-import { setConsentFormSigned } from 'store/reducers/user/actions';
-import { selectAccount } from 'store/reducers/user/selectors';
+import { setConsentFormSigned } from 'store/slices/user';
+import { selectAccount } from 'store/slices/user/selectors';
 import { backFormatPhoneNumber, formatAddressTitle } from 'utils/formats';
 import { dataUrlToFile } from 'utils/helpers';
 import { uploadFileToAWS } from 'utils/uploadFileToAWS';
@@ -35,7 +35,7 @@ export const ConsentForm = () => {
 
   const signConsentFormRequest = async () => {
     try {
-      const response = await API.getLink();
+      const response = await API.getSignLink();
 
       await uploadFileToAWS(response.data.link, await dataUrlToFile(signature, 'signature.png'));
 
