@@ -1,49 +1,57 @@
-import logout from 'assets/icons/logout.svg';
+import logoutIcon from 'assets/icons/logout.svg';
 import avatar from 'assets/images/avatar.svg';
 import classNames from 'classnames';
 import { Header } from 'components/Header';
 import { Modal } from 'components/Modal';
+import { PopupModal } from 'components/PopupModal';
 import { Text } from 'components/Text';
 import { ROUTES } from 'constants/routes';
-import { useUpdateEffect } from 'hooks/useUpdateEffect';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { resetStore } from 'store/slices/app/actions';
+import { selectAccount } from 'store/slices/user/selectors';
 
-import { LogoutModal } from './components/LogoutModal';
 import styles from './styles.module.scss';
 
 const navLinks = [
-  { route: ROUTES.DASHBOARD, text: 'Dashboard' },
-  { route: ROUTES.HOME, text: 'Disputes' },
-  { route: ROUTES.HOME, text: 'FAQ' },
-  { route: ROUTES.HOME, text: 'Support' },
-  { route: ROUTES.ACCOUNT, text: 'Account' },
+  { route: ROUTES.DASHBOARD, title: 'Dashboard' },
+  { route: ROUTES.DISPUTES, title: 'Disputes' },
+  { route: ROUTES.FAQ, title: 'FAQ' },
+  { route: ROUTES.ACCOUNT, title: 'Account' },
 ];
 
-export const MenuModal = ({ visible, onClose, account }) => {
+export const MenuModal = ({ visible, onClose }) => {
+  const account = useSelector(selectAccount);
+  const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
-  const [logoutModalVisible, setLogoutModalVisible] = useState(false);
+  const [popupModalVisible, setPopupModalVisible] = useState(false);
 
-  useUpdateEffect(() => {
-    if (!Object.keys(account).length && visible) {
+  useEffect(() => {
+    if (!account && visible) {
       onClose();
     }
-  }, [account]);
+  }, [account, visible, onClose]);
 
   const handleNavLinkClick = route => {
+    onClose();
     navigate(route);
-    onClose();
   };
 
-  const openLogoutModal = () => {
-    setLogoutModalVisible(true);
+  const handleLogoutClick = () => {
     onClose();
+    setPopupModalVisible(true);
   };
 
-  const closeLogoutModal = () => {
-    setLogoutModalVisible(false);
+  const closePopupModal = () => {
+    setPopupModalVisible(false);
+  };
+
+  const logout = () => {
+    onClose();
+    dispatch(resetStore());
   };
 
   return (
@@ -55,7 +63,7 @@ export const MenuModal = ({ visible, onClose, account }) => {
             {navLinks.map(navLink => (
               <button
                 type="button"
-                key={navLink.text}
+                key={navLink.title}
                 onClick={() => handleNavLinkClick(navLink.route)}
               >
                 <Text
@@ -65,7 +73,7 @@ export const MenuModal = ({ visible, onClose, account }) => {
                     [styles['menu-modal__text--active']]: navLink.route === location.pathname,
                   })}
                 >
-                  {navLink.text}
+                  {navLink.title}
                 </Text>
               </button>
             ))}
@@ -76,25 +84,33 @@ export const MenuModal = ({ visible, onClose, account }) => {
                 <img src={avatar} alt="avatar" />
                 <div>
                   <Text type="p3" className={styles['menu-modal__full-name']}>
-                    {account.data?.fullName || ''}
+                    {account?.data.fullName || ''}
                   </Text>
                   <Text type="p6" className={styles['menu-modal__text']}>
-                    {account.data?.email || ''}
+                    {account?.data.email || ''}
                   </Text>
                 </div>
               </div>
               <button
                 type="button"
                 className={styles['menu-modal__logout-wrapper']}
-                onClick={openLogoutModal}
+                onClick={handleLogoutClick}
               >
-                <img src={logout} alt="logout" />
+                <img src={logoutIcon} alt="logout" />
               </button>
             </div>
           </div>
         </div>
       </Modal>
-      <LogoutModal visible={logoutModalVisible} onClose={closeLogoutModal} />
+      <PopupModal
+        visible={popupModalVisible}
+        heading="Log out"
+        message="Are you sure to log out from your account?"
+        secondaryButtonTitle="Log out"
+        secondaryButtonClick={logout}
+        primaryButtonTitle="Cancel"
+        primaryButtonClick={closePopupModal}
+      />
     </>
   );
 };
@@ -102,5 +118,4 @@ export const MenuModal = ({ visible, onClose, account }) => {
 MenuModal.propTypes = {
   visible: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
-  account: PropTypes.shape({}).isRequired,
 };

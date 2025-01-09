@@ -1,18 +1,25 @@
 import classNames from 'classnames';
 import { Header } from 'components/Header';
+import { ROUTES } from 'constants/routes';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { selectAccount } from 'store/reducers/user/selectors';
+import { useLocation } from 'react-router-dom';
 
 import { MenuModal } from './components/MenuModal';
 import styles from './styles.module.scss';
 
-export const Page = ({ children }) => {
-  const account = useSelector(selectAccount);
-  const [menuModalVisible, setMenuModalVisible] = useState(false);
+const noHeaderList = [
+  ROUTES.LOGIN,
+  ROUTES.VERIFICATION,
+  ROUTES.CREATE_ACCOUNT,
+  ROUTES.IDENTIFICATION,
+  ROUTES.CONSENT_FORM,
+  ROUTES.SUBSCRIPTION_PLANS,
+];
 
-  const isConsentFormSigned = !!account?.isConsentFormSigned;
+export const Page = ({ children }) => {
+  const [menuModalVisible, setMenuModalVisible] = useState(false);
+  const location = useLocation();
 
   const openMenuModal = () => {
     setMenuModalVisible(true);
@@ -22,11 +29,13 @@ export const Page = ({ children }) => {
     setMenuModalVisible(false);
   };
 
+  const shouldBeHeader = !noHeaderList.includes(location.pathname);
+
   return (
-    <div className={classNames(styles.page, { [styles['page--signed']]: isConsentFormSigned })}>
-      {isConsentFormSigned && <Header icon="menu" onClick={openMenuModal} />}
+    <div className={classNames(styles.page, { [styles['page--with-header']]: shouldBeHeader })}>
+      {shouldBeHeader && <Header icon="menu" onClick={openMenuModal} />}
       {children}
-      <MenuModal visible={menuModalVisible} onClose={closeMenuModal} account={account || {}} />
+      {shouldBeHeader && <MenuModal visible={menuModalVisible} onClose={closeMenuModal} />}
     </div>
   );
 };
