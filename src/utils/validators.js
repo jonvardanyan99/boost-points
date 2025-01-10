@@ -100,3 +100,32 @@ export const identificationFormSchema = z.object({
     .max(9, INVALID_LICENCE_NO)
     .regex(/^\d+$/, INVALID_LICENCE_NO),
 });
+
+export const getDisputeFormSchema = values => {
+  const disputeFormSchema = z.object(
+    Object.keys(values).reduce((acc, key) => {
+      if (values[key].type === 'text') {
+        acc[key] = z.object({
+          type: z.string(),
+          value: z.string({ required_error: FIELD_REQUIRED }),
+        });
+      }
+
+      if (values[key].type === 'file-upload') {
+        acc[key] = z.object({
+          type: z.string(),
+          value: z
+            .object({})
+            .nullable()
+            .refine(item => item !== null, {
+              message: FIELD_REQUIRED,
+            }),
+        });
+      }
+
+      return acc;
+    }, {}),
+  );
+
+  return disputeFormSchema;
+};
