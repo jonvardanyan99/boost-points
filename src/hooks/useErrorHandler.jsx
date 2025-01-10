@@ -11,24 +11,28 @@ export const useErrorHandler = () => {
   };
 
   const handleApiError = (error, setError = () => {}, keys = []) => {
-    if (error.response && error.response.data) {
-      const { detail } = error.response.data;
+    if (error.name === 'AxiosError') {
+      if (error.response && error.response.data) {
+        const { detail } = error.response.data;
 
-      if (typeof detail === 'string') {
-        setSnackbarText(detail);
+        if (typeof detail === 'string') {
+          setSnackbarText(detail);
+        } else {
+          const errorDetails = Array.isArray(detail) ? detail[0] : detail;
+
+          Object.keys(errorDetails).forEach(apiKey => {
+            if (keys.includes(apiKey)) {
+              setError(apiKey, errorDetails[apiKey][0]);
+            } else {
+              setSnackbarText(`${apiKey}: ${errorDetails[Object.keys(errorDetails)[0]][0]}`);
+            }
+          });
+        }
       } else {
-        const errorDetails = Array.isArray(detail) ? detail[0] : detail;
-
-        Object.keys(errorDetails).forEach(apiKey => {
-          if (keys.includes(apiKey)) {
-            setError(apiKey, errorDetails[apiKey][0]);
-          } else {
-            setSnackbarText(`${apiKey}: ${errorDetails[Object.keys(errorDetails)[0]][0]}`);
-          }
-        });
+        setSnackbarText(UNEXPECTED_ERROR);
       }
     } else {
-      setSnackbarText(UNEXPECTED_ERROR);
+      setSnackbarText(error.message);
     }
   };
 
