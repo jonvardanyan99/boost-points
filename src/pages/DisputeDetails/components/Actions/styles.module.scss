@@ -1,0 +1,44 @@
+.component {
+  background-color: rgb(var(--white-color));
+  border-radius: 5px;
+  padding: 25px 18px 34px 18px;
+
+  &__action-container {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    border: 1px solid rgb(var(--gray-10-color));
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 15px 22px 18px 22px;
+    margin-top: 12px;
+
+    &:first-of-type {
+      margin-top: 11px;
+    }
+  }
+
+  &__radio {
+    width: 22px;
+    height: 22px;
+    accent-color: rgb(var(--accent-color));
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  &__action-text-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__action-text {
+    color: rgb(var(--black-4-color));
+    margin-top: 3px;
+  }
+
+  &__button {
+    width: 100%;
+    height: 46px;
+    margin-top: 21px;
+  }
+}
