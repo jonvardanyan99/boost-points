@@ -15,7 +15,7 @@ export const formatAddressTitle = address => {
     const streetName = address.streetName;
     const streetSuffix = !streetName.includes(address.streetSuffix) ? address.streetSuffix : null;
     const suburb = address.suburb;
-    const state = address.state.label || address.state;
+    const state = address.state?.label || address.state;
     const postcode = address.postcode;
     const countryCode = address.countryCode.label || address.countryCode;
 
@@ -35,4 +35,16 @@ export const formatAddressTitle = address => {
   }
 
   return formattedTitle;
+};
+
+export const formatToCurrency = (price, discountPercent) => {
+  if (discountPercent) {
+    const discount = Math.round((price * discountPercent) / 100);
+    price -= discount;
+  }
+
+  const dollars = Math.floor(price / 100);
+  const cents = (price % 100).toString().padStart(2, '0');
+
+  return `$${dollars}.${cents}`;
 };
