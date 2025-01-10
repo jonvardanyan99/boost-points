@@ -24,3 +24,17 @@ export const diffObjects = (obj1, obj2) => {
     return acc;
   }, {});
 };
+
+export const generateId = () => {
+  return `${Date.now()}-${Math.random()}`;
+};
+
+export const createParagraphsList = text => {
+  return text.split('\\n').map(paragraph => {
+    if (paragraph === '') {
+      return '\u00A0';
+    }
+
+    return paragraph;
+  });
+};
