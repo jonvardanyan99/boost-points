@@ -1,4 +1,4 @@
-import close from 'assets/icons/close.svg';
+import close from 'assets/icons/close-white.svg';
 import menu from 'assets/icons/menu.svg';
 import logo from 'assets/images/logo-white.svg';
 import classNames from 'classnames';
