@@ -1,0 +1,36 @@
+.page {
+  width: var(--fixed-width);
+  padding: 29px 15px 0 15px;
+
+  &__close-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 25px;
+  }
+
+  &__close-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__heading {
+    margin-bottom: 17px;
+  }
+
+  &__input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    margin-top: 6px;
+  }
+
+  &__input {
+    flex: 1;
+  }
+
+  &__button {
+    width: 100%;
+    margin-top: 23px;
+  }
+}
