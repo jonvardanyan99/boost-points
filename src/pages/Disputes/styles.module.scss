@@ -1,0 +1,70 @@
+.disputes {
+  width: var(--fixed-width);
+  background-color: rgb(var(--gray-8-color));
+  padding: 20px 10px;
+
+  &__container {
+    min-height: 100%;
+    background-color: rgb(var(--white-color));
+    border-radius: 5px;
+    padding: 25px 18px;
+
+    &--empty {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  &__text-wrapper {
+    display: flex;
+    gap: 6px;
+  }
+
+  &__text {
+    color: rgb(var(--gray-2-color));
+  }
+
+  &__agency-container {
+    margin-top: 15px;
+  }
+
+  &__disputes-container {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 8px;
+  }
+
+  &__dispute {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+    border: 1px solid rgb(var(--gray-7-color));
+    border-radius: 5px;
+    padding: 22px 22px 25px 22px;
+  }
+
+  &__in-progress-badge {
+    background-color: rgb(var(--blue-1-color));
+    margin-top: 11px;
+
+    > p {
+      color: rgb(var(--blue-dark-color));
+    }
+  }
+
+  &__resolved-badge {
+    background-color: rgb(var(--green-1-color));
+    margin-top: 11px;
+
+    > p {
+      color: rgb(var(--green-color));
+    }
+  }
+
+  &__empty-text {
+    color: rgb(var(--gray-2-color));
+  }
+}
