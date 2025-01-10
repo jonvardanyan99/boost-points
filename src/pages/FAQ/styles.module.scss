@@ -1,0 +1,29 @@
+.faq {
+  width: var(--fixed-width);
+  background-color: rgb(var(--gray-8-color));
+  padding: 20px 10px 37px 10px;
+
+  &__container {
+    background-color: rgb(var(--white-color));
+    border-radius: 5px;
+    padding: 25px 18px 35px 18px;
+  }
+
+  &__search-input {
+    margin-top: 14px;
+
+    > div {
+      > input {
+        height: 42px;
+        border-radius: 6px;
+      }
+    }
+  }
+
+  &__question-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 22px;
+  }
+}
