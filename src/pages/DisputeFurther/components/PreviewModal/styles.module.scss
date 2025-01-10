@@ -1,0 +1,65 @@
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__container {
+    width: var(--fixed-width);
+    max-height: 100%;
+    overflow-y: auto;
+    background-color: rgb(var(--gray-8-color));
+    padding: 17px 10px 30px 10px;
+  }
+
+  &__wrapper {
+    background-color: rgb(var(--white-color));
+    padding: 25px 18px;
+  }
+
+  &__left-arrow-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__heading {
+    margin-top: 8px;
+    margin-bottom: 11px;
+  }
+
+  &__field-wrapper {
+    border: 1px solid rgb(var(--gray-10-color));
+    border-radius: 5px;
+  }
+
+  &__field {
+    border-bottom: 1px solid rgb(var(--gray-10-color));
+    padding: 14px 16px;
+
+    &:last-child {
+      border-bottom: unset;
+    }
+  }
+
+  &__field-name {
+    color: rgb(var(--black-4-color));
+    margin-bottom: 2px;
+  }
+
+  &__field-value {
+    color: rgb(var(--black-3-color));
+  }
+
+  &__field-text {
+    border: 1px solid rgb(var(--gray-10-color));
+    border-radius: 5px;
+    padding: 14px 16px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  &__button {
+    width: 100%;
+    height: 46px;
+  }
+}
