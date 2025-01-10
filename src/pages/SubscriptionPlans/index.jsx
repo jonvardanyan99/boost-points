@@ -1,20 +1,39 @@
-import close from 'assets/icons/close.svg';
+import close from 'assets/icons/close-white.svg';
 import { Loader } from 'components/Loader';
 import { Text } from 'components/Text';
+import { ROUTES, SEARCH_PARAMS } from 'constants/routes';
 import { useQuery } from 'hooks/useQuery';
-import React from 'react';
+import React, { useCallback } from 'react';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { API } from 'services/api';
+import { selectAccount } from 'store/slices/user/selectors';
 
 import { Plan } from './components/Plan';
 import styles from './styles.module.scss';
 
 export const SubscriptionPlans = () => {
+  const account = useSelector(selectAccount);
+  const { subscription } = account;
+  const navigate = useNavigate();
+
   const { data, loading } = useQuery({ requestFn: API.getSubscriptionPlans });
+
+  const navigateToSubscription = useCallback(() => {
+    navigate({
+      pathname: ROUTES.ACCOUNT,
+      search: `?${SEARCH_PARAMS.TAB}=subscription`,
+    });
+  }, [navigate]);
 
   return (
     <div className={styles.page}>
       <div className={styles['page__close-wrapper']}>
-        <button className={styles['page__close-button']} type="button">
+        <button
+          type="button"
+          className={styles['page__close-button']}
+          onClick={navigateToSubscription}
+        >
           <img src={close} alt="close" />
         </button>
       </div>
@@ -25,12 +44,16 @@ export const SubscriptionPlans = () => {
         Choose the plan that suits you
       </Text>
       {loading ? (
-        <Loader secondary size={25} />
+        <Loader forPage />
       ) : (
         <>
           <div className={styles['page__plans-container']}>
             {data?.map(plan => (
-              <Plan key={plan.name} data={plan} />
+              <Plan
+                key={plan.uuid}
+                data={plan}
+                selectedPlan={subscription.subscriptionPlan?.name}
+              />
             ))}
           </div>
           <Text type="p6" className={styles['page__disclaimer-text']}>
