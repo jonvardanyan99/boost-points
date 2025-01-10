@@ -16,6 +16,7 @@
     height: 48px;
     border: 1px solid rgb(var(--gray-5-color));
     border-radius: 4px;
+    transition: border-color 0.2s;
     padding: 0 16px;
 
     &--active {

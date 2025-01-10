@@ -15,6 +15,7 @@
     border-radius: 4px;
     font-size: var(--p4-font-size);
     line-height: var(--p4-line-height);
+    transition: border-color 0.2s;
     padding: 0 16px;
 
     &--error {
