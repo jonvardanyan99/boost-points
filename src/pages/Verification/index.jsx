@@ -9,7 +9,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { API } from 'services/api';
-import { setAccount, setTokens } from 'store/reducers/user/actions';
+import { setAccount, setTokens } from 'store/slices/user';
 import { getFormikError } from 'utils/errorHandlers';
 import { formatPhoneNumber } from 'utils/formats';
 import { verificationFormSchema } from 'utils/validators';
@@ -24,7 +24,7 @@ export const Verification = () => {
   const [verify, { loading }] = useMutation(API.verifyPhoneNumber);
   const { handleApiError, snackbar } = useErrorHandler();
 
-  const phoneNumber = location.state.phoneNumber;
+  const phoneNumber = location.state?.phoneNumber;
   const contentText = `Enter the verification code we’ve sent to ${phoneNumber}`;
 
   const formik = useFormik({
