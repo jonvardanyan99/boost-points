@@ -1,25 +1,33 @@
+import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { React } from 'react';
 import BeatLoader from 'react-spinners/BeatLoader';
 
+import styles from './styles.module.scss';
+
 export const Loader = ({
+  className,
   secondary,
-  color = secondary ? 'rgb(var(--accent-color))' : 'rgb(var(--white-color))',
-  size = 10,
-  cssOverride = {},
+  forPage,
+  color = secondary || forPage ? 'rgb(var(--accent-color))' : 'rgb(var(--white-color))',
+  size = forPage ? 25 : 10,
   speedMultiplier,
 }) => {
-  const css = { display: 'flex', justifyContent: 'center', ...cssOverride };
-
   return (
-    <BeatLoader color={color} size={size} cssOverride={css} speedMultiplier={speedMultiplier} />
+    <BeatLoader
+      className={classNames(styles.loader, { [styles['loader--for-page']]: forPage }, className)}
+      color={color}
+      size={size}
+      speedMultiplier={speedMultiplier}
+    />
   );
 };
 
 Loader.propTypes = {
+  className: PropTypes.string,
   secondary: PropTypes.bool,
+  forPage: PropTypes.bool,
   color: PropTypes.string,
   size: PropTypes.number,
-  cssOverride: PropTypes.shape({}),
   speedMultiplier: PropTypes.number,
 };
