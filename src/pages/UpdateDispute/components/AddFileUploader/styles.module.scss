@@ -1,0 +1,15 @@
+.file-uploader {
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+  }
+
+  &__text {
+    color: rgb(var(--accent-color));
+  }
+
+  &__file-input {
+    display: none;
+  }
+}
