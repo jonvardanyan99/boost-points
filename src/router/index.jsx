@@ -5,33 +5,53 @@ import { Account } from 'pages/Account';
 import { ConsentForm } from 'pages/ConsentForm';
 import { CreateAccount } from 'pages/CreateAccount';
 import { Dashboard } from 'pages/Dashboard';
+import { Dispute } from 'pages/Dispute';
+import { DisputeDetails } from 'pages/DisputeDetails';
+import { DisputeFurther } from 'pages/DisputeFurther';
+import { Disputes } from 'pages/Disputes';
+import { EscalateDispute } from 'pages/EscalateDispute';
+import { FAQ } from 'pages/FAQ';
 import { Identification } from 'pages/Identification';
 import { Login } from 'pages/Login';
+import { PaymentMethod } from 'pages/PaymentMethod';
 import { Report } from 'pages/Report';
+import { SubscriptionPlans } from 'pages/SubscriptionPlans';
+import { UpdateDispute } from 'pages/UpdateDispute';
 import { Verification } from 'pages/Verification';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { API } from 'services/api';
-import { setData } from 'store/reducers/user/actions';
-import { selectAccount, selectIsAuthenticated } from 'store/reducers/user/selectors';
+import { setData, setSubscription } from 'store/slices/user';
+import { selectAccount, selectIsAuthenticated } from 'store/slices/user/selectors';
 
 export const Router = () => {
-  const dispatch = useDispatch();
   const isAuthenticated = useSelector(selectIsAuthenticated);
   const account = useSelector(selectAccount);
+  const dispatch = useDispatch();
 
   const isNew = account?.data.isNew;
   const isAccountCreated = isNew && !!account.data.firstName;
   const isConsentFormSigned = !!account?.isConsentFormSigned;
 
-  const { data } = useQuery({ requestFn: API.getAccount, skip: !isAuthenticated });
+  const { data: accountData } = useQuery({ requestFn: API.getAccount, skip: !isAuthenticated });
+
+  const { data: subscriptionData } = useQuery({
+    requestFn: API.getSubscription,
+    skip: !isAuthenticated,
+  });
 
   useEffect(() => {
-    if (data) {
-      dispatch(setData(data));
+    if (accountData) {
+      dispatch(setData(accountData));
     }
-  }, [data, dispatch]);
+  }, [accountData, dispatch]);
+
+  useEffect(() => {
+    if (subscriptionData) {
+      dispatch(setSubscription(subscriptionData));
+    }
+  }, [subscriptionData, dispatch]);
 
   return (
     <BrowserRouter basename="/boost-points">
@@ -67,7 +87,16 @@ export const Router = () => {
               >
                 <Route path={ROUTES.DASHBOARD} element={<Dashboard />} />
                 <Route path={ROUTES.REPORT} element={<Report />} />
+                <Route path={ROUTES.SUBSCRIPTION_PLANS} element={<SubscriptionPlans />} />
+                <Route path={ROUTES.DISPUTE} element={<Dispute />} />
+                <Route path={ROUTES.DISPUTES} element={<Disputes />} />
+                <Route path={ROUTES.DISPUTE_DETAILS} element={<DisputeDetails />} />
+                <Route path={ROUTES.UPDATE_DISPUTE} element={<UpdateDispute />} />
+                <Route path={ROUTES.DISPUTE_FURTHER} element={<DisputeFurther />} />
+                <Route path={ROUTES.ESCALATE_DISPUTE} element={<EscalateDispute />} />
+                <Route path={ROUTES.FAQ} element={<FAQ />} />
                 <Route path={ROUTES.ACCOUNT} element={<Account />} />
+                <Route path={ROUTES.PAYMENT_METHOD} element={<PaymentMethod />} />
               </Route>
             </Route>
           </Route>
