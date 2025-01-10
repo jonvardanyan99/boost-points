@@ -1,0 +1,39 @@
+.page {
+  width: var(--fixed-width);
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(var(--gray-8-color));
+
+  &__header {
+    background-color: rgb(var(--white-color));
+    padding: 15px 15px 19px 15px;
+  }
+
+  &__text {
+    color: rgb(var(--gray-1-color));
+  }
+
+  &__content {
+    flex: 1;
+    padding: 20px 10px 25px 10px;
+  }
+
+  &__content-container {
+    height: 100%;
+    background-color: rgb(var(--white-color));
+    border-radius: 5px;
+    padding: 25px 18px;
+  }
+
+  &__textarea {
+    > textarea {
+      width: 100%;
+    }
+  }
+
+  &__button {
+    width: 100%;
+    height: 46px;
+    margin-top: 31px;
+  }
+}
