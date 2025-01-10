@@ -10,16 +10,6 @@
     align-items: center;
   }
 
-  &__rating-wrapper {
-    background-color: rgb(var(--gray-8-color));
-    border-radius: 100px;
-    padding: 2px 6px 3px 6px;
-  }
-
-  &__rating {
-    color: rgb(var(--gray-2-color));
-  }
-
   &__report-button {
     width: 100%;
     height: 44px;

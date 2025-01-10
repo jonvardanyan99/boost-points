@@ -1,6 +1,7 @@
 import checkMark from 'assets/icons/check-mark.svg';
 import exclamationMark from 'assets/icons/exclamation-mark.svg';
 import classNames from 'classnames';
+import { Badge } from 'components/Badge';
 import { Button } from 'components/Button';
 import { Progressbar } from 'components/Progressbar';
 import { Text } from 'components/Text';
@@ -55,13 +56,7 @@ export const CreditScore = ({ className, agency, logo, maxScore, disabled }) => 
     <div className={classNames(styles['credit-score'], className)}>
       <div className={styles['credit-score__header']}>
         <img src={logo} alt={agency} />
-        {creditScore !== null && (
-          <div className={styles['credit-score__rating-wrapper']}>
-            <Text type="p6" className={styles['credit-score__rating']}>
-              {ratingText}
-            </Text>
-          </div>
-        )}
+        {creditScore !== null && <Badge text={ratingText} />}
       </div>
       {creditScore === null ? (
         <Button
