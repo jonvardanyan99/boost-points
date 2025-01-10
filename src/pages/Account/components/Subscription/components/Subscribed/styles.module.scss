@@ -1,0 +1,41 @@
+.subscribed {
+  border: 1px solid rgb(var(--gray-7-color));
+  border-radius: 6px;
+  padding: 23px 28px 32px 28px;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 27px;
+  }
+
+  &__title {
+    color: rgb(var(--gray-1-color));
+    margin-bottom: 2px;
+
+    &:last-of-type {
+      margin-top: 20px;
+    }
+  }
+
+  &__payment-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  &__divider {
+    color: rgb(var(--gray-3-color));
+  }
+
+  &__button-text {
+    color: rgb(var(--accent-color));
+  }
+
+  &__main-button {
+    width: 100%;
+    height: 44px;
+    margin-top: 28px;
+  }
+}
