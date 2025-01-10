@@ -13,21 +13,34 @@ import { API } from 'services/api';
 import { selectAccount } from 'store/slices/user/selectors';
 import { capitalize } from 'utils/helpers';
 
+import { IssueCategory } from './components/IssueCategory';
 import styles from './styles.module.scss';
+
+const issueCategories = [
+  'Identity issues',
+  'Credit enquires',
+  'Adverse on file',
+  'Defaults',
+  'Insolvencies & Actions',
+];
 
 export const Report = () => {
   const account = useSelector(selectAccount);
   const params = useParams();
   const { agency } = params;
-  const { data, loading } = useQuery({ requestFn: () => API.getReport(agency) });
+
+  const { data: reportData, loading: reportLoading } = useQuery({
+    requestFn: () => API.getReport(agency),
+  });
+  const { data: issuesData, loading: issuesLoading } = useQuery({ requestFn: API.getIssues });
 
   return (
     <div className={styles.report}>
-      {loading ? (
-        <Loader secondary size={25} cssOverride={{ marginTop: '30px' }} />
+      {reportLoading || issuesLoading ? (
+        <Loader forPage />
       ) : (
         <>
-          <div className={styles['report__content-heading']}>
+          <div className={styles['report__content-header']}>
             <Text type="p1" fontWeight={600}>
               {`${capitalize(agency)} report`}
             </Text>
@@ -39,8 +52,11 @@ export const Report = () => {
                 •
               </Text>
               <Text type="p5" className={styles['report__date-text']}>
-                {data?.creditEnquiries
-                  ? `From ${format(new Date(data.creditEnquiries[0].enquiryDate), 'dd MMM y')}`
+                {reportData?.creditEnquiries
+                  ? `From ${format(
+                      new Date(reportData.creditEnquiries[0].enquiryDate),
+                      'dd MMM y',
+                    )}`
                   : 'No date'}
               </Text>
             </div>
@@ -52,7 +68,7 @@ export const Report = () => {
                 <Progressbar
                   width="148px"
                   height="148px"
-                  value={Number(data?.scores?.oneScore) || 0}
+                  value={Number(reportData?.scores?.oneScore) || 0}
                   maxValue={1200}
                 />
               </div>
@@ -110,6 +126,23 @@ export const Report = () => {
                     Recent credit applications made can have an impact on risk.
                   </Text>
                 </div>
+              </div>
+            </div>
+            <div className={styles['report__issues-review']}>
+              <Text type="h6">Identified errors</Text>
+              <Text type="p4" className={styles['report__issues-instruction']}>
+                Review the issues we found and request a dispute if any of this information needs to
+                be changed
+              </Text>
+              <div className={styles['report__issues-container']}>
+                {issueCategories.map(category => (
+                  <IssueCategory
+                    key={category}
+                    name={category}
+                    issues={issuesData?.data || []}
+                    agency={agency}
+                  />
+                ))}
               </div>
             </div>
           </div>

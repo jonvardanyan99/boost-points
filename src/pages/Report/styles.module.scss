@@ -1,7 +1,9 @@
 .report {
   width: var(--fixed-width);
+  background-color: rgb(var(--gray-8-color));
 
-  &__content-heading {
+  &__content-header {
+    background-color: rgb(var(--white-color));
     padding: 15px 15px 19px 15px;
   }
 
@@ -15,8 +17,7 @@
   }
 
   &__content {
-    background-color: rgb(var(--gray-8-color));
-    padding: 20px 10px;
+    padding: 20px 10px 64px 10px;
   }
 
   &__overview {
@@ -54,5 +55,24 @@
 
   &__credit-info-text {
     color: rgb(var(--gray-1-color));
+  }
+
+  &__issues-review {
+    background-color: rgb(var(--white-color));
+    border-radius: 5px;
+    padding: 25px 18px 36px 18px;
+    margin-top: 20px;
+  }
+
+  &__issues-instruction {
+    color: rgb(var(--gray-2-color));
+    margin-top: 4px;
+  }
+
+  &__issues-container {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 22px;
   }
 }

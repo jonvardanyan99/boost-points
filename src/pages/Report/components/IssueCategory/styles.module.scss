@@ -1,0 +1,58 @@
+.category {
+  border-radius: 5px;
+  border: 1px solid rgb(var(--gray-10-color));
+
+  &--open {
+    padding-top: 3px;
+    padding-bottom: 37px;
+  }
+
+  &__button {
+    width: 100%;
+    cursor: default;
+    padding: 0 16px;
+
+    &--active {
+      cursor: pointer;
+    }
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+
+    &--open {
+      border-bottom: 1px solid rgb(var(--gray-10-color));
+    }
+  }
+
+  &__quantity-container {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  &__quantity-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+  }
+
+  &__quantity {
+    color: rgb(var(--orange-color));
+  }
+
+  &__no-quantity {
+    color: rgb(var(--gray-3-color));
+  }
+
+  &__issues-container {
+    display: flex;
+    flex-direction: column;
+    gap: 23px;
+    padding: 0 16px;
+    margin-top: 23px;
+  }
+}
