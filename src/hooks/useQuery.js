@@ -13,7 +13,7 @@ export const useQuery = ({ requestFn, skip }) => {
           const response = await requestFn();
 
           setData(response.data);
-          // eslint-disable-next-line no-empty
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-empty
         } catch (error) {
         } finally {
           setLoading(false);
