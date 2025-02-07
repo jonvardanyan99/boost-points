@@ -6,10 +6,9 @@ import { Button } from 'components/Button';
 import { Progressbar } from 'components/Progressbar';
 import { Text } from 'components/Text';
 import { ROUTES } from 'constants/routes';
-import { useErrorHandler } from 'hooks/useErrorHandler';
-import { useMutation } from 'hooks/useMutation';
+import { useQuery } from 'hooks/useQuery';
 import PropTypes from 'prop-types';
-import React, { useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { generatePath, useNavigate } from 'react-router-dom';
 import { API } from 'services/api';
 
@@ -17,60 +16,76 @@ import styles from './styles.module.scss';
 
 export const CreditScore = ({ className, agency, logo, maxScore, disabled }) => {
   const navigate = useNavigate();
-  const [creditScore, setCreditScore] = useState(null);
-  const [issuesQuantity, setIssuesQuantity] = useState(null);
-  const { handleApiError, snackbar } = useErrorHandler();
+  const [shouldSendRequests, setShouldSendRequests] = useState(false);
 
-  const sendReportRequest = async () => {
-    try {
-      await API.getReport(agency);
-      const scoresResponse = await API.getCreditScores();
-      const issuesResponse = await API.getIssues();
+  const { data: reportData, loading: reportLoading } = useQuery({
+    requestFn: () => API.getReport(agency),
+    skip: !shouldSendRequests,
+  });
+  const { data: creditScoresData, loading: creditScoresLoading } = useQuery({
+    requestFn: API.getCreditScores,
+    skip: !reportData,
+  });
+  const { data: issuesData, loading: issuesLoading } = useQuery({
+    requestFn: API.getIssues,
+    skip: !creditScoresData,
+  });
 
-      setCreditScore(scoresResponse.data[agency] || 0);
-      setIssuesQuantity(issuesResponse.data.data[0].qt);
-    } catch (error) {
-      handleApiError(error);
+  const score = useMemo(() => {
+    if (creditScoresData) {
+      return creditScoresData[agency] || 0;
     }
-  };
 
-  const [requestReport, { loading }] = useMutation(sendReportRequest);
+    return null;
+  }, [creditScoresData, agency]);
+
+  const issuesQuantity = useMemo(() => {
+    if (issuesData) {
+      return issuesData.data[0]?.qt;
+    }
+
+    return null;
+  }, [issuesData]);
 
   const ratingText = useMemo(() => {
-    if (creditScore >= 1000) {
+    if (score >= 1000) {
       return 'Perfect';
     }
 
-    if (creditScore < 1000 && creditScore >= 500) {
+    if (score < 1000 && score >= 500) {
       return 'Good';
     }
 
     return 'Bad';
-  }, [creditScore]);
+  }, [score]);
 
-  const viewReport = () => {
+  const triggerRequests = useCallback(() => {
+    setShouldSendRequests(true);
+  }, []);
+
+  const viewReport = useCallback(() => {
     navigate(generatePath(ROUTES.REPORT, { agency }));
-  };
+  }, [navigate, agency]);
 
   return (
     <div className={classNames(styles['credit-score'], className)}>
       <div className={styles['credit-score__header']}>
         <img src={logo} alt={agency} />
-        {creditScore !== null && <Badge text={ratingText} />}
+        {score !== null && <Badge text={ratingText} />}
       </div>
-      {creditScore === null ? (
+      {!reportData || !creditScoresData || !issuesData ? (
         <Button
           className={styles['credit-score__report-button']}
           title="Request report"
-          onClick={requestReport}
-          loading={loading}
+          onClick={triggerRequests}
+          loading={reportLoading || creditScoresLoading || issuesLoading}
           disabled={disabled}
         />
       ) : (
         <>
           <Progressbar
             className={styles['credit-score__progressbar']}
-            value={creditScore}
+            value={score}
             maxValue={maxScore}
           />
           <div className={styles['credit-score__issue-wrapper']}>
@@ -95,7 +110,6 @@ export const CreditScore = ({ className, agency, logo, maxScore, disabled }) => 
           />
         </>
       )}
-      {snackbar}
     </div>
   );
 };
