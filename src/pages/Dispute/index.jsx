@@ -47,13 +47,13 @@ export const Dispute = () => {
   useEffect(() => {
     if (disputesData) {
       if (
-        subscription.status !== 'Active' ||
-        disputesData.total === subscription.subscriptionPlan?.disputesQt
+        subscription?.status !== 'Active' ||
+        disputesData.total === subscription?.subscriptionPlan?.disputesQt
       ) {
         navigate(ROUTES.SUBSCRIPTION_PLANS);
       }
     }
-  }, [disputesData, subscription.status, subscription.subscriptionPlan?.disputesQt, navigate]);
+  }, [disputesData, subscription?.status, subscription?.subscriptionPlan?.disputesQt, navigate]);
 
   useEffect(() => {
     if (issueData) {

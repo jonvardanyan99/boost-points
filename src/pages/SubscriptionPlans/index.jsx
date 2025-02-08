@@ -52,7 +52,7 @@ export const SubscriptionPlans = () => {
               <Plan
                 key={plan.uuid}
                 data={plan}
-                selectedPlan={subscription.subscriptionPlan?.name}
+                selectedPlan={subscription?.subscriptionPlan?.name}
               />
             ))}
           </div>

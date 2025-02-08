@@ -12,7 +12,7 @@ export const Subscription = () => {
 
   return (
     <div className={styles.subscription}>
-      {subscription.status === 'Active' ? (
+      {subscription?.status === 'Active' ? (
         <Subscribed subscription={subscription} />
       ) : (
         <NotSubscribed />
