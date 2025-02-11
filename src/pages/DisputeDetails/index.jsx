@@ -90,7 +90,7 @@ export const DisputeDetails = () => {
   }, [action, closeDispute, navigate, uuid, data?.name]);
 
   const closePopupModal = useCallback(() => {
-    setPopupModalVisible(false);
+    window.location.reload();
   }, []);
 
   const navigateToDisputes = useCallback(() => {
@@ -193,89 +193,29 @@ export const DisputeDetails = () => {
                   </div>
                 </div>
               </div>
-              <div className={styles['details__content-container']}>
-                <Text type="h6">Dispute data</Text>
-                <div className={styles['details__data-wrapper']}>
-                  <div className={styles.details__data}>
-                    <Text type="p5" className={styles['details__data-label']}>
-                      Credit bureau
-                    </Text>
-                    <Text type="p5" fontWeight={600} className={styles['details__data-value']}>
-                      {disputeCreatedStage.data['Credit bureau']}
-                    </Text>
+              {disputeCreatedStage.data && (
+                <div className={styles['details__content-container']}>
+                  <Text type="h6">Dispute data</Text>
+                  <div className={styles['details__data-wrapper']}>
+                    {Object.keys(disputeCreatedStage.data).map(key => (
+                      <div key={key} className={styles.details__data}>
+                        <Text type="p5" className={styles['details__data-label']}>
+                          {key}
+                        </Text>
+                        <Text type="p5" fontWeight={600} className={styles['details__data-value']}>
+                          {disputeCreatedStage.data[key]}
+                        </Text>
+                      </div>
+                    ))}
                   </div>
-                  <div className={styles.details__data}>
-                    <Text type="p5" className={styles['details__data-label']}>
-                      Type of info to be corrected
-                    </Text>
-                    <Text type="p5" fontWeight={600} className={styles['details__data-value']}>
-                      {disputeCreatedStage.data['Type of info to be corrected']}
-                    </Text>
-                  </div>
-                  <div className={styles.details__data}>
-                    <Text type="p5" className={styles['details__data-label']}>
-                      Issue description
-                    </Text>
-                    <Text type="p5" fontWeight={600} className={styles['details__data-value']}>
-                      {disputeCreatedStage.data['Issue description']}
-                    </Text>
-                  </div>
-                  <div className={styles.details__data}>
-                    <Text type="p5" className={styles['details__data-label']}>
-                      Current data
-                    </Text>
-                    <Text type="p5" fontWeight={600} className={styles['details__data-value']}>
-                      {disputeCreatedStage.data['Current data']}
-                    </Text>
-                  </div>
-                  {disputeCreatedStage.data['New data'] && (
-                    <div className={styles.details__data}>
-                      <Text type="p5" className={styles['details__data-label']}>
-                        New data
-                      </Text>
-                      <Text type="p5" fontWeight={600} className={styles['details__data-value']}>
-                        {disputeCreatedStage.data['New data']}
-                      </Text>
-                    </div>
-                  )}
-                  {disputeCreatedStage.data['Attached document'] && (
-                    <div className={styles.details__data}>
-                      <Text type="p5" className={styles['details__data-label']}>
-                        Attached document
-                      </Text>
-                      <Text type="p5" fontWeight={600} className={styles['details__data-value']}>
-                        {disputeCreatedStage.data['Attached document']}
-                      </Text>
-                    </div>
-                  )}
-                  {disputeCreatedStage.data["Document's front page"] && (
-                    <div className={styles.details__data}>
-                      <Text type="p5" className={styles['details__data-label']}>
-                        Document's front page
-                      </Text>
-                      <Text type="p5" fontWeight={600} className={styles['details__data-value']}>
-                        {disputeCreatedStage.data["Document's front page"]}
-                      </Text>
-                    </div>
-                  )}
-                  {disputeCreatedStage.data["Document's back page"] && (
-                    <div className={styles.details__data}>
-                      <Text type="p5" className={styles['details__data-label']}>
-                        Document's back page
-                      </Text>
-                      <Text type="p5" fontWeight={600} className={styles['details__data-value']}>
-                        {disputeCreatedStage.data["Document's back page"]}
-                      </Text>
-                    </div>
-                  )}
                 </div>
-              </div>
+              )}
               {responseReceivedStage && (
                 <div className={styles['details__content-container']}>
                   <Text type="h6">Equifax’s response</Text>
                   <div className={styles['details__response-wrapper']}>
                     <Text type="p5" fontWeight={600} className={styles['details__response-text']}>
-                      {responseReceivedStage.data.data.trim()}
+                      {responseReceivedStage.data?.data.trim()}
                     </Text>
                   </div>
                 </div>
