@@ -59,9 +59,9 @@ export const Disputes = () => {
                         </Text>
                         <Badge
                           className={
-                            dispute.status === 'In progress'
-                              ? styles['disputes__in-progress-badge']
-                              : styles['disputes__resolved-badge']
+                            dispute.status === 'Resolved'
+                              ? styles['disputes__resolved-badge']
+                              : styles['disputes__in-progress-badge']
                           }
                           text={dispute.status}
                         />
