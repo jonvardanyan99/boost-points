@@ -139,7 +139,7 @@ export const Dispute = () => {
                       <FileUploader
                         key={question.questionId}
                         description="Select a file to upload"
-                        value={formik.values[question.cellName]?.value || {}}
+                        value={formik.values[question.cellName]?.value || null}
                         onSelect={fileData =>
                           formik.setFieldValue(
                             question.cellName,
