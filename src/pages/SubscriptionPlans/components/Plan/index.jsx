@@ -16,6 +16,8 @@ export const Plan = ({ data, selectedPlan }) => {
   const activateSubscription = async () => {
     try {
       await API.activateSubscription({ subscriptionPlanUuid: data.uuid });
+
+      window.location.reload();
     } catch (error) {
       handleApiError(error);
     }
