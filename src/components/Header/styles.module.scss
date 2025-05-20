@@ -10,6 +10,12 @@
   background: var(--secondary-gradient);
   padding: 13px 15px;
 
+  &__logo-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   &__icon-wrapper {
     display: flex;
     justify-content: center;
