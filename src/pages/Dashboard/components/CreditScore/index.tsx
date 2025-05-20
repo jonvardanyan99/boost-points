@@ -79,7 +79,9 @@ export const CreditScore: React.FC<Props> = ({ className, agency, logo, maxScore
     <div className={classNames(styles['credit-score'], className)}>
       <div className={styles['credit-score__header']}>
         <img src={logo} alt={agency} />
-        {score !== null && <Badge text={ratingText} />}
+        {!reportData || !creditScoresData || !issuesData
+          ? null
+          : score !== null && <Badge text={ratingText} />}
       </div>
       {!reportData || !creditScoresData || !issuesData ? (
         <Button
