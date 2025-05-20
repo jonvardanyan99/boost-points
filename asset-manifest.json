@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/boost-points/static/css/main.6256ffa1.css",
-    "main.js": "/boost-points/static/js/main.d4576236.js",
+    "main.css": "/boost-points/static/css/main.62f4e6de.css",
+    "main.js": "/boost-points/static/js/main.0c9f844c.js",
     "static/js/787.13d0f21f.chunk.js": "/boost-points/static/js/787.13d0f21f.chunk.js",
     "static/media/OpenSans-Medium.ttf": "/boost-points/static/media/OpenSans-Medium.5b0a682fe3717764627e.ttf",
     "static/media/OpenSans-Bold.ttf": "/boost-points/static/media/OpenSans-Bold.45847e90261782dc01a6.ttf",
@@ -43,12 +43,12 @@
     "static/media/incomplete-circle.svg": "/boost-points/static/media/incomplete-circle.99c7efa2f3c79eb9c1247d7c5270905a.svg",
     "static/media/checkbox.svg": "/boost-points/static/media/checkbox.d9a8bf52491d538af2082cf157265904.svg",
     "static/media/empty-circle.svg": "/boost-points/static/media/empty-circle.a0dc55b64bdd67868a05a66dc3c9d355.svg",
-    "main.6256ffa1.css.map": "/boost-points/static/css/main.6256ffa1.css.map",
-    "main.d4576236.js.map": "/boost-points/static/js/main.d4576236.js.map",
+    "main.62f4e6de.css.map": "/boost-points/static/css/main.62f4e6de.css.map",
+    "main.0c9f844c.js.map": "/boost-points/static/js/main.0c9f844c.js.map",
     "787.13d0f21f.chunk.js.map": "/boost-points/static/js/787.13d0f21f.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.6256ffa1.css",
-    "static/js/main.d4576236.js"
+    "static/css/main.62f4e6de.css",
+    "static/js/main.0c9f844c.js"
   ]
 }
