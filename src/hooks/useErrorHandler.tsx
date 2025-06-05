@@ -1,7 +1,8 @@
 import { StripeError } from '@stripe/stripe-js';
 import { AxiosError, isAxiosError } from 'axios';
-import { Snackbar } from 'components/Snackbar';
 import React, { useState } from 'react';
+
+import { Snackbar } from '~/components/Snackbar';
 
 type DetailObj = Record<string, string[]>;
 
@@ -55,7 +56,7 @@ export const useErrorHandler = () => {
   return {
     handleApiError,
     snackbar: (
-      <Snackbar visible={!!snackbarText} onClose={handleSnackbarClose} text={snackbarText} />
+      <Snackbar text={snackbarText} visible={!!snackbarText} onClose={handleSnackbarClose} />
     ),
   };
 };

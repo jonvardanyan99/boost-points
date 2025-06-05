@@ -1,21 +1,22 @@
-import { Button } from 'components/Button';
-import { Dropdown } from 'components/Dropdown';
-import { Input } from 'components/Input';
-import { Loader } from 'components/Loader';
-import { Text } from 'components/Text';
-import { DOCUMENT_TYPE_OPTIONS, STATE_OPTIONS } from 'constants/selectOptions';
 import { useFormik } from 'formik';
-import { useErrorHandler } from 'hooks/useErrorHandler';
-import { useMutation } from 'hooks/useMutation';
-import { useQuery } from 'hooks/useQuery';
 import React, { useEffect } from 'react';
-import { API } from 'services/api';
-import { IdentificationFormValues } from 'types/formValues';
-import { DeepNonNullable } from 'types/utils';
-import { getFormikError } from 'utils/errorHandlers';
-import { diffObjects } from 'utils/helpers';
-import { identificationFormSchema } from 'utils/validators';
 import { toFormikValidationSchema } from 'zod-formik-adapter';
+
+import { Button } from '~/components/Button';
+import { Dropdown } from '~/components/Dropdown';
+import { Input } from '~/components/Input';
+import { Loader } from '~/components/Loader';
+import { Text } from '~/components/Text';
+import { DOCUMENT_TYPE_OPTIONS, STATE_OPTIONS } from '~/constants/selectOptions';
+import { useErrorHandler } from '~/hooks/useErrorHandler';
+import { useMutation } from '~/hooks/useMutation';
+import { useQuery } from '~/hooks/useQuery';
+import { API } from '~/services/api';
+import { IdentificationFormValues } from '~/types/formValues';
+import { DeepNonNullable } from '~/types/utils';
+import { getFormikError } from '~/utils/errorHandlers';
+import { diffObjects } from '~/utils/helpers';
+import { identificationFormSchema } from '~/utils/validators';
 
 import styles from './styles.module.scss';
 
@@ -72,44 +73,44 @@ export const Identification: React.FC = () => {
         <Loader secondary size={20} />
       ) : (
         <>
-          <Text type="p1" fontWeight={600} className={styles.identification__title}>
+          <Text className={styles.identification__title} fontWeight={600} type="p1">
             Identification
           </Text>
           <Dropdown
             className={styles.identification__field}
+            error={getFormikError(formik, 'documentType')}
+            label="Document type *"
+            options={DOCUMENT_TYPE_OPTIONS}
             placeholder="Select Document Type"
             selectedOption={formik.values.documentType}
-            onChange={option => formik.setFieldValue('documentType', option, true)}
             onBlur={() => formik.setFieldTouched('documentType', true, true)}
-            options={DOCUMENT_TYPE_OPTIONS}
-            label="Document type *"
-            error={getFormikError(formik, 'documentType')}
+            onChange={option => formik.setFieldValue('documentType', option, true)}
           />
           <Dropdown
             className={styles.identification__field}
+            error={getFormikError(formik, 'state')}
+            label="State of issue *"
+            options={STATE_OPTIONS}
             placeholder="Select State"
             selectedOption={formik.values.state}
-            onChange={option => formik.setFieldValue('state', option, true)}
             onBlur={() => formik.setFieldTouched('state', true, true)}
-            options={STATE_OPTIONS}
-            label="State of issue *"
-            error={getFormikError(formik, 'state')}
+            onChange={option => formik.setFieldValue('state', option, true)}
           />
           <Input
-            placeholder="249004225"
-            name="number"
-            value={formik.values.number}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            label="Licence no *"
             error={getFormikError(formik, 'number')}
+            label="Licence no *"
+            name="number"
+            placeholder="249004225"
+            value={formik.values.number}
+            onBlur={formik.handleBlur}
+            onChange={formik.handleChange}
           />
           <Button
             className={styles['identification__main-button']}
+            disabled={!formik.dirty}
+            loading={loading}
             title="Apply changes"
             onClick={formik.handleSubmit}
-            loading={loading}
-            disabled={!formik.dirty}
           />
           {snackbar}
         </>

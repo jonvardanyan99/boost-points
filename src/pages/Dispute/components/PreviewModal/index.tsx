@@ -1,18 +1,19 @@
-import leftArrow from 'assets/icons/left-arrow.svg';
 import axios from 'axios';
-import { Button } from 'components/Button';
-import { Modal } from 'components/Modal';
-import { PopupModal } from 'components/PopupModal';
-import { Text } from 'components/Text';
-import { ROUTES } from 'constants/routes';
-import { useMutation } from 'hooks/useMutation';
 import React, { useCallback, useState } from 'react';
 import { generatePath, useLocation, useNavigate } from 'react-router-dom';
-import { API } from 'services/api';
-import { CreateDisputeVariables } from 'services/api/types/mutations';
-import { DisputeFormValues } from 'types/formValues';
-import { dataUrlToFile } from 'utils/helpers';
-import { extractKeyFromPresignedUrl, uploadFileToAWS } from 'utils/uploadFileToAWS';
+
+import leftArrow from '~/assets/icons/left-arrow.svg';
+import { Button } from '~/components/Button';
+import { Modal } from '~/components/Modal';
+import { PopupModal } from '~/components/PopupModal';
+import { Text } from '~/components/Text';
+import { ROUTES } from '~/constants/routes';
+import { useMutation } from '~/hooks/useMutation';
+import { API } from '~/services/api';
+import { CreateDisputeVariables } from '~/services/api/types/mutations';
+import { DisputeFormValues } from '~/types/formValues';
+import { dataUrlToFile } from '~/utils/helpers';
+import { extractKeyFromPresignedUrl, uploadFileToAWS } from '~/utils/uploadFileToAWS';
 
 import styles from './styles.module.scss';
 
@@ -73,7 +74,7 @@ export const PreviewModal: React.FC<Props> = ({
           const typedValue = data[key].value as object as File;
           acc.data[key] = typedValue.name;
 
-          const foundFile = responses.find(response => response.key === key);
+          const foundFile = responses.find(response => response?.key === key);
           const typedFoundFile = foundFile as NonNullable<typeof foundFile>;
 
           acc.files.push({
@@ -113,33 +114,33 @@ export const PreviewModal: React.FC<Props> = ({
 
   return (
     <>
-      <Modal visible={visible} className={styles['preview-modal']}>
+      <Modal className={styles['preview-modal']} visible={visible}>
         <div className={styles['preview-modal__container']}>
           <div className={styles['preview-modal__wrapper']}>
             <button
-              type="button"
               className={styles['preview-modal__left-arrow-button']}
+              type="button"
               onClick={onClose}
             >
-              <img src={leftArrow} alt="left-arrow" />
+              <img alt="left-arrow" src={leftArrow} />
             </button>
-            <Text type="h6" className={styles['preview-modal__heading']}>
+            <Text className={styles['preview-modal__heading']} type="h6">
               Preview dispute
             </Text>
             <div className={styles['preview-modal__content-container']}>
               <div className={styles['preview-modal__field']}>
-                <Text type="p5" className={styles['preview-modal__field-label']}>
+                <Text className={styles['preview-modal__field-label']} type="p5">
                   Credit bureau
                 </Text>
-                <Text type="p5" fontWeight={600} className={styles['preview-modal__field-name']}>
+                <Text className={styles['preview-modal__field-name']} fontWeight={600} type="p5">
                   Equifax
                 </Text>
               </div>
               <div className={styles['preview-modal__field']}>
-                <Text type="p5" className={styles['preview-modal__field-label']}>
+                <Text className={styles['preview-modal__field-label']} type="p5">
                   Type of info to be corrected
                 </Text>
-                <Text type="p5" fontWeight={600} className={styles['preview-modal__field-name']}>
+                <Text className={styles['preview-modal__field-name']} fontWeight={600} type="p5">
                   {issueName}
                 </Text>
               </div>
@@ -150,25 +151,25 @@ export const PreviewModal: React.FC<Props> = ({
                   return (
                     <React.Fragment key={key}>
                       <div className={styles['preview-modal__field']}>
-                        <Text type="p5" className={styles['preview-modal__field-label']}>
+                        <Text className={styles['preview-modal__field-label']} type="p5">
                           Current data
                         </Text>
                         <Text
-                          type="p5"
-                          fontWeight={600}
                           className={styles['preview-modal__field-name']}
+                          fontWeight={600}
+                          type="p5"
                         >
                           {currentAddress}
                         </Text>
                       </div>
                       <div className={styles['preview-modal__field']}>
-                        <Text type="p5" className={styles['preview-modal__field-label']}>
+                        <Text className={styles['preview-modal__field-label']} type="p5">
                           {key}
                         </Text>
                         <Text
-                          type="p5"
-                          fontWeight={600}
                           className={styles['preview-modal__field-name']}
+                          fontWeight={600}
+                          type="p5"
                         >
                           {(data[key]?.value as string) || ''}
                         </Text>
@@ -178,14 +179,14 @@ export const PreviewModal: React.FC<Props> = ({
                 }
 
                 return (
-                  <div key={key} className={styles['preview-modal__field']}>
-                    <Text type="p5" className={styles['preview-modal__field-label']}>
+                  <div className={styles['preview-modal__field']} key={key}>
+                    <Text className={styles['preview-modal__field-label']} type="p5">
                       {key}
                     </Text>
                     <Text
-                      type="p5"
-                      fontWeight={600}
                       className={styles['preview-modal__field-name']}
+                      fontWeight={600}
+                      type="p5"
                     >
                       {typedValue?.name || ''}
                     </Text>
@@ -195,22 +196,22 @@ export const PreviewModal: React.FC<Props> = ({
             </div>
             <Button
               className={styles['preview-modal__main-button']}
+              loading={loading}
               title="Submit dispute"
               onClick={submitDispute}
-              loading={loading}
             />
           </div>
         </div>
       </Modal>
       <PopupModal
-        visible={popupModalVisible}
+        hasIcon
         heading="Dispute created"
         message="You can track your disputes in the “Disputes” section"
-        secondaryButtonTitle="Close"
-        secondaryButtonClick={handleCloseClick}
-        primaryButtonTitle="Go to disputes"
         primaryButtonClick={navigateToDisputes}
-        hasIcon
+        primaryButtonTitle="Go to disputes"
+        secondaryButtonClick={handleCloseClick}
+        secondaryButtonTitle="Close"
+        visible={popupModalVisible}
       />
     </>
   );

@@ -1,8 +1,9 @@
-import rightArrow from 'assets/icons/right-arrow.svg';
 import classNames from 'classnames';
-import { Text } from 'components/Text';
 import React, { useState } from 'react';
-import { ConfirmAddressModalFormValues } from 'types/formValues';
+
+import rightArrow from '~/assets/icons/right-arrow.svg';
+import { Text } from '~/components/Text';
+import { ConfirmAddressModalFormValues } from '~/types/formValues';
 
 import { SelectAddressModal } from './components/SelectAddressModal';
 import styles from './styles.module.scss';
@@ -38,30 +39,30 @@ export const SelectAddress: React.FC<Props> = ({
   return (
     <div className={classNames(styles['select-address'], className)}>
       <label htmlFor={label}>
-        <Text type="p4" className={styles['select-address__label-text']}>
+        <Text className={styles['select-address__label-text']} type="p4">
           {label}
         </Text>
       </label>
       <button
-        type="button"
-        id={label}
         className={classNames(styles['select-address__button'], {
           [styles['select-address__button--error']]: error,
         })}
+        id={label}
+        type="button"
         onClick={openSelectAddressModal}
       >
         {placeholder}
-        <img src={rightArrow} alt="right-arrow" />
+        <img alt="right-arrow" src={rightArrow} />
       </button>
       {error && (
-        <Text type="p4" className={styles['select-address__error-text']}>
+        <Text className={styles['select-address__error-text']} type="p4">
           {error}
         </Text>
       )}
       <SelectAddressModal
         visible={selectAddressModalVisible}
-        onOpen={openSelectAddressModal}
         onClose={closeSelectAddressModal}
+        onOpen={openSelectAddressModal}
         onSelect={onSelect}
       />
     </div>

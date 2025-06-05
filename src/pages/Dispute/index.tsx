@@ -1,24 +1,25 @@
-import { Button } from 'components/Button';
-import { FileUploader } from 'components/FileUploader';
-import { Input } from 'components/Input';
-import { Loader } from 'components/Loader';
-import { Text } from 'components/Text';
-import { ROUTES } from 'constants/routes';
 import { useFormik } from 'formik';
-import { useErrorHandler } from 'hooks/useErrorHandler';
-import { useQuery } from 'hooks/useQuery';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { API } from 'services/api';
-import { useAppSelector } from 'store/hooks';
-import { selectAccount } from 'store/slices/user/selectors';
-import { UserState } from 'store/slices/user/types';
-import { DisputeFormValues } from 'types/formValues';
-import { CreateDisputeData } from 'types/models';
-import { getFormikError } from 'utils/errorHandlers';
-import { formatAddressTitle } from 'utils/formats';
-import { getDisputeFormSchema } from 'utils/validators';
 import { toFormikValidationSchema } from 'zod-formik-adapter';
+
+import { Button } from '~/components/Button';
+import { FileUploader } from '~/components/FileUploader';
+import { Input } from '~/components/Input';
+import { Loader } from '~/components/Loader';
+import { Text } from '~/components/Text';
+import { ROUTES } from '~/constants/routes';
+import { useErrorHandler } from '~/hooks/useErrorHandler';
+import { useQuery } from '~/hooks/useQuery';
+import { API } from '~/services/api';
+import { useAppSelector } from '~/store/hooks';
+import { selectAccount } from '~/store/slices/user/selectors';
+import { UserState } from '~/store/slices/user/types';
+import { DisputeFormValues } from '~/types/formValues';
+import { CreateDisputeData } from '~/types/models';
+import { getFormikError } from '~/utils/errorHandlers';
+import { formatAddressTitle } from '~/utils/formats';
+import { getDisputeFormSchema } from '~/utils/validators';
 
 import { PreviewModal } from './components/PreviewModal';
 import styles from './styles.module.scss';
@@ -110,11 +111,11 @@ export const Dispute: React.FC = () => {
         <>
           <div className={styles.dispute__header}>
             {issueData && (
-              <Text type="p1" fontWeight={600}>
+              <Text fontWeight={600} type="p1">
                 {issueData.name}
               </Text>
             )}
-            <Text type="p5" className={styles.dispute__info}>
+            <Text className={styles.dispute__info} type="p5">
               Dispute with Equifax
             </Text>
           </div>
@@ -125,10 +126,13 @@ export const Dispute: React.FC = () => {
                   if (question.type === 'text') {
                     return (
                       <Input
+                        error={getFormikError(formik, question.cellName, 'value')}
                         key={question.questionId}
-                        placeholder={formatAddressTitle(account.data.residentialAddress)}
+                        label={`${question.questionText} *`}
                         name={question.cellName}
+                        placeholder={formatAddressTitle(account.data.residentialAddress)}
                         value={(formik.values[question.cellName]?.value as string) || ''}
+                        onBlur={formik.handleBlur}
                         onChange={e =>
                           formik.setFieldValue(
                             question.cellName,
@@ -136,9 +140,6 @@ export const Dispute: React.FC = () => {
                             true,
                           )
                         }
-                        onBlur={formik.handleBlur}
-                        label={`${question.questionText} *`}
-                        error={getFormikError(formik, question.cellName, 'value')}
                       />
                     );
                   }
@@ -146,16 +147,11 @@ export const Dispute: React.FC = () => {
                   if (question.type === 'file-upload') {
                     return (
                       <FileUploader
-                        key={question.questionId}
                         description="Select a file to upload"
+                        error={getFormikError(formik, question.cellName, 'value')}
+                        key={question.questionId}
+                        label={`${question.questionText} *`}
                         value={(formik.values[question.cellName]?.value as object as File) || null}
-                        onSelect={fileData =>
-                          formik.setFieldValue(
-                            question.cellName,
-                            { ...formik.values[question.cellName], value: fileData },
-                            true,
-                          )
-                        }
                         onBlur={() => formik.setFieldTouched(question.cellName, true, true)}
                         onDelete={() =>
                           formik.setFieldValue(
@@ -164,8 +160,13 @@ export const Dispute: React.FC = () => {
                             true,
                           )
                         }
-                        label={`${question.questionText} *`}
-                        error={getFormikError(formik, question.cellName, 'value')}
+                        onSelect={fileData =>
+                          formik.setFieldValue(
+                            question.cellName,
+                            { ...formik.values[question.cellName], value: fileData },
+                            true,
+                          )
+                        }
                       />
                     );
                   }
@@ -175,22 +176,22 @@ export const Dispute: React.FC = () => {
               </div>
               <Button
                 className={styles.dispute__button}
+                disabled={!formik.isValid}
                 title="Preview & Submit"
                 onClick={formik.handleSubmit}
-                disabled={!formik.isValid}
               />
             </div>
           </div>
         </>
       )}
       <PreviewModal
+        currentAddress={formatAddressTitle(account.data.residentialAddress)}
+        data={formik.values}
+        handleApiError={handleApiError}
+        issueName={issueData?.name || ''}
+        issueUuid={uuid}
         visible={previewModalVisible}
         onClose={closePreviewModal}
-        issueUuid={uuid}
-        issueName={issueData?.name || ''}
-        data={formik.values}
-        currentAddress={formatAddressTitle(account.data.residentialAddress)}
-        handleApiError={handleApiError}
       />
       {snackbar}
     </div>

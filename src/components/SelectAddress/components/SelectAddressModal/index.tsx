@@ -1,12 +1,13 @@
-import leftArrow from 'assets/icons/left-arrow.svg';
-import { Input } from 'components/Input';
-import { Modal } from 'components/Modal';
-import { Text } from 'components/Text';
-import { MAPS_API_KEY } from 'constants/env';
 import React, { useEffect, useState } from 'react';
 import usePlacesService from 'react-google-autocomplete/lib/usePlacesAutocompleteService';
-import { ConfirmAddressModalFormValues } from 'types/formValues';
-import { DraftAddress } from 'types/models';
+
+import leftArrow from '~/assets/icons/left-arrow.svg';
+import { Input } from '~/components/Input';
+import { Modal } from '~/components/Modal';
+import { Text } from '~/components/Text';
+import { MAPS_API_KEY } from '~/constants/env';
+import { ConfirmAddressModalFormValues } from '~/types/formValues';
+import { DraftAddress } from '~/types/models';
 
 import { ConfirmAddressModal } from './components/ConfirmAddressModal';
 import styles from './styles.module.scss';
@@ -117,11 +118,11 @@ export const SelectAddressModal: React.FC<Props> = ({ visible, onOpen, onClose, 
 
   return (
     <>
-      <Modal visible={visible} className={styles['select-address-modal']}>
+      <Modal className={styles['select-address-modal']} visible={visible}>
         <div className={styles['select-address-modal__container']}>
           <div className={styles['select-address-modal__header']}>
             <button type="button" onClick={onClose}>
-              <img src={leftArrow} alt="left-arrow" />
+              <img alt="left-arrow" src={leftArrow} />
             </button>
             <Input
               className={styles['select-address-modal__input']}
@@ -138,12 +139,12 @@ export const SelectAddressModal: React.FC<Props> = ({ visible, onOpen, onClose, 
 
             return (
               <button
-                type="button"
-                key={placePrediction.place_id}
                 className={styles['select-address-modal__place-prediction']}
+                key={placePrediction.place_id}
+                type="button"
                 onClick={() => handlePlacePredictionClick(placePrediction.place_id)}
               >
-                <Text type="p3" className={className}>
+                <Text className={className} type="p3">
                   {placePrediction.description}
                 </Text>
               </button>
@@ -154,10 +155,10 @@ export const SelectAddressModal: React.FC<Props> = ({ visible, onOpen, onClose, 
       {confirmAddressModalVisible && (
         <ConfirmAddressModal
           visible
-          openSelectAddressModal={onOpen}
           closeSelectAddressModal={onClose}
-          onClose={closeConfirmAddressModal}
           draftAddress={draftAddress}
+          openSelectAddressModal={onOpen}
+          onClose={closeConfirmAddressModal}
           onSelect={onSelect}
         />
       )}

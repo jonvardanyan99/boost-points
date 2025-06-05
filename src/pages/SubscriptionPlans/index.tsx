@@ -1,13 +1,14 @@
-import close from 'assets/icons/close-white.svg';
-import { Loader } from 'components/Loader';
-import { Text } from 'components/Text';
-import { ROUTES, SEARCH_PARAMS } from 'constants/routes';
-import { useQuery } from 'hooks/useQuery';
 import React, { useCallback, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { API } from 'services/api';
-import { useAppSelector } from 'store/hooks';
-import { selectAccount } from 'store/slices/user/selectors';
+
+import close from '~/assets/icons/close-white.svg';
+import { Loader } from '~/components/Loader';
+import { Text } from '~/components/Text';
+import { ROUTES, SEARCH_PARAMS } from '~/constants/routes';
+import { useQuery } from '~/hooks/useQuery';
+import { API } from '~/services/api';
+import { useAppSelector } from '~/store/hooks';
+import { selectAccount } from '~/store/slices/user/selectors';
 
 import { Plan } from './components/Plan';
 import styles from './styles.module.scss';
@@ -34,17 +35,17 @@ export const SubscriptionPlans: React.FC = () => {
     <div className={styles.page}>
       <div className={styles['page__close-wrapper']}>
         <button
-          type="button"
           className={styles['page__close-button']}
+          type="button"
           onClick={navigateToSubscription}
         >
-          <img src={close} alt="close" />
+          <img alt="close" src={close} />
         </button>
       </div>
-      <Text type="h4" className={styles.page__heading}>
+      <Text className={styles.page__heading} type="h4">
         Subscribe and take control of your financial future!
       </Text>
-      <Text type="p4" className={styles.page__text}>
+      <Text className={styles.page__text} type="p4">
         Choose the plan that suits you
       </Text>
       {loading ? (
@@ -54,13 +55,13 @@ export const SubscriptionPlans: React.FC = () => {
           <div className={styles['page__plans-container']}>
             {data?.map(plan => (
               <Plan
-                key={plan.uuid}
                 data={plan}
+                key={plan.uuid}
                 selectedPlan={subscription?.subscriptionPlan?.name}
               />
             ))}
           </div>
-          <Text type="p6" className={styles['page__disclaimer-text']}>
+          <Text className={styles['page__disclaimer-text']} type="p6">
             *Does not include GST, which will be added further on the payment page
           </Text>
         </>

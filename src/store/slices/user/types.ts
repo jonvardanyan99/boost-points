@@ -1,5 +1,6 @@
 import { Card } from '@stripe/stripe-js';
-import { AccountData, Subscription } from 'types/models';
+
+import { AccountData, Subscription } from '~/types/models';
 
 export interface UserState {
   tokens: {

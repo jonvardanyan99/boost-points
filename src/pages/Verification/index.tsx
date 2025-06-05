@@ -1,21 +1,22 @@
-import logo from 'assets/images/logo.svg';
-import { Button } from 'components/Button';
-import { Input } from 'components/Input';
-import { Text } from 'components/Text';
 import { useFormik } from 'formik';
-import { useErrorHandler } from 'hooks/useErrorHandler';
-import { useMutation } from 'hooks/useMutation';
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { API } from 'services/api';
-import { useAppDispatch } from 'store/hooks';
-import { setAccount, setTokens } from 'store/slices/user';
-import { VerificationFormValues } from 'types/formValues';
-import { AccountData } from 'types/models';
-import { getFormikError } from 'utils/errorHandlers';
-import { formatPhoneNumber } from 'utils/formats';
-import { verificationFormSchema } from 'utils/validators';
 import { toFormikValidationSchema } from 'zod-formik-adapter';
+
+import logo from '~/assets/images/logo.svg';
+import { Button } from '~/components/Button';
+import { Input } from '~/components/Input';
+import { Text } from '~/components/Text';
+import { useErrorHandler } from '~/hooks/useErrorHandler';
+import { useMutation } from '~/hooks/useMutation';
+import { API } from '~/services/api';
+import { useAppDispatch } from '~/store/hooks';
+import { setAccount, setTokens } from '~/store/slices/user';
+import { VerificationFormValues } from '~/types/formValues';
+import { AccountData } from '~/types/models';
+import { getFormikError } from '~/utils/errorHandlers';
+import { formatPhoneNumber } from '~/utils/formats';
+import { verificationFormSchema } from '~/utils/validators';
 
 import styles from './styles.module.scss';
 
@@ -87,33 +88,33 @@ export const Verification: React.FC = () => {
 
   return (
     <div className={styles.verification}>
-      <img src={logo} alt="logo" />
-      <Text type="h4" className={styles.verification__heading}>
+      <img alt="logo" src={logo} />
+      <Text className={styles.verification__heading} type="h4">
         Phone Verification
       </Text>
-      <Text type="p4" className={styles.verification__instruction}>
+      <Text className={styles.verification__instruction} type="p4">
         {contentText}
       </Text>
       <Input
         className={styles.verification__input}
-        placeholder="2423"
-        name="otp"
-        value={formik.values.otp}
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur}
         error={getFormikError(formik, 'otp')}
+        name="otp"
+        placeholder="2423"
+        value={formik.values.otp}
+        onBlur={formik.handleBlur}
+        onChange={formik.handleChange}
       />
       <Button
         className={styles.verification__button}
+        loading={loading}
         title="Proceed"
         onClick={formik.handleSubmit}
-        loading={loading}
       />
       {resendVisible && (
         <div className={styles.verification__resend}>
           <Text type="p4">Didn’t get the code?</Text>
           <button type="button" onClick={handleResendClick}>
-            <Text type="p4" className={styles['verification__resend-text']}>
+            <Text className={styles['verification__resend-text']} type="p4">
               Resend
             </Text>
           </button>

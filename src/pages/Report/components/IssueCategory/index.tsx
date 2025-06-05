@@ -1,11 +1,12 @@
-import downArrow from 'assets/icons/down-arrow.svg';
-import exclamationMark from 'assets/icons/exclamation-mark.svg';
-import upArrow from 'assets/icons/up-arrow.svg';
 import classNames from 'classnames';
-import { Text } from 'components/Text';
 import React, { useCallback, useMemo, useState } from 'react';
-import { GetIssuesResponse } from 'services/api/types/queries';
-import { Agency, AgencyIssueCategory } from 'types/models';
+
+import downArrow from '~/assets/icons/down-arrow.svg';
+import exclamationMark from '~/assets/icons/exclamation-mark.svg';
+import upArrow from '~/assets/icons/up-arrow.svg';
+import { Text } from '~/components/Text';
+import { GetIssuesResponse } from '~/services/api/types/queries';
+import { Agency, AgencyIssueCategory } from '~/types/models';
 
 import { Issue } from './components/Issue';
 import styles from './styles.module.scss';
@@ -30,10 +31,10 @@ export const IssueCategory: React.FC<Props> = ({ name, issues, agency }) => {
   return (
     <div className={classNames(styles.category, { [styles['category--open']]: isCategoryOpen })}>
       <button
-        type="button"
         className={classNames(styles.category__button, {
           [styles['category__button--active']]: data,
         })}
+        type="button"
         onClick={data ? toggleCategoryOpen : undefined}
       >
         <div
@@ -41,25 +42,25 @@ export const IssueCategory: React.FC<Props> = ({ name, issues, agency }) => {
             [styles['category__header--open']]: isCategoryOpen,
           })}
         >
-          <Text type="p3" fontWeight={600}>
+          <Text fontWeight={600} type="p3">
             {name}
           </Text>
           {data ? (
             <div className={styles['category__quantity-container']}>
               <div className={styles['category__quantity-wrapper']}>
-                <img src={exclamationMark} width="13px" height="13px" alt="exclamation-mark" />
-                <Text type="p4" fontWeight={600} className={styles.category__quantity}>
+                <img alt="exclamation-mark" height="13px" src={exclamationMark} width="13px" />
+                <Text className={styles.category__quantity} fontWeight={600} type="p4">
                   {data.qt}
                 </Text>
               </div>
               {isCategoryOpen ? (
-                <img src={upArrow} alt="up-arrow" />
+                <img alt="up-arrow" src={upArrow} />
               ) : (
-                <img src={downArrow} alt="down-arrow" />
+                <img alt="down-arrow" src={downArrow} />
               )}
             </div>
           ) : (
-            <Text type="p4" fontWeight={600} className={styles['category__no-quantity']}>
+            <Text className={styles['category__no-quantity']} fontWeight={600} type="p4">
               0
             </Text>
           )}
@@ -67,7 +68,7 @@ export const IssueCategory: React.FC<Props> = ({ name, issues, agency }) => {
       </button>
       {isCategoryOpen && (
         <div className={styles['category__issues-container']}>
-          {data?.issues.map(issue => <Issue key={issue.uuid} data={issue} agency={agency} />)}
+          {data?.issues.map(issue => <Issue agency={agency} data={issue} key={issue.uuid} />)}
         </div>
       )}
     </div>

@@ -1,9 +1,10 @@
 import 'react-circular-progressbar/dist/styles.css';
 
 import classNames from 'classnames';
-import { Text } from 'components/Text';
 import React from 'react';
 import { CircularProgressbar } from 'react-circular-progressbar';
+
+import { Text } from '~/components/Text';
 
 import styles from './styles.module.scss';
 
@@ -27,7 +28,6 @@ export const Progressbar: React.FC<Props> = ({
   return (
     <div className={classNames(styles.progressbar, className)}>
       <CircularProgressbar
-        value={value}
         maxValue={maxValue}
         strokeWidth={9}
         styles={{
@@ -35,10 +35,11 @@ export const Progressbar: React.FC<Props> = ({
           path: { stroke: 'rgb(var(--green-color))' },
           trail: { stroke: 'rgb(var(--gray-7-color))' },
         }}
+        value={value}
       />
       <div className={styles['progressbar__text-wrapper']}>
         <Text type="h4">{value}</Text>
-        <Text type="p5" className={styles['progressbar__max-value-text']}>
+        <Text className={styles['progressbar__max-value-text']} type="p5">
           {maxValueText}
         </Text>
       </div>

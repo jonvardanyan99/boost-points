@@ -46,6 +46,7 @@ declare module 'react-google-autocomplete/lib/usePlacesAutocompleteService' {
     placesService: PlacesService;
   }
 
+  // eslint-disable-next-line import/no-default-export
   export default function usePlacesAutocompleteService(
     config: usePlacesAutocompleteServiceConfig,
   ): usePlacesAutocompleteServiceResponse;

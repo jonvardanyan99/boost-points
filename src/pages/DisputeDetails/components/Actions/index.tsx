@@ -1,8 +1,9 @@
-import { Button } from 'components/Button';
-import { Text } from 'components/Text';
 import React, { useMemo } from 'react';
-import { GetDisputeResponse } from 'services/api/types/queries';
-import { DisputeAction } from 'types/models';
+
+import { Button } from '~/components/Button';
+import { Text } from '~/components/Text';
+import { GetDisputeResponse } from '~/services/api/types/queries';
+import { DisputeAction } from '~/types/models';
 
 import styles from './styles.module.scss';
 
@@ -26,58 +27,58 @@ export const Actions: React.FC<Props> = ({
       return (
         <>
           {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-          <label htmlFor="close" className={styles['component__action-container']}>
+          <label className={styles['component__action-container']} htmlFor="close">
             <input
-              id="close"
               className={styles.component__radio}
-              type="radio"
+              id="close"
               name="action"
+              type="radio"
               value="close"
               onChange={onSelect}
             />
             <div className={styles['component__action-text-wrapper']}>
-              <Text type="p4" fontWeight={600}>
+              <Text fontWeight={600} type="p4">
                 Close the case
               </Text>
-              <Text type="p5" className={styles['component__action-text']}>
+              <Text className={styles['component__action-text']} type="p5">
                 Equifax has confirmed the resolution of your issue
               </Text>
             </div>
           </label>
           {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-          <label htmlFor="refine" className={styles['component__action-container']}>
+          <label className={styles['component__action-container']} htmlFor="refine">
             <input
-              id="refine"
               className={styles.component__radio}
-              type="radio"
+              id="refine"
               name="action"
+              type="radio"
               value="refine"
               onChange={onSelect}
             />
             <div className={styles['component__action-text-wrapper']}>
-              <Text type="p4" fontWeight={600}>
+              <Text fontWeight={600} type="p4">
                 Submit additional info
               </Text>
-              <Text type="p5" className={styles['component__action-text']}>
+              <Text className={styles['component__action-text']} type="p5">
                 Equifax has requested additional details for your dispute case
               </Text>
             </div>
           </label>
           {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-          <label htmlFor="further" className={styles['component__action-container']}>
+          <label className={styles['component__action-container']} htmlFor="further">
             <input
-              id="further"
               className={styles.component__radio}
-              type="radio"
+              id="further"
               name="action"
+              type="radio"
               value="further"
               onChange={onSelect}
             />
             <div className={styles['component__action-text-wrapper']}>
-              <Text type="p4" fontWeight={600}>
+              <Text fontWeight={600} type="p4">
                 Dispute further
               </Text>
-              <Text type="p5" className={styles['component__action-text']}>
+              <Text className={styles['component__action-text']} type="p5">
                 Negative response from Creditor
               </Text>
             </div>
@@ -90,39 +91,39 @@ export const Actions: React.FC<Props> = ({
       return (
         <>
           {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-          <label htmlFor="close" className={styles['component__action-container']}>
+          <label className={styles['component__action-container']} htmlFor="close">
             <input
-              id="close"
               className={styles.component__radio}
-              type="radio"
+              id="close"
               name="action"
+              type="radio"
               value="close"
               onChange={onSelect}
             />
             <div className={styles['component__action-text-wrapper']}>
-              <Text type="p4" fontWeight={600}>
+              <Text fontWeight={600} type="p4">
                 Close the case
               </Text>
-              <Text type="p5" className={styles['component__action-text']}>
+              <Text className={styles['component__action-text']} type="p5">
                 Equifax has confirmed the resolution of your issue
               </Text>
             </div>
           </label>
           {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-          <label htmlFor="escalate" className={styles['component__action-container']}>
+          <label className={styles['component__action-container']} htmlFor="escalate">
             <input
-              id="escalate"
               className={styles.component__radio}
-              type="radio"
+              id="escalate"
               name="action"
+              type="radio"
               value="escalate"
               onChange={onSelect}
             />
             <div className={styles['component__action-text-wrapper']}>
-              <Text type="p4" fontWeight={600}>
+              <Text fontWeight={600} type="p4">
                 Help with the dispute
               </Text>
-              <Text type="p5" className={styles['component__action-text']}>
+              <Text className={styles['component__action-text']} type="p5">
                 Equifax's response hasn't met your needs and no specific action was requested,
                 select this to escalate the case with Score Up support
               </Text>
@@ -141,10 +142,10 @@ export const Actions: React.FC<Props> = ({
       {content}
       <Button
         className={styles.component__button}
+        disabled={!action}
+        loading={loading}
         title="Confirm selection"
         onClick={onSubmit}
-        loading={loading}
-        disabled={!action}
       />
     </div>
   ) : null;

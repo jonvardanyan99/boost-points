@@ -1,5 +1,6 @@
-import { CreateDisputeData } from 'types/models';
 import { z } from 'zod';
+
+import { CreateDisputeData } from '~/types/models';
 
 const FIELD_REQUIRED = 'This field is required';
 const INVALID_PHONE_NUMBER = 'Invalid phone number';

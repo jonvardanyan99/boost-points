@@ -1,6 +1,7 @@
 import classNames from 'classnames';
-import { Text } from 'components/Text';
 import React from 'react';
+
+import { Text } from '~/components/Text';
 
 import styles from './styles.module.scss';
 
@@ -23,13 +24,13 @@ export const Textarea: React.FC<Props> = ({
 }) => {
   return (
     <div className={classNames(styles['text-area'], className)}>
-      <Text type="p3" className={styles['text-area__label-text']}>
+      <Text className={styles['text-area__label-text']} type="p3">
         {label}
       </Text>
       <textarea
         className={styles['text-area__field']}
-        placeholder={placeholder}
         name={name}
+        placeholder={placeholder}
         value={value}
         onChange={onChange}
       />

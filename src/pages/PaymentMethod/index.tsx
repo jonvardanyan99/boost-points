@@ -1,15 +1,16 @@
 import { CardNumberElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import { Stripe, StripeCardNumberElement, StripeElements } from '@stripe/stripe-js';
-import close from 'assets/icons/close.svg';
-import { Button } from 'components/Button';
-import { Text } from 'components/Text';
-import { useErrorHandler } from 'hooks/useErrorHandler';
-import { useMutation } from 'hooks/useMutation';
 import React, { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { API } from 'services/api';
-import { useAppDispatch } from 'store/hooks';
-import { updateCardInfo } from 'store/slices/user';
+
+import close from '~/assets/icons/close.svg';
+import { Button } from '~/components/Button';
+import { Text } from '~/components/Text';
+import { useErrorHandler } from '~/hooks/useErrorHandler';
+import { useMutation } from '~/hooks/useMutation';
+import { API } from '~/services/api';
+import { useAppDispatch } from '~/store/hooks';
+import { updateCardInfo } from '~/store/slices/user';
 
 import { StripeElement } from './components/StripeElement';
 import styles from './styles.module.scss';
@@ -61,24 +62,24 @@ export const PaymentMethod: React.FC = () => {
   return (
     <div className={styles.page}>
       <div className={styles['page__close-wrapper']}>
-        <button type="button" className={styles['page__close-button']} onClick={navigateBack}>
-          <img src={close} alt="close" />
+        <button className={styles['page__close-button']} type="button" onClick={navigateBack}>
+          <img alt="close" src={close} />
         </button>
       </div>
-      <Text type="h4" className={styles.page__heading}>
+      <Text className={styles.page__heading} type="h4">
         Update payment details
       </Text>
       <StripeElement type="cardNumberElement" />
       <div className={styles['page__input-wrapper']}>
-        <StripeElement type="cardExpiryElement" className={styles.page__input} />
-        <StripeElement type="cardCvcElement" className={styles.page__input} />
+        <StripeElement className={styles.page__input} type="cardExpiryElement" />
+        <StripeElement className={styles.page__input} type="cardCvcElement" />
       </div>
       <Button
         className={styles.page__button}
-        title="Update"
-        onClick={update}
         disabled={!stripe || !elements}
         loading={loading}
+        title="Update"
+        onClick={update}
       />
       {snackbar}
     </div>

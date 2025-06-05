@@ -1,9 +1,10 @@
-import information from 'assets/images/information.svg';
-import { Button } from 'components/Button';
-import { Text } from 'components/Text';
-import { ROUTES } from 'constants/routes';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import information from '~/assets/images/information.svg';
+import { Button } from '~/components/Button';
+import { Text } from '~/components/Text';
+import { ROUTES } from '~/constants/routes';
 
 import styles from './styles.module.scss';
 
@@ -16,8 +17,8 @@ export const NotSubscribed: React.FC = () => {
 
   return (
     <div className={styles['not-subscribed']}>
-      <img src={information} width="80px" height="80px" alt="information" />
-      <Text type="p2" fontWeight={600} className={styles['not-subscribed__text']}>
+      <img alt="information" height="80px" src={information} width="80px" />
+      <Text className={styles['not-subscribed__text']} fontWeight={600} type="p2">
         Your subscription is not active
       </Text>
       <Button

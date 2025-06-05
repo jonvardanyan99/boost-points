@@ -1,16 +1,17 @@
-import downArrow from 'assets/icons/down-arrow.svg';
-import downArrowGray from 'assets/icons/down-arrow-gray.svg';
 import classNames from 'classnames';
-import { Text } from 'components/Text';
+import { FormikErrors } from 'formik';
+import React, { useEffect, useRef, useState } from 'react';
+
+import downArrow from '~/assets/icons/down-arrow.svg';
+import downArrowGray from '~/assets/icons/down-arrow-gray.svg';
+import { Text } from '~/components/Text';
 import {
   CountryCodeOptions,
   DocumentTypeOptions,
   GenderOptions,
   StateOptions,
-} from 'constants/selectOptions';
-import { FormikErrors } from 'formik';
-import { useUpdateEffect } from 'hooks/useUpdateEffect';
-import React, { useEffect, useRef, useState } from 'react';
+} from '~/constants/selectOptions';
+import { useUpdateEffect } from '~/hooks/useUpdateEffect';
 
 import styles from './styles.module.scss';
 
@@ -77,30 +78,30 @@ export const Dropdown: React.FC<Props> = ({
       {label && (
         <label htmlFor={label}>
           <Text
-            type="p3"
             className={classNames(styles['dropdown__label-text'], {
               [styles['dropdown__label-text--disabled']]: disabled,
             })}
+            type="p3"
           >
             {label}
           </Text>
         </label>
       )}
       <button
-        type="button"
-        id={label}
         className={classNames(styles['dropdown__main-button'], {
           [styles['dropdown__main-button--active']]: optionsVisible,
           [styles['dropdown__main-button--disabled']]: disabled,
           [styles['dropdown__main-button--error']]: error,
         })}
+        id={label}
+        type="button"
         onClick={disabled ? undefined : toggleOptionsVisible}
       >
         {selectedOption?.label || placeholder}
-        <img src={disabled ? downArrowGray : downArrow} alt="down-arrow" />
+        <img alt="down-arrow" src={disabled ? downArrowGray : downArrow} />
       </button>
       {error && (
-        <Text type="p4" className={styles['dropdown__error-text']}>
+        <Text className={styles['dropdown__error-text']} type="p4">
           {error}
         </Text>
       )}

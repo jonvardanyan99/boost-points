@@ -1,6 +1,7 @@
 import { CardCvcElement, CardExpiryElement, CardNumberElement } from '@stripe/react-stripe-js';
-import { Text } from 'components/Text';
 import React from 'react';
+
+import { Text } from '~/components/Text';
 
 import styles from './styles.module.scss';
 
@@ -18,13 +19,13 @@ export const StripeElement: React.FC<Props> = ({ type, className }) => {
       <div className={className}>
         {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
         <label htmlFor="card-number">
-          <Text type="p3" className={styles['label-text']}>
+          <Text className={styles['label-text']} type="p3">
             Card number
           </Text>
         </label>
         <CardNumberElement
-          id="card-number"
           className={styles.element}
+          id="card-number"
           options={{
             style: {
               base: {
@@ -48,13 +49,13 @@ export const StripeElement: React.FC<Props> = ({ type, className }) => {
       <div className={className}>
         {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
         <label htmlFor="expiry-date">
-          <Text type="p3" className={styles['label-text']}>
+          <Text className={styles['label-text']} type="p3">
             Expiry date
           </Text>
         </label>
         <CardExpiryElement
-          id="expiry-date"
           className={styles.element}
+          id="expiry-date"
           options={{
             style: {
               base: {
@@ -78,13 +79,13 @@ export const StripeElement: React.FC<Props> = ({ type, className }) => {
       <div className={className}>
         {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
         <label htmlFor="cvc/cvv">
-          <Text type="p3" className={styles['label-text']}>
+          <Text className={styles['label-text']} type="p3">
             CVC/CVV
           </Text>
         </label>
         <CardCvcElement
-          id="cvc/cvv"
           className={styles.element}
+          id="cvc/cvv"
           options={{
             placeholder: 'CVC/CVV',
             style: {

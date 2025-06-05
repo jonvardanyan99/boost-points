@@ -1,19 +1,20 @@
-import logo from 'assets/images/logo.svg';
-import { Button } from 'components/Button';
-import { Input } from 'components/Input';
-import { Text } from 'components/Text';
-import { ROUTES } from 'constants/routes';
 import { useFormik } from 'formik';
-import { useErrorHandler } from 'hooks/useErrorHandler';
-import { useMutation } from 'hooks/useMutation';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { API } from 'services/api';
-import { LoginResponse, LoginVariables } from 'services/api/types/mutations';
-import { getFormikError } from 'utils/errorHandlers';
-import { formatPhoneNumber } from 'utils/formats';
-import { loginFormSchema } from 'utils/validators';
 import { toFormikValidationSchema } from 'zod-formik-adapter';
+
+import logo from '~/assets/images/logo.svg';
+import { Button } from '~/components/Button';
+import { Input } from '~/components/Input';
+import { Text } from '~/components/Text';
+import { ROUTES } from '~/constants/routes';
+import { useErrorHandler } from '~/hooks/useErrorHandler';
+import { useMutation } from '~/hooks/useMutation';
+import { API } from '~/services/api';
+import { LoginResponse, LoginVariables } from '~/services/api/types/mutations';
+import { getFormikError } from '~/utils/errorHandlers';
+import { formatPhoneNumber } from '~/utils/formats';
+import { loginFormSchema } from '~/utils/validators';
 
 import styles from './styles.module.scss';
 
@@ -46,28 +47,28 @@ export const Login: React.FC = () => {
 
   return (
     <div className={styles.login}>
-      <img src={logo} alt="logo" />
-      <Text type="h4" className={styles.login__heading}>
+      <img alt="logo" src={logo} />
+      <Text className={styles.login__heading} type="h4">
         Log in
       </Text>
-      <Text type="p4" className={styles.login__instruction}>
+      <Text className={styles.login__instruction} type="p4">
         Whenever you log in or creating a new account let’s start with your phone number
       </Text>
       <Input
-        type="tel"
         className={styles.login__input}
-        placeholder="0432 892 002"
-        name="phoneNumber"
-        value={formik.values.phoneNumber}
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur}
         error={getFormikError<LoginFormValues>(formik, 'phoneNumber')}
+        name="phoneNumber"
+        placeholder="0432 892 002"
+        type="tel"
+        value={formik.values.phoneNumber}
+        onBlur={formik.handleBlur}
+        onChange={formik.handleChange}
       />
       <Button
         className={styles.login__button}
+        loading={loading}
         title="Proceed"
         onClick={formik.handleSubmit}
-        loading={loading}
       />
       {snackbar}
     </div>

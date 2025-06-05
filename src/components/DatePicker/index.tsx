@@ -1,13 +1,14 @@
 import 'react-datepicker/dist/react-datepicker.css';
 
-import calendar from 'assets/icons/calendar.svg';
-import downArrow from 'assets/icons/down-arrow.svg';
 import classNames from 'classnames';
-import { Text } from 'components/Text';
 import { format } from 'date-fns';
-import { useUpdateEffect } from 'hooks/useUpdateEffect';
 import React, { useEffect, useRef, useState } from 'react';
 import ReactDatePicker from 'react-datepicker';
+
+import calendar from '~/assets/icons/calendar.svg';
+import downArrow from '~/assets/icons/down-arrow.svg';
+import { Text } from '~/components/Text';
+import { useUpdateEffect } from '~/hooks/useUpdateEffect';
 
 import styles from './styles.module.scss';
 
@@ -74,41 +75,41 @@ export const DatePicker: React.FC<Props> = ({
   return (
     <div className={classNames(styles['date-picker'], className)} ref={datePickerRef}>
       <label htmlFor={label}>
-        <Text type="p3" className={styles['date-picker__label-text']}>
+        <Text className={styles['date-picker__label-text']} type="p3">
           {label}
         </Text>
       </label>
       <button
-        type="button"
-        id={label}
         className={classNames(styles['date-picker__main-button'], {
           [styles['date-picker__main-button--active']]: datePickerVisible,
           [styles['date-picker__main-button--error']]: error,
         })}
+        id={label}
+        type="button"
         onClick={toggleDatePickerVisible}
       >
         <div>
-          <img src={calendar} alt="calendar" />
+          <img alt="calendar" src={calendar} />
           <Text type="p3">{value ? format(value, 'dd/MM/y') : placeholder}</Text>
         </div>
-        <img src={downArrow} alt="down-arrow" />
+        <img alt="down-arrow" src={downArrow} />
       </button>
       {error && (
-        <Text type="p4" className={styles['date-picker__error-text']}>
+        <Text className={styles['date-picker__error-text']} type="p4">
           {error}
         </Text>
       )}
       {datePickerVisible && (
         <ReactDatePicker
+          inline
+          showMonthDropdown
+          showYearDropdown
           calendarClassName={styles['date-picker__react-date-picker']}
           dayClassName={getDayClassName}
+          dropdownMode="select"
           selected={value}
           onChange={date => onChange(date)}
           onSelect={() => setDatePickerVisible(false)}
-          dropdownMode="select"
-          showMonthDropdown
-          showYearDropdown
-          inline
         />
       )}
     </div>

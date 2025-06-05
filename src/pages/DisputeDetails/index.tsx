@@ -1,19 +1,20 @@
-import approveCircle from 'assets/icons/approve-circle.svg';
-import incompleteCircle from 'assets/icons/incomplete-circle.svg';
-import equifax from 'assets/images/equifax.svg';
-import { Badge } from 'components/Badge';
-import { Loader } from 'components/Loader';
-import { PopupModal } from 'components/PopupModal';
-import { Text } from 'components/Text';
-import { ROUTES } from 'constants/routes';
-import { useErrorHandler } from 'hooks/useErrorHandler';
-import { useMutation } from 'hooks/useMutation';
-import { useQuery } from 'hooks/useQuery';
 import React, { useCallback, useMemo, useState } from 'react';
 import { generatePath, useNavigate, useParams } from 'react-router-dom';
-import { API } from 'services/api';
-import { DisputeAction, TakenAction } from 'types/models';
-import { formatDate } from 'utils/formats';
+
+import approveCircle from '~/assets/icons/approve-circle.svg';
+import incompleteCircle from '~/assets/icons/incomplete-circle.svg';
+import equifax from '~/assets/images/equifax.svg';
+import { Badge } from '~/components/Badge';
+import { Loader } from '~/components/Loader';
+import { PopupModal } from '~/components/PopupModal';
+import { Text } from '~/components/Text';
+import { ROUTES } from '~/constants/routes';
+import { useErrorHandler } from '~/hooks/useErrorHandler';
+import { useMutation } from '~/hooks/useMutation';
+import { useQuery } from '~/hooks/useQuery';
+import { API } from '~/services/api';
+import { DisputeAction, TakenAction } from '~/types/models';
+import { formatDate } from '~/utils/formats';
 
 import { Actions } from './components/Actions';
 import { ActionTaken } from './components/ActionTaken';
@@ -101,7 +102,7 @@ export const DisputeDetails: React.FC = () => {
         data && (
           <>
             <div className={styles.details__header}>
-              <Text type="p1" fontWeight={600}>
+              <Text fontWeight={600} type="p1">
                 {data.name}
               </Text>
             </div>
@@ -110,25 +111,25 @@ export const DisputeDetails: React.FC = () => {
                 <Text type="h6">Summary</Text>
                 <div className={styles['details__summary-container']}>
                   <div>
-                    <Text type="p4" className={styles['details__summary-label']}>
+                    <Text className={styles['details__summary-label']} type="p4">
                       Agency
                     </Text>
                     <img
-                      src={equifax}
-                      className={styles.details__logo}
-                      width="74px"
-                      height="24px"
                       alt="equifax"
+                      className={styles.details__logo}
+                      height="24px"
+                      src={equifax}
+                      width="74px"
                     />
-                    <Text type="p4" className={styles['details__summary-label']}>
+                    <Text className={styles['details__summary-label']} type="p4">
                       Dispute No
                     </Text>
-                    <Text type="p4" className={styles['details__summary-value']}>
+                    <Text className={styles['details__summary-value']} type="p4">
                       {data.number}
                     </Text>
                   </div>
                   <div>
-                    <Text type="p4" className={styles['details__summary-label']}>
+                    <Text className={styles['details__summary-label']} type="p4">
                       Dispute status
                     </Text>
                     <Badge
@@ -139,10 +140,10 @@ export const DisputeDetails: React.FC = () => {
                       }
                       text={data.status}
                     />
-                    <Text type="p4" className={styles['details__summary-label']}>
+                    <Text className={styles['details__summary-label']} type="p4">
                       Date created
                     </Text>
-                    <Text type="p4" className={styles['details__summary-value']}>
+                    <Text className={styles['details__summary-value']} type="p4">
                       {formatDate(data.createdAt)}
                     </Text>
                   </div>
@@ -156,18 +157,18 @@ export const DisputeDetails: React.FC = () => {
                       if (index === arr.length - 1) {
                         return (
                           <img
-                            key={index}
-                            src={data.status === 'In progress' ? incompleteCircle : approveCircle}
                             alt={
                               data.status === 'In progress' ? 'incomplete-circle' : 'approve-circle'
                             }
+                            key={index}
+                            src={data.status === 'In progress' ? incompleteCircle : approveCircle}
                           />
                         );
                       }
 
                       return (
                         <React.Fragment key={index}>
-                          <img src={approveCircle} alt="approve-circle" />
+                          <img alt="approve-circle" src={approveCircle} />
                           <div className={styles['details__timeline-line']} />
                         </React.Fragment>
                       );
@@ -176,10 +177,10 @@ export const DisputeDetails: React.FC = () => {
                   <div className={styles['details__progress-wrapper']}>
                     {data.stages.map((stage, index) => (
                       <div key={index}>
-                        <Text type="p5" className={styles['details__date-text']}>
+                        <Text className={styles['details__date-text']} type="p5">
                           {formatDate(stage.date)}
                         </Text>
-                        <Text type="p5" className={styles['details__stage-name']}>
+                        <Text className={styles['details__stage-name']} type="p5">
                           {stage.name}
                         </Text>
                       </div>
@@ -192,11 +193,11 @@ export const DisputeDetails: React.FC = () => {
                   <Text type="h6">Dispute data</Text>
                   <div className={styles['details__data-wrapper']}>
                     {Object.keys(disputeCreatedStage.data).map(key => (
-                      <div key={key} className={styles.details__data}>
-                        <Text type="p5" className={styles['details__data-label']}>
+                      <div className={styles.details__data} key={key}>
+                        <Text className={styles['details__data-label']} type="p5">
                           {key}
                         </Text>
-                        <Text type="p5" fontWeight={600} className={styles['details__data-value']}>
+                        <Text className={styles['details__data-value']} fontWeight={600} type="p5">
                           {disputeCreatedStage.data?.[key] as string | number}
                         </Text>
                       </div>
@@ -208,35 +209,35 @@ export const DisputeDetails: React.FC = () => {
                 <div className={styles['details__content-container']}>
                   <Text type="h6">Equifax’s response</Text>
                   <div className={styles['details__response-wrapper']}>
-                    <Text type="p5" fontWeight={600} className={styles['details__response-text']}>
+                    <Text className={styles['details__response-text']} fontWeight={600} type="p5">
                       {responseReceivedStage.data.data.trim()}
                     </Text>
                   </div>
                 </div>
               )}
               {takenActions.map((takenAction, index) => (
-                <ActionTaken key={index} data={takenAction} />
+                <ActionTaken data={takenAction} key={index} />
               ))}
               <Actions
-                possibleActions={data.possibleActions}
                 action={action}
+                loading={actionLoading}
+                possibleActions={data.possibleActions}
                 onSelect={selectAction}
                 onSubmit={handleActionSelect}
-                loading={actionLoading}
               />
             </div>
           </>
         )
       )}
       <PopupModal
-        visible={popupModalVisible}
+        hasIcon
         heading="Dispute closed"
         message={`Congratulations, you have successfully disputed “${data?.name}”`}
-        secondaryButtonTitle="Close"
-        secondaryButtonClick={closePopupModal}
-        primaryButtonTitle="Go to disputes"
         primaryButtonClick={navigateToDisputes}
-        hasIcon
+        primaryButtonTitle="Go to disputes"
+        secondaryButtonClick={closePopupModal}
+        secondaryButtonTitle="Close"
+        visible={popupModalVisible}
       />
       {snackbar}
     </div>

@@ -1,4 +1,6 @@
-import { GetIssueFurtherOptionsResponse } from 'services/api/types/queries';
+import { z } from 'zod';
+
+import { GetIssueFurtherOptionsResponse } from '~/services/api/types/queries';
 import {
   confirmAddressFormSchema,
   createAccountFormSchema,
@@ -6,8 +8,7 @@ import {
   identificationFormSchema,
   loginFormSchema,
   verificationFormSchema,
-} from 'utils/validators';
-import { z } from 'zod';
+} from '~/utils/validators';
 
 export type LoginFormValues = z.infer<typeof loginFormSchema>;
 export type VerificationFormValues = z.infer<typeof verificationFormSchema>;

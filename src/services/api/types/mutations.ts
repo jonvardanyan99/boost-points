@@ -1,6 +1,6 @@
-import { DocumentTypeOptions, GenderOptions, StateOptions } from 'constants/selectOptions';
-import { AccountData, Address } from 'types/models';
-import { AtLeastOne } from 'types/utils';
+import { DocumentTypeOptions, GenderOptions, StateOptions } from '~/constants/selectOptions';
+import { AccountData, Address } from '~/types/models';
+import { AtLeastOne } from '~/types/utils';
 
 interface SuccessResponse {
   detail: string;

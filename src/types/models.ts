@@ -1,5 +1,5 @@
-import { CountryCodeOptions, GenderOptions, StateOptions } from 'constants/selectOptions';
-import { GetDisputeResponse } from 'services/api/types/queries';
+import { CountryCodeOptions, GenderOptions, StateOptions } from '~/constants/selectOptions';
+import { GetDisputeResponse } from '~/services/api/types/queries';
 
 export type Agency = 'equifax' | 'experian' | 'illion';
 

@@ -1,8 +1,9 @@
 import axios from 'axios';
-import { API_URL, REFRESH_TOKEN_URL } from 'constants/env';
-import { store } from 'store';
-import { resetStore } from 'store/slices/app/actions';
-import { setTokens } from 'store/slices/user';
+
+import { API_URL, REFRESH_TOKEN_URL } from '~/constants/env';
+import { store } from '~/store';
+import { resetStore } from '~/store/slices/app/actions';
+import { setTokens } from '~/store/slices/user';
 
 import { Api } from './types';
 
@@ -90,7 +91,7 @@ axiosInstance.interceptors.response.use(
       } catch (e) {
         store.dispatch(resetStore());
 
-        return Promise.reject(e);
+        return await Promise.reject(e);
       } finally {
         refreshingToken = false;
         refreshTokenPromiseResolver('success');

@@ -1,4 +1,4 @@
-import { DocumentTypeOptions, StateOptions } from 'constants/selectOptions';
+import { DocumentTypeOptions, StateOptions } from '~/constants/selectOptions';
 import {
   AccountData,
   Agency,
@@ -6,7 +6,7 @@ import {
   CreateDisputeData,
   Subscription,
   SubscriptionPlan,
-} from 'types/models';
+} from '~/types/models';
 
 type Status = 'In progress' | 'Resolved' | 'Not applicable' | 'Escalated to WCS';
 

@@ -1,15 +1,16 @@
-import { Button } from 'components/Button';
-import { PopupModal } from 'components/PopupModal';
-import { Text } from 'components/Text';
-import { ROUTES } from 'constants/routes';
 import { useFormik } from 'formik';
-import { useErrorHandler } from 'hooks/useErrorHandler';
-import { useMutation } from 'hooks/useMutation';
 import React, { useCallback, useState } from 'react';
 import { generatePath, useNavigate, useParams } from 'react-router-dom';
-import { API } from 'services/api';
-import { SendDisputeActionVariables } from 'services/api/types/mutations';
-import { EscalateDisputeFormValues } from 'types/formValues';
+
+import { Button } from '~/components/Button';
+import { PopupModal } from '~/components/PopupModal';
+import { Text } from '~/components/Text';
+import { ROUTES } from '~/constants/routes';
+import { useErrorHandler } from '~/hooks/useErrorHandler';
+import { useMutation } from '~/hooks/useMutation';
+import { API } from '~/services/api';
+import { SendDisputeActionVariables } from '~/services/api/types/mutations';
+import { EscalateDisputeFormValues } from '~/types/formValues';
 
 import { Textarea } from './components/Textarea';
 import styles from './styles.module.scss';
@@ -62,10 +63,10 @@ export const EscalateDispute: React.FC = () => {
   return (
     <div className={styles.page}>
       <div className={styles.page__header}>
-        <Text type="p1" fontWeight={600}>
+        <Text fontWeight={600} type="p1">
           Contact ScoreUp support
         </Text>
-        <Text type="p5" className={styles.page__text}>
+        <Text className={styles.page__text} type="p5">
           Dispute with Equifax
         </Text>
       </div>
@@ -74,29 +75,29 @@ export const EscalateDispute: React.FC = () => {
           <Textarea
             className={styles.page__textarea}
             label="Add a brief description"
-            placeholder="Add a brief description"
             name="description"
+            placeholder="Add a brief description"
             value={formik.values.description}
             onChange={formik.handleChange}
           />
           <Button
             className={styles.page__button}
+            disabled={!formik.dirty}
+            loading={loading}
             title="Submit"
             onClick={formik.handleSubmit}
-            loading={loading}
-            disabled={!formik.dirty}
           />
         </div>
       </div>
       <PopupModal
-        visible={popupModalVisible}
+        hasIcon
         heading="Sent to ScoreUp support"
         message="Thank you for trusting Score Up to resolve your issue. A member of our team will review your dispute history and may contact you in the next three business days"
-        secondaryButtonTitle="Close"
-        secondaryButtonClick={handleCloseClick}
-        primaryButtonTitle="Go to disputes"
         primaryButtonClick={navigateToDisputes}
-        hasIcon
+        primaryButtonTitle="Go to disputes"
+        secondaryButtonClick={handleCloseClick}
+        secondaryButtonTitle="Close"
+        visible={popupModalVisible}
       />
       {snackbar}
     </div>

@@ -1,16 +1,17 @@
-import leftArrow from 'assets/icons/left-arrow.svg';
-import { Button } from 'components/Button';
-import { Modal } from 'components/Modal';
-import { PopupModal } from 'components/PopupModal';
-import { Text } from 'components/Text';
-import { ROUTES } from 'constants/routes';
-import { useMutation } from 'hooks/useMutation';
 import React, { useCallback, useMemo, useState } from 'react';
 import { generatePath, useNavigate, useParams } from 'react-router-dom';
-import { API } from 'services/api';
-import { SendDisputeActionVariables } from 'services/api/types/mutations';
-import { GetIssueFurtherOptionsResponse } from 'services/api/types/queries';
-import { createParagraphsList } from 'utils/helpers';
+
+import leftArrow from '~/assets/icons/left-arrow.svg';
+import { Button } from '~/components/Button';
+import { Modal } from '~/components/Modal';
+import { PopupModal } from '~/components/PopupModal';
+import { Text } from '~/components/Text';
+import { ROUTES } from '~/constants/routes';
+import { useMutation } from '~/hooks/useMutation';
+import { API } from '~/services/api';
+import { SendDisputeActionVariables } from '~/services/api/types/mutations';
+import { GetIssueFurtherOptionsResponse } from '~/services/api/types/queries';
+import { createParagraphsList } from '~/utils/helpers';
 
 import styles from './styles.module.scss';
 
@@ -73,29 +74,29 @@ export const PreviewModal: React.FC<Props> = ({ visible, onClose, data, handleAp
 
   return (
     <>
-      <Modal visible={visible} className={styles.modal}>
+      <Modal className={styles.modal} visible={visible}>
         <div className={styles.modal__container}>
           <div className={styles.modal__wrapper}>
-            <button type="button" className={styles['modal__left-arrow-button']} onClick={onClose}>
-              <img src={leftArrow} alt="left-arrow" />
+            <button className={styles['modal__left-arrow-button']} type="button" onClick={onClose}>
+              <img alt="left-arrow" src={leftArrow} />
             </button>
-            <Text type="h6" className={styles.modal__heading}>
+            <Text className={styles.modal__heading} type="h6">
               Preview
             </Text>
             <div className={styles['modal__field-wrapper']}>
               <div className={styles.modal__field}>
-                <Text type="p5" className={styles['modal__field-name']}>
+                <Text className={styles['modal__field-name']} type="p5">
                   Credit bureau
                 </Text>
-                <Text type="p5" fontWeight={600} className={styles['modal__field-value']}>
+                <Text className={styles['modal__field-value']} fontWeight={600} type="p5">
                   Equifax
                 </Text>
               </div>
               <div className={styles.modal__field}>
-                <Text type="p5" className={styles['modal__field-name']}>
+                <Text className={styles['modal__field-name']} type="p5">
                   Reason
                 </Text>
-                <Text type="p5" fontWeight={600} className={styles['modal__field-value']}>
+                <Text className={styles['modal__field-value']} fontWeight={600} type="p5">
                   {data.reason || ''}
                 </Text>
               </div>
@@ -103,10 +104,10 @@ export const PreviewModal: React.FC<Props> = ({ visible, onClose, data, handleAp
             <div className={styles['modal__field-text']}>
               {disputeTextList.map((text, index) => (
                 <Text
+                  className={styles['modal__field-value']}
+                  fontWeight={600}
                   key={index}
                   type="p5"
-                  fontWeight={600}
-                  className={styles['modal__field-value']}
                 >
                   {text}
                 </Text>
@@ -114,22 +115,22 @@ export const PreviewModal: React.FC<Props> = ({ visible, onClose, data, handleAp
             </div>
             <Button
               className={styles.modal__button}
+              loading={loading}
               title="Submit"
               onClick={submitDispute}
-              loading={loading}
             />
           </div>
         </div>
       </Modal>
       <PopupModal
-        visible={popupModalVisible}
+        hasIcon
         heading="Response sent to Equifax"
         message="You've successfully sent a response. Thank you for using Score Up"
-        secondaryButtonTitle="Close"
-        secondaryButtonClick={handleCloseClick}
-        primaryButtonTitle="Go to disputes"
         primaryButtonClick={navigateToDisputes}
-        hasIcon
+        primaryButtonTitle="Go to disputes"
+        secondaryButtonClick={handleCloseClick}
+        secondaryButtonTitle="Close"
+        visible={popupModalVisible}
       />
     </>
   );

@@ -1,18 +1,19 @@
-import approveCircle from 'assets/icons/approve-circle.svg';
-import disapproveCircle from 'assets/icons/disapprove-circle.svg';
-import emptyCircle from 'assets/icons/empty-circle.svg';
-import { Loader } from 'components/Loader';
-import { Progressbar } from 'components/Progressbar';
-import { Text } from 'components/Text';
 import { format } from 'date-fns/format';
-import { useQuery } from 'hooks/useQuery';
 import React, { useMemo } from 'react';
 import { useParams } from 'react-router-dom';
-import { API } from 'services/api';
-import { useAppSelector } from 'store/hooks';
-import { selectAccount } from 'store/slices/user/selectors';
-import { Agency, AgencyIssueCategory } from 'types/models';
-import { capitalize } from 'utils/helpers';
+
+import approveCircle from '~/assets/icons/approve-circle.svg';
+import disapproveCircle from '~/assets/icons/disapprove-circle.svg';
+import emptyCircle from '~/assets/icons/empty-circle.svg';
+import { Loader } from '~/components/Loader';
+import { Progressbar } from '~/components/Progressbar';
+import { Text } from '~/components/Text';
+import { useQuery } from '~/hooks/useQuery';
+import { API } from '~/services/api';
+import { useAppSelector } from '~/store/hooks';
+import { selectAccount } from '~/store/slices/user/selectors';
+import { Agency, AgencyIssueCategory } from '~/types/models';
+import { capitalize } from '~/utils/helpers';
 
 import { IssueCategory } from './components/IssueCategory';
 import styles from './styles.module.scss';
@@ -46,17 +47,17 @@ export const Report: React.FC = () => {
       ) : (
         <>
           <div className={styles['report__content-header']}>
-            <Text type="p1" fontWeight={600}>
+            <Text fontWeight={600} type="p1">
               {`${capitalize(agency)} report`}
             </Text>
             <div className={styles['report__date-wrapper']}>
-              <Text type="p5" className={styles['report__date-text']}>
+              <Text className={styles['report__date-text']} type="p5">
                 {typedAccount.data.fullName}
               </Text>
-              <Text type="p5" className={styles['report__date-text']}>
+              <Text className={styles['report__date-text']} type="p5">
                 •
               </Text>
-              <Text type="p5" className={styles['report__date-text']}>
+              <Text className={styles['report__date-text']} type="p5">
                 {reportData?.creditEnquiries
                   ? `From ${format(
                       new Date(reportData.creditEnquiries[0].enquiryDate),
@@ -71,63 +72,63 @@ export const Report: React.FC = () => {
               <Text type="h6">Overview</Text>
               <div className={styles['report__progressbar-container']}>
                 <Progressbar
-                  width="148px"
                   height="148px"
-                  value={Number(reportData?.scores?.oneScore) || 0}
                   maxValue={1200}
+                  value={Number(reportData?.scores?.oneScore) || 0}
+                  width="148px"
                 />
               </div>
               <div className={styles['report__credit-info']}>
                 <div>
                   <div className={styles['report__circle-wrapper']}>
-                    <img src={approveCircle} alt="approve-circle" />
-                    <img src={approveCircle} alt="approve-circle" />
-                    <img src={emptyCircle} alt="empty-circle" />
+                    <img alt="approve-circle" src={approveCircle} />
+                    <img alt="approve-circle" src={approveCircle} />
+                    <img alt="empty-circle" src={emptyCircle} />
                   </div>
-                  <Text type="p4" fontWeight={600} className={styles['report__credit-info-title']}>
+                  <Text className={styles['report__credit-info-title']} fontWeight={600} type="p4">
                     Account Repayment History
                   </Text>
-                  <Text type="p4" className={styles['report__credit-info-text']}>
+                  <Text className={styles['report__credit-info-text']} type="p4">
                     Repayment history information can have an impact on risk.
                   </Text>
                 </div>
                 <div>
                   <div className={styles['report__circle-wrapper']}>
-                    <img src={approveCircle} alt="approve-circle" />
-                    <img src={emptyCircle} alt="empty-circle" />
-                    <img src={emptyCircle} alt="empty-circle" />
+                    <img alt="approve-circle" src={approveCircle} />
+                    <img alt="empty-circle" src={emptyCircle} />
+                    <img alt="empty-circle" src={emptyCircle} />
                   </div>
-                  <Text type="p4" fontWeight={600} className={styles['report__credit-info-title']}>
+                  <Text className={styles['report__credit-info-title']} fontWeight={600} type="p4">
                     Lack of Consumer Adverse Information
                   </Text>
-                  <Text type="p4" className={styles['report__credit-info-text']}>
+                  <Text className={styles['report__credit-info-text']} type="p4">
                     Having no consumer adverse information can have an impact on risk.
                   </Text>
                 </div>
                 <div>
                   <div className={styles['report__circle-wrapper']}>
-                    <img src={disapproveCircle} alt="disapprove-circle" />
-                    <img src={disapproveCircle} alt="disapprove-circle" />
-                    <img src={emptyCircle} alt="empty-circle" />
+                    <img alt="disapprove-circle" src={disapproveCircle} />
+                    <img alt="disapprove-circle" src={disapproveCircle} />
+                    <img alt="empty-circle" src={emptyCircle} />
                   </div>
-                  <Text type="p4" fontWeight={600} className={styles['report__credit-info-title']}>
+                  <Text className={styles['report__credit-info-title']} fontWeight={600} type="p4">
                     Historical Consumer Credit Application Information
                   </Text>
-                  <Text type="p4" className={styles['report__credit-info-text']}>
+                  <Text className={styles['report__credit-info-text']} type="p4">
                     The type and frequency of historical credit applications can be an indicator of
                     risk.
                   </Text>
                 </div>
                 <div>
                   <div className={styles['report__circle-wrapper']}>
-                    <img src={disapproveCircle} alt="disapprove-circle" />
-                    <img src={emptyCircle} alt="empty-circle" />
-                    <img src={emptyCircle} alt="empty-circle" />
+                    <img alt="disapprove-circle" src={disapproveCircle} />
+                    <img alt="empty-circle" src={emptyCircle} />
+                    <img alt="empty-circle" src={emptyCircle} />
                   </div>
-                  <Text type="p4" fontWeight={600} className={styles['report__credit-info-title']}>
+                  <Text className={styles['report__credit-info-title']} fontWeight={600} type="p4">
                     Recent Consumer Credit Application Information
                   </Text>
-                  <Text type="p4" className={styles['report__credit-info-text']}>
+                  <Text className={styles['report__credit-info-text']} type="p4">
                     Recent credit applications made can have an impact on risk.
                   </Text>
                 </div>
@@ -135,17 +136,17 @@ export const Report: React.FC = () => {
             </div>
             <div className={styles['report__issues-review']}>
               <Text type="h6">Identified errors</Text>
-              <Text type="p4" className={styles['report__issues-instruction']}>
+              <Text className={styles['report__issues-instruction']} type="p4">
                 Review the issues we found and request a dispute if any of this information needs to
                 be changed
               </Text>
               <div className={styles['report__issues-container']}>
                 {issueCategories.map(category => (
                   <IssueCategory
+                    agency={agency}
+                    issues={issuesData?.data || []}
                     key={category}
                     name={category}
-                    issues={issuesData?.data || []}
-                    agency={agency}
                   />
                 ))}
               </div>

@@ -1,14 +1,15 @@
-import rightArrowGray from 'assets/icons/right-arrow-gray-4.svg';
-import equifax from 'assets/images/equifax.svg';
 import classNames from 'classnames';
-import { Badge } from 'components/Badge';
-import { Loader } from 'components/Loader';
-import { Text } from 'components/Text';
-import { ROUTES } from 'constants/routes';
-import { useQuery } from 'hooks/useQuery';
 import React from 'react';
 import { generatePath, useNavigate } from 'react-router-dom';
-import { API } from 'services/api';
+
+import rightArrowGray from '~/assets/icons/right-arrow-gray-4.svg';
+import equifax from '~/assets/images/equifax.svg';
+import { Badge } from '~/components/Badge';
+import { Loader } from '~/components/Loader';
+import { Text } from '~/components/Text';
+import { ROUTES } from '~/constants/routes';
+import { useQuery } from '~/hooks/useQuery';
+import { API } from '~/services/api';
 
 import styles from './styles.module.scss';
 
@@ -35,26 +36,26 @@ export const Disputes: React.FC = () => {
             <>
               <Text type="h6">Disputes</Text>
               <div className={styles['disputes__text-wrapper']}>
-                <Text type="p4" className={styles.disputes__text}>{`${data?.active} active`}</Text>
-                <Text type="p4" className={styles.disputes__text}>
+                <Text className={styles.disputes__text} type="p4">{`${data?.active} active`}</Text>
+                <Text className={styles.disputes__text} type="p4">
                   •
                 </Text>
-                <Text type="p4" className={styles.disputes__text}>
+                <Text className={styles.disputes__text} type="p4">
                   {`${data?.total} in total`}
                 </Text>
               </div>
               <div className={styles['disputes__agency-container']}>
-                <img src={equifax} alt="equifax" />
+                <img alt="equifax" src={equifax} />
                 <div className={styles['disputes__disputes-container']}>
                   {data?.data?.map(dispute => (
                     <button
+                      className={styles.disputes__dispute}
                       key={dispute.uuid}
                       type="button"
-                      className={styles.disputes__dispute}
                       onClick={() => navigateToDetails(dispute.uuid)}
                     >
                       <div>
-                        <Text type="p3" fontWeight={600}>
+                        <Text fontWeight={600} type="p3">
                           {dispute.name}
                         </Text>
                         <Badge
@@ -66,14 +67,14 @@ export const Disputes: React.FC = () => {
                           text={dispute.status}
                         />
                       </div>
-                      <img src={rightArrowGray} alt="right-arrow-gray" />
+                      <img alt="right-arrow-gray" src={rightArrowGray} />
                     </button>
                   ))}
                 </div>
               </div>
             </>
           ) : (
-            <Text type="p4" className={styles['disputes__empty-text']}>
+            <Text className={styles['disputes__empty-text']} type="p4">
               Your past and current disputes will be here
             </Text>
           )}

@@ -1,5 +1,6 @@
-import { CountryCodeOptions, StateOptions } from 'constants/selectOptions';
 import { format } from 'date-fns/format';
+
+import { CountryCodeOptions, StateOptions } from '~/constants/selectOptions';
 
 interface FormatAddressModel {
   propertyName: string;

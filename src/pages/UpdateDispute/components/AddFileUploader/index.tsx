@@ -1,7 +1,8 @@
-import plusGreen from 'assets/icons/plus-green.svg';
 import classNames from 'classnames';
-import { Text } from 'components/Text';
 import React, { useCallback, useRef } from 'react';
+
+import plusGreen from '~/assets/icons/plus-green.svg';
+import { Text } from '~/components/Text';
 
 import styles from './styles.module.scss';
 
@@ -30,16 +31,16 @@ export const AddFileUploader: React.FC<Props> = ({ className, onSelect }) => {
 
   return (
     <div className={classNames(styles['file-uploader'], className)}>
-      <button type="button" className={styles['file-uploader__wrapper']} onClick={triggerFileInput}>
-        <img src={plusGreen} alt="plus-green" />
-        <Text type="p5" fontWeight={600} className={styles['file-uploader__text']}>
+      <button className={styles['file-uploader__wrapper']} type="button" onClick={triggerFileInput}>
+        <img alt="plus-green" src={plusGreen} />
+        <Text className={styles['file-uploader__text']} fontWeight={600} type="p5">
           Add another file
         </Text>
       </button>
       <input
-        type="file"
-        ref={fileInputRef}
         className={styles['file-uploader__file-input']}
+        ref={fileInputRef}
+        type="file"
         onChange={handleFileSelect}
       />
     </div>

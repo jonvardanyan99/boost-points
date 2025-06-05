@@ -1,8 +1,9 @@
-import approveCircle from 'assets/icons/approve-circle.svg';
-import { Text } from 'components/Text';
 import React, { useMemo } from 'react';
-import { TakenAction } from 'types/models';
-import { createParagraphsList } from 'utils/helpers';
+
+import approveCircle from '~/assets/icons/approve-circle.svg';
+import { Text } from '~/components/Text';
+import { TakenAction } from '~/types/models';
+import { createParagraphsList } from '~/utils/helpers';
 
 import styles from './styles.module.scss';
 
@@ -82,16 +83,16 @@ export const ActionTaken: React.FC<Props> = ({ data }) => {
 
   return (
     <div className={styles.component}>
-      <Text type="h6" className={styles.component__title}>
+      <Text className={styles.component__title} type="h6">
         Action taken
       </Text>
       <div className={styles.component__header}>
-        <img src={approveCircle} width="22px" height="22px" alt="approve-circle" />
+        <img alt="approve-circle" height="22px" src={approveCircle} width="22px" />
         <div className={styles['component__text-wrapper']}>
-          <Text type="p4" fontWeight={600}>
+          <Text fontWeight={600} type="p4">
             {actionInfo.heading}
           </Text>
-          <Text type="p5" className={styles.component__text}>
+          <Text className={styles.component__text} type="p5">
             {actionInfo.description}
           </Text>
         </div>
@@ -99,23 +100,23 @@ export const ActionTaken: React.FC<Props> = ({ data }) => {
       {dataKeys && (
         <div className={styles['component__data-wrapper']}>
           {dataKeys.map(key => (
-            <div key={key} className={styles.component__data}>
-              <Text type="p5" className={styles['component__data-label']}>
+            <div className={styles.component__data} key={key}>
+              <Text className={styles['component__data-label']} type="p5">
                 {key}
               </Text>
               {key === 'Text' ? (
                 disputeFurtherTextList?.map((text, index) => (
                   <Text
+                    className={styles['component__data-value']}
+                    fontWeight={600}
                     key={index}
                     type="p5"
-                    fontWeight={600}
-                    className={styles['component__data-value']}
                   >
                     {text}
                   </Text>
                 ))
               ) : (
-                <Text type="p5" fontWeight={600} className={styles['component__data-value']}>
+                <Text className={styles['component__data-value']} fontWeight={600} type="p5">
                   {actionData?.[key] || ''}
                 </Text>
               )}

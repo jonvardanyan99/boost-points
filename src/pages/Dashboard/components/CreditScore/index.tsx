@@ -1,16 +1,17 @@
-import checkMark from 'assets/icons/check-mark.svg';
-import exclamationMark from 'assets/icons/exclamation-mark.svg';
 import classNames from 'classnames';
-import { Badge } from 'components/Badge';
-import { Button } from 'components/Button';
-import { Progressbar } from 'components/Progressbar';
-import { Text } from 'components/Text';
-import { ROUTES } from 'constants/routes';
-import { useQuery } from 'hooks/useQuery';
 import React, { useCallback, useMemo, useState } from 'react';
 import { generatePath, useNavigate } from 'react-router-dom';
-import { API } from 'services/api';
-import { Agency } from 'types/models';
+
+import checkMark from '~/assets/icons/check-mark.svg';
+import exclamationMark from '~/assets/icons/exclamation-mark.svg';
+import { Badge } from '~/components/Badge';
+import { Button } from '~/components/Button';
+import { Progressbar } from '~/components/Progressbar';
+import { Text } from '~/components/Text';
+import { ROUTES } from '~/constants/routes';
+import { useQuery } from '~/hooks/useQuery';
+import { API } from '~/services/api';
+import { Agency } from '~/types/models';
 
 import styles from './styles.module.scss';
 
@@ -78,7 +79,7 @@ export const CreditScore: React.FC<Props> = ({ className, agency, logo, maxScore
   return (
     <div className={classNames(styles['credit-score'], className)}>
       <div className={styles['credit-score__header']}>
-        <img src={logo} alt={agency} />
+        <img alt={agency} src={logo} />
         {!reportData || !creditScoresData || !issuesData
           ? null
           : score !== null && <Badge text={ratingText} />}
@@ -86,37 +87,37 @@ export const CreditScore: React.FC<Props> = ({ className, agency, logo, maxScore
       {!reportData || !creditScoresData || !issuesData ? (
         <Button
           className={styles['credit-score__report-button']}
+          disabled={disabled}
+          loading={reportLoading || creditScoresLoading || issuesLoading}
           title="Request report"
           onClick={triggerRequests}
-          loading={reportLoading || creditScoresLoading || issuesLoading}
-          disabled={disabled}
         />
       ) : (
         <>
           <Progressbar
             className={styles['credit-score__progressbar']}
-            value={score || 0}
             maxValue={maxScore}
+            value={score || 0}
           />
           <div className={styles['credit-score__issue-wrapper']}>
             <img
-              src={issuesQuantity ? exclamationMark : checkMark}
               alt={issuesQuantity ? 'exclamation-mark' : 'check-mark'}
+              src={issuesQuantity ? exclamationMark : checkMark}
             />
             <Text
-              type="p5"
               className={classNames(styles['credit-score__issue-text'], {
                 [styles['credit-score__issue-text--warning']]: issuesQuantity,
               })}
+              type="p5"
             >
               {issuesQuantity ? `${issuesQuantity} issues found` : 'No issues'}
             </Text>
           </div>
           <Button
+            secondary
             className={styles['credit-score__view-button']}
             title="View"
             onClick={viewReport}
-            secondary
           />
         </>
       )}

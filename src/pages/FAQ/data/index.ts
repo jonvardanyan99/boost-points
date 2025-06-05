@@ -1,4 +1,4 @@
-import { AskedQuestion } from 'types/models';
+import { AskedQuestion } from '~/types/models';
 
 export const questions: AskedQuestion[] = [
   {

@@ -1,5 +1,6 @@
-import { Text } from 'components/Text';
 import React, { useEffect } from 'react';
+
+import { Text } from '~/components/Text';
 
 import styles from './styles.module.scss';
 
@@ -30,7 +31,7 @@ export const Snackbar: React.FC<Props> = ({ visible, onClose, text }) => {
 
   return (
     <div className={styles.snackbar}>
-      <Text type="p1" className={styles.snackbar__text}>
+      <Text className={styles.snackbar__text} type="p1">
         {text}
       </Text>
     </div>

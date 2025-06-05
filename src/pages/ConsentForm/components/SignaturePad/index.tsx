@@ -1,7 +1,8 @@
 import classNames from 'classnames';
-import { Text } from 'components/Text';
 import React, { CSSProperties, useEffect, useRef } from 'react';
 import SignatureCanvas from 'react-signature-canvas';
+
+import { Text } from '~/components/Text';
 
 import styles from './styles.module.scss';
 
@@ -37,17 +38,17 @@ export const SignaturePad: React.FC<Props> = ({ className, value, onChange }) =>
 
   return (
     <div className={classNames(styles['signature-pad'], className)}>
-      <Text type="p4" className={styles['signature-pad__text']}>
+      <Text className={styles['signature-pad__text']} type="p4">
         Sign inside this box
       </Text>
       {value && (
         <button type="button" onClick={clearSignature}>
-          <Text type="p4" className={styles['signature-pad__clear-text']} fontWeight={600}>
+          <Text className={styles['signature-pad__clear-text']} fontWeight={600} type="p4">
             Clear
           </Text>
         </button>
       )}
-      <SignatureCanvas ref={signatureRef} canvasProps={{ style: CSS }} onEnd={getSignature} />
+      <SignatureCanvas canvasProps={{ style: CSS }} ref={signatureRef} onEnd={getSignature} />
     </div>
   );
 };

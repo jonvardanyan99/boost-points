@@ -1,7 +1,8 @@
-import clear from 'assets/icons/clear.svg';
 import classNames from 'classnames';
-import { Text } from 'components/Text';
 import React, { useCallback } from 'react';
+
+import clear from '~/assets/icons/clear.svg';
+import { Text } from '~/components/Text';
 
 import styles from './styles.module.scss';
 
@@ -44,7 +45,7 @@ export const Input: React.FC<Props> = ({
     <div className={className}>
       {label && (
         <label htmlFor={label}>
-          <Text type="p3" className={styles['label-text']}>
+          <Text className={styles['label-text']} type="p3">
             {label}
           </Text>
         </label>
@@ -52,49 +53,49 @@ export const Input: React.FC<Props> = ({
       {clearable ? (
         <div className={styles['input-wrapper']}>
           <input
-            type={type}
-            id={label}
             className={classNames(styles.input, {
               [styles['input--disabled']]: disabled,
               [styles['input--error']]: error,
             })}
-            placeholder={placeholder}
-            name={name}
-            value={value}
-            onChange={onChange}
-            onBlur={onBlur}
             disabled={disabled}
+            id={label}
+            name={name}
+            placeholder={placeholder}
+            type={type}
+            value={value}
+            onBlur={onBlur}
+            onChange={onChange}
           />
           {value && (
             <button
-              type="button"
               className={classNames(styles['clear-icon-button'], {
                 [styles['clear-icon-button--disabled']]: disabled,
               })}
+              type="button"
               onClick={clearValue}
             >
-              <img src={clear} alt="clear" />
+              <img alt="clear" src={clear} />
             </button>
           )}
         </div>
       ) : (
         <input
-          type={type}
-          id={label}
           className={classNames(styles.input, {
             [styles['input--disabled']]: disabled,
             [styles['input--error']]: error,
           })}
-          placeholder={placeholder}
-          name={name}
-          value={value}
-          onChange={onChange}
-          onBlur={onBlur}
           disabled={disabled}
+          id={label}
+          name={name}
+          placeholder={placeholder}
+          type={type}
+          value={value}
+          onBlur={onBlur}
+          onChange={onChange}
         />
       )}
       {error && (
-        <Text type="p4" className={styles['error-text']}>
+        <Text className={styles['error-text']} type="p4">
           {error}
         </Text>
       )}

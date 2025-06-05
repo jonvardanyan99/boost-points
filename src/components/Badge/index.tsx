@@ -1,6 +1,7 @@
 import classNames from 'classnames';
-import { Text } from 'components/Text';
 import React from 'react';
+
+import { Text } from '~/components/Text';
 
 import styles from './styles.module.scss';
 
@@ -12,7 +13,7 @@ interface Props {
 export const Badge: React.FC<Props> = ({ className, text }) => {
   return (
     <div className={classNames(styles.badge, className)}>
-      <Text type="p6" className={styles.badge__text}>
+      <Text className={styles.badge__text} type="p6">
         {text}
       </Text>
     </div>

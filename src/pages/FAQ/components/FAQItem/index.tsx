@@ -1,7 +1,8 @@
-import rightArrowGray from 'assets/icons/right-arrow-gray-2.svg';
-import upArrowGray from 'assets/icons/up-arrow-gray.svg';
-import { Text } from 'components/Text';
 import React, { useCallback, useState } from 'react';
+
+import rightArrowGray from '~/assets/icons/right-arrow-gray-2.svg';
+import upArrowGray from '~/assets/icons/up-arrow-gray.svg';
+import { Text } from '~/components/Text';
 
 import styles from './styles.module.scss';
 
@@ -18,17 +19,17 @@ export const FAQItem: React.FC<Props> = ({ question, text }) => {
   }, []);
 
   return (
-    <button type="button" className={styles.question} onClick={toggleIsActive}>
+    <button className={styles.question} type="button" onClick={toggleIsActive}>
       <div className={styles.question__wrapper}>
         <Text type="p3">{question}</Text>
         {isActive ? (
-          <img src={upArrowGray} alt="up-arrow-gray" />
+          <img alt="up-arrow-gray" src={upArrowGray} />
         ) : (
-          <img src={rightArrowGray} alt="right-arrow-gray" />
+          <img alt="right-arrow-gray" src={rightArrowGray} />
         )}
       </div>
       {isActive && (
-        <Text type="p4" className={styles.question__text}>
+        <Text className={styles.question__text} type="p4">
           {text}
         </Text>
       )}

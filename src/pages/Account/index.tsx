@@ -1,9 +1,10 @@
 import classNames from 'classnames';
-import { Text } from 'components/Text';
-import { SEARCH_PARAMS } from 'constants/routes';
 import React, { useCallback, useEffect, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { capitalize } from 'utils/helpers';
+
+import { Text } from '~/components/Text';
+import { SEARCH_PARAMS } from '~/constants/routes';
+import { capitalize } from '~/utils/helpers';
 
 import { Identification } from './components/Identification';
 import { Settings } from './components/Settings';
@@ -57,24 +58,24 @@ export const Account: React.FC = () => {
   return (
     <div className={styles.account}>
       <div className={styles.account__container}>
-        <Text type="h6" className={styles.account__heading}>
+        <Text className={styles.account__heading} type="h6">
           Account
         </Text>
         <div className={styles['account__tabs-wrapper']}>
           {TABS.map(tab => (
             <button
-              type="button"
-              key={tab}
               className={classNames(styles.account__tab, {
                 [styles['account__tab--active']]: tabParam === tab,
               })}
+              key={tab}
+              type="button"
               onClick={() => handleActiveTabChange(tab)}
             >
               <Text
-                type="p5"
                 className={classNames(styles['account__tab-text'], {
                   [styles['account__tab-text--active']]: tabParam === tab,
                 })}
+                type="p5"
               >
                 {capitalize(tab)}
               </Text>

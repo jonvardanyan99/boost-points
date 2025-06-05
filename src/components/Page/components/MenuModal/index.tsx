@@ -1,16 +1,17 @@
-import logoutIcon from 'assets/icons/logout.svg';
-import avatar from 'assets/images/avatar.svg';
 import classNames from 'classnames';
-import { Header } from 'components/Header';
-import { Modal } from 'components/Modal';
-import { PopupModal } from 'components/PopupModal';
-import { Text } from 'components/Text';
-import { ROUTES } from 'constants/routes';
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from 'store/hooks';
-import { resetStore } from 'store/slices/app/actions';
-import { selectAccount } from 'store/slices/user/selectors';
+
+import logoutIcon from '~/assets/icons/logout.svg';
+import avatar from '~/assets/images/avatar.svg';
+import { Header } from '~/components/Header';
+import { Modal } from '~/components/Modal';
+import { PopupModal } from '~/components/PopupModal';
+import { Text } from '~/components/Text';
+import { ROUTES } from '~/constants/routes';
+import { useAppDispatch, useAppSelector } from '~/store/hooks';
+import { resetStore } from '~/store/slices/app/actions';
+import { selectAccount } from '~/store/slices/user/selectors';
 
 import styles from './styles.module.scss';
 
@@ -60,22 +61,22 @@ export const MenuModal: React.FC<Props> = ({ visible, onClose }) => {
 
   return (
     <>
-      <Modal visible={visible} className={styles['menu-modal']}>
+      <Modal className={styles['menu-modal']} visible={visible}>
         <div className={styles['menu-modal__container']}>
-          <Header icon="close" onClick={onClose} className={styles['menu-modal__header']} />
+          <Header className={styles['menu-modal__header']} icon="close" onClick={onClose} />
           <div className={styles['menu-modal__navbar']}>
             {navLinks.map(navLink => (
               <button
-                type="button"
                 key={navLink.title}
+                type="button"
                 onClick={() => handleNavLinkClick(navLink.route)}
               >
                 <Text
-                  type="p1"
-                  fontWeight={600}
                   className={classNames(styles['menu-modal__text'], {
                     [styles['menu-modal__text--active']]: navLink.route === location.pathname,
                   })}
+                  fontWeight={600}
+                  type="p1"
                 >
                   {navLink.title}
                 </Text>
@@ -85,35 +86,35 @@ export const MenuModal: React.FC<Props> = ({ visible, onClose }) => {
           <div className={styles['menu-modal__footer']}>
             <div className={styles['menu-modal__footer-wrapper']}>
               <div className={styles['menu-modal__user-info']}>
-                <img src={avatar} alt="avatar" />
+                <img alt="avatar" src={avatar} />
                 <div>
-                  <Text type="p3" className={styles['menu-modal__full-name']}>
+                  <Text className={styles['menu-modal__full-name']} type="p3">
                     {account?.data.fullName || ''}
                   </Text>
-                  <Text type="p6" className={styles['menu-modal__text']}>
+                  <Text className={styles['menu-modal__text']} type="p6">
                     {account?.data.email || ''}
                   </Text>
                 </div>
               </div>
               <button
-                type="button"
                 className={styles['menu-modal__logout-wrapper']}
+                type="button"
                 onClick={handleLogoutClick}
               >
-                <img src={logoutIcon} alt="logout" />
+                <img alt="logout" src={logoutIcon} />
               </button>
             </div>
           </div>
         </div>
       </Modal>
       <PopupModal
-        visible={popupModalVisible}
         heading="Log out"
         message="Are you sure to log out from your account?"
-        secondaryButtonTitle="Log out"
-        secondaryButtonClick={logout}
-        primaryButtonTitle="Cancel"
         primaryButtonClick={closePopupModal}
+        primaryButtonTitle="Cancel"
+        secondaryButtonClick={logout}
+        secondaryButtonTitle="Log out"
+        visible={popupModalVisible}
       />
     </>
   );

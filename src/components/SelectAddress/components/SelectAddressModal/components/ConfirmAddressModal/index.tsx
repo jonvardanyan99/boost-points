@@ -1,17 +1,18 @@
-import leftArrow from 'assets/icons/left-arrow.svg';
-import { Button } from 'components/Button';
-import { Dropdown } from 'components/Dropdown';
-import { Input } from 'components/Input';
-import { Modal } from 'components/Modal';
-import { Text } from 'components/Text';
-import { COUNTRY_CODE_OPTIONS, STATE_OPTIONS } from 'constants/selectOptions';
 import { useFormik } from 'formik';
 import React from 'react';
-import { ConfirmAddressModalFormValues } from 'types/formValues';
-import { DraftAddress } from 'types/models';
-import { getFormikError } from 'utils/errorHandlers';
-import { confirmAddressFormSchema } from 'utils/validators';
 import { toFormikValidationSchema } from 'zod-formik-adapter';
+
+import leftArrow from '~/assets/icons/left-arrow.svg';
+import { Button } from '~/components/Button';
+import { Dropdown } from '~/components/Dropdown';
+import { Input } from '~/components/Input';
+import { Modal } from '~/components/Modal';
+import { Text } from '~/components/Text';
+import { COUNTRY_CODE_OPTIONS, STATE_OPTIONS } from '~/constants/selectOptions';
+import { ConfirmAddressModalFormValues } from '~/types/formValues';
+import { DraftAddress } from '~/types/models';
+import { getFormikError } from '~/utils/errorHandlers';
+import { confirmAddressFormSchema } from '~/utils/validators';
 
 import styles from './styles.module.scss';
 
@@ -81,108 +82,108 @@ export const ConfirmAddressModal: React.FC<Props> = ({
   };
 
   return (
-    <Modal visible={visible} className={styles['confirm-address-modal']}>
+    <Modal className={styles['confirm-address-modal']} visible={visible}>
       <div className={styles['confirm-address-modal__container']}>
         <button
-          type="button"
           className={styles['confirm-address-modal__left-arrow-button']}
+          type="button"
           onClick={handleLeftArrowClick}
         >
-          <img src={leftArrow} alt="left-arrow" />
+          <img alt="left-arrow" src={leftArrow} />
         </button>
         <Text type="h4">Confirm address details</Text>
-        <Text type="p4" className={styles['confirm-address-modal__text']}>
+        <Text className={styles['confirm-address-modal__text']} type="p4">
           Check the address details below and fill remaining required fields marked with “*”
         </Text>
         <Input
-          placeholder="Property name or lot number"
-          name="propertyName"
-          value={formik.values.propertyName}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          label="Property name or lot number *"
           error={getFormikError(formik, 'propertyName')}
+          label="Property name or lot number *"
+          name="propertyName"
+          placeholder="Property name or lot number"
+          value={formik.values.propertyName}
+          onBlur={formik.handleBlur}
+          onChange={formik.handleChange}
         />
         <div className={styles['confirm-address-modal__wrapper']}>
           <Input
-            placeholder="Unit or flat number"
-            name="unitNumber"
-            value={formik.values.unitNumber}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            label="Unit or flat number"
             error={getFormikError(formik, 'unitNumber')}
+            label="Unit or flat number"
+            name="unitNumber"
+            placeholder="Unit or flat number"
+            value={formik.values.unitNumber}
+            onBlur={formik.handleBlur}
+            onChange={formik.handleChange}
           />
           <Input
-            placeholder="House number"
-            name="streetNumber"
-            value={formik.values.streetNumber}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            label="House number"
             error={getFormikError(formik, 'streetNumber')}
+            label="House number"
+            name="streetNumber"
+            placeholder="House number"
+            value={formik.values.streetNumber}
+            onBlur={formik.handleBlur}
+            onChange={formik.handleChange}
           />
         </div>
         <Input
-          placeholder="Street name"
-          name="streetName"
-          value={formik.values.streetName}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          label="Street name *"
           error={getFormikError(formik, 'streetName')}
+          label="Street name *"
+          name="streetName"
+          placeholder="Street name"
+          value={formik.values.streetName}
+          onBlur={formik.handleBlur}
+          onChange={formik.handleChange}
         />
         <Input
           className={styles['confirm-address-modal__street-type-input']}
-          placeholder="Street type"
-          name="streetSuffix"
-          value={formik.values.streetSuffix}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          label="Street type *"
           error={getFormikError(formik, 'streetSuffix')}
+          label="Street type *"
+          name="streetSuffix"
+          placeholder="Street type"
+          value={formik.values.streetSuffix}
+          onBlur={formik.handleBlur}
+          onChange={formik.handleChange}
         />
         <Input
-          placeholder="Suburb or town"
-          name="suburb"
-          value={formik.values.suburb}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          label="Suburb or town *"
           error={getFormikError(formik, 'suburb')}
+          label="Suburb or town *"
+          name="suburb"
+          placeholder="Suburb or town"
+          value={formik.values.suburb}
+          onBlur={formik.handleBlur}
+          onChange={formik.handleChange}
         />
         <div className={styles['confirm-address-modal__wrapper']}>
           <Dropdown
             className={styles['confirm-address-modal__state-dropdown']}
+            error={getFormikError(formik, 'state')}
+            label="State *"
+            options={STATE_OPTIONS}
             placeholder="Select State"
             selectedOption={formik.values.state}
-            onChange={option => formik.setFieldValue('state', option, true)}
             onBlur={() => formik.setFieldTouched('state', true, true)}
-            options={STATE_OPTIONS}
-            label="State *"
-            error={getFormikError(formik, 'state')}
+            onChange={option => formik.setFieldValue('state', option, true)}
           />
           <Input
             className={styles['confirm-address-modal__post-code-input']}
-            type="number"
-            placeholder="Postcode"
-            name="postcode"
-            value={formik.values.postcode}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            label="Postcode *"
             error={getFormikError(formik, 'postcode')}
+            label="Postcode *"
+            name="postcode"
+            placeholder="Postcode"
+            type="number"
+            value={formik.values.postcode}
+            onBlur={formik.handleBlur}
+            onChange={formik.handleChange}
           />
         </div>
         <Dropdown
           className={styles['confirm-address-modal__country-code-dropdown']}
+          error={getFormikError(formik, 'countryCode')}
+          label="Country code of the country *"
+          options={COUNTRY_CODE_OPTIONS}
           placeholder="Select Country Code"
           selectedOption={formik.values.countryCode}
-          onChange={option => formik.setFieldValue('countryCode', option, true)}
           onBlur={() => formik.setFieldTouched('countryCode', true, true)}
-          options={COUNTRY_CODE_OPTIONS}
-          label="Country code of the country *"
-          error={getFormikError(formik, 'countryCode')}
+          onChange={option => formik.setFieldValue('countryCode', option, true)}
         />
         <Button
           className={styles['confirm-address-modal__button']}

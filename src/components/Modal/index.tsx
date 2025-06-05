@@ -11,16 +11,14 @@ interface Props {
   className?: string;
 }
 
-export const Modal: React.FC<Props> = ({ visible, children, className }) => {
+export const Modal: React.FC<Props> = ({ visible, children, className = '' }) => {
   const containerRef = useRef(global.document.createElement('div'));
 
   // eslint-disable-next-line consistent-return
   useEffect(() => {
     if (visible) {
       const container = containerRef.current;
-
-      const ContainerClassName = className ? className : '';
-      container.classList.add(styles.modal, ContainerClassName);
+      container.classList.add(styles.modal, className);
 
       modalRoot.appendChild(container);
       global.document.body.classList.add(styles['hidden-body']);

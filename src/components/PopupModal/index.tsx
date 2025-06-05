@@ -1,8 +1,9 @@
-import greenCheckMark from 'assets/icons/green-check-mark.svg';
-import { Button } from 'components/Button';
-import { Modal } from 'components/Modal';
-import { Text } from 'components/Text';
 import React from 'react';
+
+import greenCheckMark from '~/assets/icons/green-check-mark.svg';
+import { Button } from '~/components/Button';
+import { Modal } from '~/components/Modal';
+import { Text } from '~/components/Text';
 
 import styles from './styles.module.scss';
 
@@ -28,24 +29,24 @@ export const PopupModal: React.FC<Props> = ({
   hasIcon,
 }) => {
   return (
-    <Modal visible={visible} className={styles['popup-modal']}>
+    <Modal className={styles['popup-modal']} visible={visible}>
       <div className={styles['popup-modal__container']}>
         <div className={styles['popup-modal__wrapper']}>
           {hasIcon && (
             <div className={styles['popup-modal__icon-wrapper']}>
-              <img src={greenCheckMark} alt="green-check-mark" />
+              <img alt="green-check-mark" src={greenCheckMark} />
             </div>
           )}
           <Text type="h5">{heading}</Text>
-          <Text type="p3" className={styles['popup-modal__message']}>
+          <Text className={styles['popup-modal__message']} type="p3">
             {message}
           </Text>
           <div className={styles['popup-modal__button-wrapper']}>
             <Button
+              secondary
               className={styles['popup-modal__button']}
               title={secondaryButtonTitle}
               onClick={secondaryButtonClick}
-              secondary
             />
             <Button
               className={styles['popup-modal__button']}

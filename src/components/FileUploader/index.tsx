@@ -1,11 +1,12 @@
-import closeGray from 'assets/icons/close-gray.svg';
-import plus from 'assets/icons/plus.svg';
-import upload from 'assets/icons/upload.svg';
 import classNames from 'classnames';
-import { Button } from 'components/Button';
-import { Text } from 'components/Text';
 import React, { useCallback, useEffect, useMemo, useRef } from 'react';
-import { generateId } from 'utils/helpers';
+
+import closeGray from '~/assets/icons/close-gray.svg';
+import plus from '~/assets/icons/plus.svg';
+import upload from '~/assets/icons/upload.svg';
+import { Button } from '~/components/Button';
+import { Text } from '~/components/Text';
+import { generateId } from '~/utils/helpers';
 
 import styles from './styles.module.scss';
 
@@ -73,10 +74,10 @@ export const FileUploader: React.FC<Props> = ({
       {label && (
         <label htmlFor={id}>
           <Text
-            type="p4"
             className={classNames(styles['file-uploader__label-text'], {
               [styles['file-uploader__label-text--selected']]: value instanceof File,
             })}
+            type="p4"
           >
             {label}
           </Text>
@@ -85,19 +86,19 @@ export const FileUploader: React.FC<Props> = ({
       {!(value instanceof File) ? (
         <label htmlFor={id}>
           <div className={styles['file-uploader__container']}>
-            <img src={upload} alt="upload" />
-            <Text type="p2" className={styles['file-uploader__text']}>
+            <img alt="upload" src={upload} />
+            <Text className={styles['file-uploader__text']} type="p2">
               {description}
             </Text>
             <Button
               className={styles['file-uploader__main-button']}
+              icon={plus}
               title="Add files"
               onClick={triggerFileInput}
-              icon={plus}
             />
           </div>
           {error && (
-            <Text type="p4" className={styles['file-uploader__error-text']}>
+            <Text className={styles['file-uploader__error-text']} type="p4">
               {error}
             </Text>
           )}
@@ -105,15 +106,15 @@ export const FileUploader: React.FC<Props> = ({
       ) : (
         <>
           <div className={styles['file-uploader__file-name-wrapper']}>
-            <Text type="p4" fontWeight={600} className={styles['file-uploader__file-name']}>
+            <Text className={styles['file-uploader__file-name']} fontWeight={600} type="p4">
               {value.name}
             </Text>
             <button
-              type="button"
               className={styles['file-uploader__icon-button']}
+              type="button"
               onClick={handleValueDelete}
             >
-              <img src={closeGray} alt="close-gray" />
+              <img alt="close-gray" src={closeGray} />
             </button>
           </div>
           <Button
@@ -124,12 +125,12 @@ export const FileUploader: React.FC<Props> = ({
         </>
       )}
       <input
-        type="file"
-        id={id}
         className={styles['file-uploader__file-input']}
+        id={id}
         ref={fileInputRef}
-        onChange={handleFileSelect}
+        type="file"
         onBlur={onBlur}
+        onChange={handleFileSelect}
       />
     </div>
   );

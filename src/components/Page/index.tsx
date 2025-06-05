@@ -1,8 +1,9 @@
 import classNames from 'classnames';
-import { Header } from 'components/Header';
-import { ROUTES } from 'constants/routes';
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
+
+import { Header } from '~/components/Header';
+import { ROUTES } from '~/constants/routes';
 
 import { MenuModal } from './components/MenuModal';
 import styles from './styles.module.scss';

@@ -11,6 +11,7 @@ export const getFormikError = <T>(
     }
 
     if (nestedKey && !Array.isArray(formik.errors[key])) {
+      // @ts-expect-error nestedKey is valid for the type of formik.errors[key]
       return formik.errors[key][nestedKey];
     }
   }

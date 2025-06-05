@@ -1,7 +1,8 @@
-import { Input } from 'components/Input';
-import { Text } from 'components/Text';
 import React, { useCallback, useEffect, useState } from 'react';
-import { AskedQuestion } from 'types/models';
+
+import { Input } from '~/components/Input';
+import { Text } from '~/components/Text';
+import { AskedQuestion } from '~/types/models';
 
 import { FAQItem } from './components/FAQItem';
 import { questions } from './data';
@@ -28,12 +29,12 @@ export const FAQ: React.FC = () => {
       <div className={styles.faq__container}>
         <Text type="h6">Frequently Asked Questions</Text>
         <Input
+          clearable
           className={styles['faq__search-input']}
           placeholder="Search"
-          value={searchQuery}
           setValue={setSearchQuery}
+          value={searchQuery}
           onChange={handleInputChange}
-          clearable
         />
         {data.length > 0 && (
           <div className={styles['faq__question-container']}>

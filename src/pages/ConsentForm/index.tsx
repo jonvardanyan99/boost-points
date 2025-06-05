@@ -1,19 +1,20 @@
-import { Button } from 'components/Button';
-import { Checkbox } from 'components/Checkbox';
-import { Text } from 'components/Text';
 import { format } from 'date-fns/format';
-import { useErrorHandler } from 'hooks/useErrorHandler';
-import { useMutation } from 'hooks/useMutation';
 import React, { useMemo, useState } from 'react';
-import { API } from 'services/api';
-import { useAppDispatch, useAppSelector } from 'store/hooks';
-import { setConsentFormSigned } from 'store/slices/user';
-import { selectAccount } from 'store/slices/user/selectors';
-import { AccountData } from 'types/models';
-import { DeepNonNullable } from 'types/utils';
-import { backFormatPhoneNumber, formatAddressTitle } from 'utils/formats';
-import { dataUrlToFile } from 'utils/helpers';
-import { extractKeyFromPresignedUrl, uploadFileToAWS } from 'utils/uploadFileToAWS';
+
+import { Button } from '~/components/Button';
+import { Checkbox } from '~/components/Checkbox';
+import { Text } from '~/components/Text';
+import { useErrorHandler } from '~/hooks/useErrorHandler';
+import { useMutation } from '~/hooks/useMutation';
+import { API } from '~/services/api';
+import { useAppDispatch, useAppSelector } from '~/store/hooks';
+import { setConsentFormSigned } from '~/store/slices/user';
+import { selectAccount } from '~/store/slices/user/selectors';
+import { AccountData } from '~/types/models';
+import { DeepNonNullable } from '~/types/utils';
+import { backFormatPhoneNumber, formatAddressTitle } from '~/utils/formats';
+import { dataUrlToFile } from '~/utils/helpers';
+import { extractKeyFromPresignedUrl, uploadFileToAWS } from '~/utils/uploadFileToAWS';
 
 import { SignaturePad } from './components/SignaturePad';
 import styles from './styles.module.scss';
@@ -56,32 +57,32 @@ export const ConsentForm: React.FC = () => {
 
   return (
     <div className={styles['consent-form']}>
-      <Text type="h4" className={styles['consent-form__heading']}>
+      <Text className={styles['consent-form__heading']} type="h4">
         Consent Form
       </Text>
-      <Text type="p4" className={styles['consent-form__text']}>
+      <Text className={styles['consent-form__text']} type="p4">
         Please read the access seeker consent below and confirm to proceed requesting credit reports
       </Text>
       <div className={styles['consent-form__content']}>
-        <Text type="p2" fontWeight={600} className={styles['consent-form__title']}>
+        <Text className={styles['consent-form__title']} fontWeight={600} type="p2">
           PART A: CLIENT DETAILS
         </Text>
-        <Text type="p3" className={styles['consent-form__text']}>
+        <Text className={styles['consent-form__text']} type="p3">
           {fullNameText}
         </Text>
-        <Text type="p3" className={styles['consent-form__text']}>
+        <Text className={styles['consent-form__text']} type="p3">
           {birthDateText}
         </Text>
-        <Text type="p3" className={styles['consent-form__text']}>
+        <Text className={styles['consent-form__text']} type="p3">
           {currentAddressText}
         </Text>
-        <Text type="p3" className={styles['consent-form__text']}>
+        <Text className={styles['consent-form__text']} type="p3">
           {contactNumberText}
         </Text>
-        <Text type="p2" fontWeight={600} className={styles['consent-form__title']}>
+        <Text className={styles['consent-form__title']} fontWeight={600} type="p2">
           PART B: CONSENT DECLARATION
         </Text>
-        <Text type="p3" className={styles['consent-form__text']}>
+        <Text className={styles['consent-form__text']} type="p3">
           {consentDeclarationText}
         </Text>
         <ul className={styles['consent-form__list-item-wrapper']}>
@@ -89,7 +90,7 @@ export const ConsentForm: React.FC = () => {
           <li className={styles['consent-form__list-item']}>Experian</li>
           <li className={styles['consent-form__list-item']}>Illion</li>
         </ul>
-        <Text type="p3" className={styles['consent-form__text']}>
+        <Text className={styles['consent-form__text']} type="p3">
           I understand and acknowledge the following:
         </Text>
         <ol className={styles['consent-form__list-item-wrapper']}>
@@ -110,20 +111,20 @@ export const ConsentForm: React.FC = () => {
             revoke it, whichever is earlier.
           </li>
         </ol>
-        <Text type="p2" fontWeight={600} className={styles['consent-form__title']}>
+        <Text className={styles['consent-form__title']} fontWeight={600} type="p2">
           PART C: DECLARATION & SIGNATURE
         </Text>
-        <Text type="p3" className={styles['consent-form__text']}>
+        <Text className={styles['consent-form__text']} type="p3">
           I declare that the details provided in Part A are accurate and correct. I have read,
           understood, and agree to the terms stated in Part B of this consent form.
         </Text>
       </div>
       <div className={styles['consent-form__confirm']}>
         <Checkbox
-          className={styles['consent-form__checkbox']}
           checked={isConfirmed}
-          onChange={setIsConfirmed}
+          className={styles['consent-form__checkbox']}
           label="I have read and agree with the access seeker consent form above"
+          onChange={setIsConfirmed}
         />
       </div>
       {isConfirmed && (
@@ -135,10 +136,10 @@ export const ConsentForm: React.FC = () => {
       )}
       <Button
         className={styles['consent-form__main-button']}
+        disabled={!isConfirmed || !signature}
+        loading={loading}
         title="Get reports"
         onClick={signConsentForm}
-        loading={loading}
-        disabled={!isConfirmed || !signature}
       />
       {snackbar}
     </div>

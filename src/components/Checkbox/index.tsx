@@ -1,8 +1,9 @@
-import checkbox from 'assets/images/checkbox.svg';
-import checkboxActive from 'assets/images/checkbox-active.svg';
 import classNames from 'classnames';
-import { Text } from 'components/Text';
 import React from 'react';
+
+import checkbox from '~/assets/images/checkbox.svg';
+import checkboxActive from '~/assets/images/checkbox-active.svg';
+import { Text } from '~/components/Text';
 
 import styles from './styles.module.scss';
 
@@ -20,16 +21,16 @@ export const Checkbox: React.FC<Props> = ({ className, checked, onChange, label 
 
   return (
     <div className={classNames(styles.checkbox, className)}>
-      <button type="button" id={label} className={styles.checkbox__button} onClick={toggleChecked}>
+      <button className={styles.checkbox__button} id={label} type="button" onClick={toggleChecked}>
         <img
+          alt="checkbox"
           className={styles.checkbox__icon}
           src={checked ? checkboxActive : checkbox}
-          alt="checkbox"
         />
       </button>
       {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
       <label htmlFor={label}>
-        <Text type="p3" className={styles.checkbox__label}>
+        <Text className={styles.checkbox__label} type="p3">
           {label}
         </Text>
       </label>

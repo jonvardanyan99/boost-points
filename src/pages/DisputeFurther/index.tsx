@@ -1,13 +1,14 @@
-import { Button } from 'components/Button';
-import { Loader } from 'components/Loader';
-import { Text } from 'components/Text';
 import { useFormik } from 'formik';
-import { useErrorHandler } from 'hooks/useErrorHandler';
-import { useQuery } from 'hooks/useQuery';
 import React, { useCallback, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { API } from 'services/api';
-import { DisputeFurtherFormValues } from 'types/formValues';
+
+import { Button } from '~/components/Button';
+import { Loader } from '~/components/Loader';
+import { Text } from '~/components/Text';
+import { useErrorHandler } from '~/hooks/useErrorHandler';
+import { useQuery } from '~/hooks/useQuery';
+import { API } from '~/services/api';
+import { DisputeFurtherFormValues } from '~/types/formValues';
 
 import { PreviewModal } from './components/PreviewModal';
 import styles from './styles.module.scss';
@@ -53,10 +54,10 @@ export const DisputeFurther: React.FC = () => {
       ) : (
         <>
           <div className={styles.page__header}>
-            <Text type="p1" fontWeight={600}>
+            <Text fontWeight={600} type="p1">
               Dispute further
             </Text>
-            <Text type="p5" className={styles.page__text}>
+            <Text className={styles.page__text} type="p5">
               Dispute with Equifax
             </Text>
           </div>
@@ -64,38 +65,38 @@ export const DisputeFurther: React.FC = () => {
             <div className={styles['page__content-container']}>
               {data?.data.map(option => (
                 <label
-                  key={option.uuid}
-                  htmlFor={option.uuid}
                   className={styles['page__options-container']}
+                  htmlFor={option.uuid}
+                  key={option.uuid}
                 >
                   <input
+                    className={styles.page__radio}
                     id={option.uuid}
-                    type="radio"
                     name="issue"
+                    type="radio"
                     value={option.reason}
                     onChange={selectIssue}
-                    className={styles.page__radio}
                   />
-                  <Text type="p4" fontWeight={600}>
+                  <Text fontWeight={600} type="p4">
                     {option.reason}
                   </Text>
                 </label>
               ))}
               <Button
                 className={styles.page__button}
+                disabled={!formik.dirty}
                 title="Proceed"
                 onClick={formik.handleSubmit}
-                disabled={!formik.dirty}
               />
             </div>
           </div>
         </>
       )}
       <PreviewModal
-        visible={previewModalVisible}
-        onClose={closePreviewModal}
         data={formik.values.issueData}
         handleApiError={handleApiError}
+        visible={previewModalVisible}
+        onClose={closePreviewModal}
       />
       {snackbar}
     </div>

@@ -1,6 +1,7 @@
 import classNames from 'classnames';
-import { Loader } from 'components/Loader';
 import React, { useMemo } from 'react';
+
+import { Loader } from '~/components/Loader';
 
 import styles from './styles.module.scss';
 
@@ -27,7 +28,7 @@ export const Button: React.FC<Props> = ({
     if (icon) {
       return (
         <>
-          <img src={icon} alt="icon" />
+          <img alt="icon" src={icon} />
           {title}
         </>
       );
@@ -38,7 +39,6 @@ export const Button: React.FC<Props> = ({
 
   return (
     <button
-      type="button"
       className={classNames(
         styles.button,
         {
@@ -48,8 +48,9 @@ export const Button: React.FC<Props> = ({
         },
         className,
       )}
-      onClick={onClick}
       disabled={disabled || loading}
+      type="button"
+      onClick={onClick}
     >
       {loading ? <Loader secondary={secondary} /> : buttonContent}
     </button>

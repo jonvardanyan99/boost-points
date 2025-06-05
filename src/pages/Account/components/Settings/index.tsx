@@ -1,29 +1,30 @@
-import { Button } from 'components/Button';
-import { Checkbox } from 'components/Checkbox';
-import { DatePicker } from 'components/DatePicker';
-import { Dropdown } from 'components/Dropdown';
-import { Input } from 'components/Input';
-import { SelectAddress } from 'components/SelectAddress';
-import { Text } from 'components/Text';
-import { COUNTRY_CODE_OPTIONS, GENDER_OPTIONS, STATE_OPTIONS } from 'constants/selectOptions';
 import { format } from 'date-fns';
 import { useFormik } from 'formik';
-import { useErrorHandler } from 'hooks/useErrorHandler';
-import { useMutation } from 'hooks/useMutation';
 import React, { useMemo, useState } from 'react';
-import { API } from 'services/api';
-import { PatchAccountVariables } from 'services/api/types/mutations';
-import { useAppDispatch, useAppSelector } from 'store/hooks';
-import { setData } from 'store/slices/user';
-import { selectAccount } from 'store/slices/user/selectors';
-import { CreateAccountFormValues } from 'types/formValues';
-import { AccountData } from 'types/models';
-import { DeepNonNullable } from 'types/utils';
-import { getFormikError } from 'utils/errorHandlers';
-import { formatAddressTitle } from 'utils/formats';
-import { diffObjects } from 'utils/helpers';
-import { createAccountFormSchema } from 'utils/validators';
 import { toFormikValidationSchema } from 'zod-formik-adapter';
+
+import { Button } from '~/components/Button';
+import { Checkbox } from '~/components/Checkbox';
+import { DatePicker } from '~/components/DatePicker';
+import { Dropdown } from '~/components/Dropdown';
+import { Input } from '~/components/Input';
+import { SelectAddress } from '~/components/SelectAddress';
+import { Text } from '~/components/Text';
+import { COUNTRY_CODE_OPTIONS, GENDER_OPTIONS, STATE_OPTIONS } from '~/constants/selectOptions';
+import { useErrorHandler } from '~/hooks/useErrorHandler';
+import { useMutation } from '~/hooks/useMutation';
+import { API } from '~/services/api';
+import { PatchAccountVariables } from '~/services/api/types/mutations';
+import { useAppDispatch, useAppSelector } from '~/store/hooks';
+import { setData } from '~/store/slices/user';
+import { selectAccount } from '~/store/slices/user/selectors';
+import { CreateAccountFormValues } from '~/types/formValues';
+import { AccountData } from '~/types/models';
+import { DeepNonNullable } from '~/types/utils';
+import { getFormikError } from '~/utils/errorHandlers';
+import { formatAddressTitle } from '~/utils/formats';
+import { diffObjects } from '~/utils/helpers';
+import { createAccountFormSchema } from '~/utils/validators';
 
 import styles from './styles.module.scss';
 
@@ -212,72 +213,74 @@ export const Settings: React.FC = () => {
 
   return (
     <div className={styles.settings}>
-      <Text type="p1" fontWeight={600}>
+      <Text fontWeight={600} type="p1">
         Account data
       </Text>
       <Input
         className={styles['settings__first-name-input']}
-        placeholder="David"
-        name="firstName"
-        value={formik.values.firstName}
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur}
-        label="First name *"
         error={getFormikError(formik, 'firstName')}
+        label="First name *"
+        name="firstName"
+        placeholder="David"
+        value={formik.values.firstName}
+        onBlur={formik.handleBlur}
+        onChange={formik.handleChange}
       />
       <button
-        type="button"
         className={styles['settings__middle-name-toggle']}
+        type="button"
         onClick={toggleMiddleNameVisible}
       >
-        <Text type="p4" className={styles['settings__middle-name-toggle-text']} fontWeight={600}>
+        <Text className={styles['settings__middle-name-toggle-text']} fontWeight={600} type="p4">
           {middleNameVisible ? 'Subtract middle name' : 'Add middle name'}
         </Text>
       </button>
       {middleNameVisible && (
         <Input
           className={styles['settings__middle-name-input']}
-          placeholder="John"
-          name="middleName"
-          value={formik.values.middleName}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          label="Middle name"
           error={getFormikError(formik, 'middleName')}
+          label="Middle name"
+          name="middleName"
+          placeholder="John"
+          value={formik.values.middleName}
+          onBlur={formik.handleBlur}
+          onChange={formik.handleChange}
         />
       )}
       <Input
-        placeholder="Bryant"
-        name="surname"
-        value={formik.values.surname}
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur}
-        label="Surname *"
         error={getFormikError(formik, 'surname')}
+        label="Surname *"
+        name="surname"
+        placeholder="Bryant"
+        value={formik.values.surname}
+        onBlur={formik.handleBlur}
+        onChange={formik.handleChange}
       />
       <div className={styles['settings__fields-wrapper']}>
         <DatePicker
           className={styles['settings__date-picker']}
+          error={getFormikError(formik, 'birthDate')}
+          label="Date of birth *"
           placeholder="Select"
           value={formik.values.birthDate}
-          onChange={option => formik.setFieldValue('birthDate', option, true)}
           onBlur={() => formik.setFieldTouched('birthDate', true, true)}
-          label="Date of birth *"
-          error={getFormikError(formik, 'birthDate')}
+          onChange={option => formik.setFieldValue('birthDate', option, true)}
         />
         <Dropdown
           className={styles.settings__dropdown}
+          error={getFormikError(formik, 'gender')}
+          label="Gender *"
+          options={GENDER_OPTIONS}
           placeholder="Select Gender"
           selectedOption={formik.values.gender}
-          onChange={option => formik.setFieldValue('gender', option, true)}
           onBlur={() => formik.setFieldTouched('gender', true, true)}
-          options={GENDER_OPTIONS}
-          label="Gender *"
-          error={getFormikError(formik, 'gender')}
+          onChange={option => formik.setFieldValue('gender', option, true)}
         />
       </div>
       <SelectAddress
         className={styles['settings__select-residential-address']}
+        error={getFormikError(formik, 'residentialAddress')}
+        label="Residential address *"
         placeholder={
           formatAddressTitle(
             formik.values.residentialAddress as DeepNonNullable<
@@ -285,20 +288,20 @@ export const Settings: React.FC = () => {
             >,
           ) || 'Select Residential Address'
         }
-        label="Residential address *"
         onBlur={() => formik.setFieldTouched('residentialAddress', true, true)}
         onSelect={data => formik.setFieldValue('residentialAddress', data, true)}
-        error={getFormikError(formik, 'residentialAddress')}
       />
       <Checkbox
-        className={styles.settings__checkbox}
         checked={previousAddressVisible}
-        onChange={setPreviousAddressVisible}
+        className={styles.settings__checkbox}
         label="I have lived here for fewer than 2 years"
+        onChange={setPreviousAddressVisible}
       />
       {previousAddressVisible && (
         <SelectAddress
           className={styles['settings__select-previous-address']}
+          error={getFormikError(formik, 'previousAddress')}
+          label="Previous address"
           placeholder={
             formatAddressTitle(
               formik.values.previousAddress as DeepNonNullable<
@@ -306,28 +309,26 @@ export const Settings: React.FC = () => {
               >,
             ) || 'Select Previous Address'
           }
-          label="Previous address"
           onBlur={() => formik.setFieldTouched('previousAddress', true, true)}
           onSelect={data => formik.setFieldValue('previousAddress', data, true)}
-          error={getFormikError(formik, 'previousAddress')}
         />
       )}
       <Input
-        type="email"
-        placeholder="david_bryant@mail.com"
-        name="email"
-        value={formik.values.email}
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur}
-        label="Email *"
         error={getFormikError(formik, 'email')}
+        label="Email *"
+        name="email"
+        placeholder="david_bryant@mail.com"
+        type="email"
+        value={formik.values.email}
+        onBlur={formik.handleBlur}
+        onChange={formik.handleChange}
       />
       <Button
         className={styles['settings__main-button']}
+        disabled={!formik.dirty}
+        loading={loading}
         title="Apply changes"
         onClick={formik.handleSubmit}
-        loading={loading}
-        disabled={!formik.dirty}
       />
       {snackbar}
     </div>

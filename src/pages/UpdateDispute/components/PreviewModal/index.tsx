@@ -1,19 +1,20 @@
-import leftArrow from 'assets/icons/left-arrow.svg';
 import axios from 'axios';
-import { Button } from 'components/Button';
-import { Modal } from 'components/Modal';
-import { PopupModal } from 'components/PopupModal';
-import { Text } from 'components/Text';
-import { ROUTES } from 'constants/routes';
-import { useMutation } from 'hooks/useMutation';
 import React, { useCallback, useState } from 'react';
 import { generatePath, useLocation, useNavigate, useParams } from 'react-router-dom';
-import { API } from 'services/api';
-import { SendDisputeActionVariables } from 'services/api/types/mutations';
-import { UpdateDisputeFormValues } from 'types/formValues';
-import { DeepNonNullable } from 'types/utils';
-import { dataUrlToFile, generateId } from 'utils/helpers';
-import { extractKeyFromPresignedUrl, uploadFileToAWS } from 'utils/uploadFileToAWS';
+
+import leftArrow from '~/assets/icons/left-arrow.svg';
+import { Button } from '~/components/Button';
+import { Modal } from '~/components/Modal';
+import { PopupModal } from '~/components/PopupModal';
+import { Text } from '~/components/Text';
+import { ROUTES } from '~/constants/routes';
+import { useMutation } from '~/hooks/useMutation';
+import { API } from '~/services/api';
+import { SendDisputeActionVariables } from '~/services/api/types/mutations';
+import { UpdateDisputeFormValues } from '~/types/formValues';
+import { DeepNonNullable } from '~/types/utils';
+import { dataUrlToFile, generateId } from '~/utils/helpers';
+import { extractKeyFromPresignedUrl, uploadFileToAWS } from '~/utils/uploadFileToAWS';
 
 import styles from './styles.module.scss';
 
@@ -112,33 +113,33 @@ export const PreviewModal: React.FC<Props> = ({ visible, onClose, data, handleAp
 
   return (
     <>
-      <Modal visible={visible} className={styles['preview-modal']}>
+      <Modal className={styles['preview-modal']} visible={visible}>
         <div className={styles['preview-modal__container']}>
           <div className={styles['preview-modal__wrapper']}>
             <button
-              type="button"
               className={styles['preview-modal__left-arrow-button']}
+              type="button"
               onClick={onClose}
             >
-              <img src={leftArrow} alt="left-arrow" />
+              <img alt="left-arrow" src={leftArrow} />
             </button>
-            <Text type="h6" className={styles['preview-modal__heading']}>
+            <Text className={styles['preview-modal__heading']} type="h6">
               Preview
             </Text>
             <div className={styles['preview-modal__content-container']}>
               <div className={styles['preview-modal__field']}>
-                <Text type="p5" className={styles['preview-modal__field-label']}>
+                <Text className={styles['preview-modal__field-label']} type="p5">
                   Credit bureau
                 </Text>
-                <Text type="p5" fontWeight={600} className={styles['preview-modal__field-name']}>
+                <Text className={styles['preview-modal__field-name']} fontWeight={600} type="p5">
                   Equifax
                 </Text>
               </div>
               <div className={styles['preview-modal__field']}>
-                <Text type="p5" className={styles['preview-modal__field-label']}>
+                <Text className={styles['preview-modal__field-label']} type="p5">
                   Type of info to be corrected
                 </Text>
-                <Text type="p5" fontWeight={600} className={styles['preview-modal__field-name']}>
+                <Text className={styles['preview-modal__field-name']} fontWeight={600} type="p5">
                   {location.state?.disputeName || ''}
                 </Text>
               </div>
@@ -147,15 +148,16 @@ export const PreviewModal: React.FC<Props> = ({ visible, onClose, data, handleAp
 
                 if (data[typedKey] && typeof data[typedKey] === 'string') {
                   return (
-                    <div key={typedKey} className={styles['preview-modal__field']}>
-                      <Text type="p5" className={styles['preview-modal__field-label']}>
+                    <div className={styles['preview-modal__field']} key={typedKey}>
+                      <Text className={styles['preview-modal__field-label']} type="p5">
                         {typedKey}
                       </Text>
                       <Text
-                        type="p5"
-                        fontWeight={600}
                         className={styles['preview-modal__field-name']}
+                        fontWeight={600}
+                        type="p5"
                       >
+                        {/* @ts-expect-error data[typedKey] can't be null */}
                         {data[typedKey]}
                       </Text>
                     </div>
@@ -163,15 +165,15 @@ export const PreviewModal: React.FC<Props> = ({ visible, onClose, data, handleAp
                 }
 
                 if (data[typedKey] && typeof data[typedKey] === 'object') {
-                  return data[typedKey].map((file, index) => (
-                    <div key={generateId()} className={styles['preview-modal__field']}>
-                      <Text type="p5" className={styles['preview-modal__field-label']}>
+                  return (data[typedKey] as NonNullable<typeof data.files>).map((file, index) => (
+                    <div className={styles['preview-modal__field']} key={generateId()}>
+                      <Text className={styles['preview-modal__field-label']} type="p5">
                         {`New file ${index + 1}`}
                       </Text>
                       <Text
-                        type="p5"
-                        fontWeight={600}
                         className={styles['preview-modal__field-name']}
+                        fontWeight={600}
+                        type="p5"
                       >
                         {file.name}
                       </Text>
@@ -184,22 +186,22 @@ export const PreviewModal: React.FC<Props> = ({ visible, onClose, data, handleAp
             </div>
             <Button
               className={styles['preview-modal__main-button']}
+              loading={loading}
               title="Submit"
               onClick={submitInfo}
-              loading={loading}
             />
           </div>
         </div>
       </Modal>
       <PopupModal
-        visible={popupModalVisible}
+        hasIcon
         heading="New details sent"
         message={`You've successfully provided extra information to Equifax for the '${location.state?.disputeName}' dispute`}
-        secondaryButtonTitle="Close"
-        secondaryButtonClick={handleCloseClick}
-        primaryButtonTitle="Go to disputes"
         primaryButtonClick={navigateToDisputes}
-        hasIcon
+        primaryButtonTitle="Go to disputes"
+        secondaryButtonClick={handleCloseClick}
+        secondaryButtonTitle="Close"
+        visible={popupModalVisible}
       />
     </>
   );

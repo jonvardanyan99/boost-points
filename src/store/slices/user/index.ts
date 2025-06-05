@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { capitalize } from 'utils/helpers';
+
+import { capitalize } from '~/utils/helpers';
 
 import {
   AccountPayload,
